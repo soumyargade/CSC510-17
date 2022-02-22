@@ -22,7 +22,14 @@ A bot is a good solution to this problem as it will decrease the time required t
 1.4 Alternative Flows
     [E1 Action Unspecified] Action verb such as “create”, “retrieve”, “update”, or “delete” was not specified. Bot prompts the user to provide an action verb.
     [E2 Path Unclear] Request keywords provided by the user could pertain to multiple API endpoints. Bot prompts the user to delineate between the potential endpoints in order to return the correct example.
-
+```
+2. Retrieve examples related to GitHub's ["Repositories" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/repos).
+```
+Insert Here.
+```
+3. Retrieve examples related to GitHub's ["Issues" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/issues).
+```
+Insert Here.
 ```
 
 ### Design Sketches
