@@ -9,6 +9,21 @@ A bot is a good solution to this problem as it will decrease the time required t
 
 
 ### Use Cases
+1. Retrieve examples related to GitHub's ["Pulls" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/pulls).
+```
+1.1 Preconditions
+    User must be logged into their MatterMost account.
+1.2 Main Flow
+    This use case begins when a user states the need to perform an action related to creating or managing pull requests on GitHub [S1].
+    This use case ends when the bot returns an example pertinent to the user’s initial request for information [S2].
+1.3 Subflows
+    [S1 Request Example] Request example [S2, E1, E2]. User submits a chat message with keywords including the term “pull request” along with an action verb such as “create”, “retrieve”, “update”, or “delete”.
+    [S2 Return Example] Bot will return the HTTP method & API endpoint used by GitHub’s “Pulls” API for the action that has been stated by the user.
+1.4 Alternative Flows
+    [E1 Action Unspecified] Action verb such as “create”, “retrieve”, “update”, or “delete” was not specified. Bot prompts the user to provide an action verb.
+    [E2 Path Unclear] Request keywords provided by the user could pertain to multiple API endpoints. Bot prompts the user to delineate between the potential endpoints in order to return the correct example.
+
+```
 
 ### Design Sketches
 
