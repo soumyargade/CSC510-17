@@ -56,9 +56,20 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
 ```
 
 ### Wireframes
+**M1**: Example of S1, S2 for Use Case 1 where user activates bot by callling out "GitEx" & then specifies action word "creating" and key phrase "pull request" so GitEx is able to return the proper HTTP verb and API endpoint.
+
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/designSketches/wireframeM1.png">
+
+**E1**: Example of E1 for Use Case 3 where user activates bot by calling out "GitEx" but then fails to specify an action verb that the bot can tie with an HTTP verb for a REST API endpoint example. Thus, the bot prompts the user for this additional info before being able to process the request in accordance with S2.
+
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/designSketches/wireframeE1.png">
+
+**E2**: Example of E2 for Use Case 2 where user activates bot by calling out "GitEx" but submits request keywords that could pertain to multiple API endpoints (ex. he could be asking to retrieve info on teams in a repository or tags in a repository, etc). Thus, the bot prompts the user for this additional info before being able to process the request in accordance with S2.
+
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/designSketches/wireframeE2.png">
+
+**E3**: Example of E3 for Use Case 1 where user activates bot by calling out "GitEx" but doesn't include any keywords that would allow the bot to figure out if he is trying to access an endpoint in GitHub's Pull, Repositories, or Issues API. Thus, the the bot prompts the user for this additional info before being able to process the request in accordance with S2.
+
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/designSketches/wireframeE3.png">
 
 ### Storyboard
