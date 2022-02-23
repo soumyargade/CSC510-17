@@ -41,10 +41,25 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
 ```
 3. Retrieve examples related to GitHub's ["Issues" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/issues).
 ```
-Insert Here.
+3.1 Preconditions
+    User must be logged into their Mattermost account.
+3.2 Main Flow
+    This use case begins when a user states the need to perform an action related to creating or managing an issue on GitHub [S1].
+    This use case ends when the bot returns an example API call pertinent to the user’s initial request for information [S2].
+3.3 Subflows
+    [S1 Request Example] Request example [S2, E1, E2, E3]. User submits a chat message with the word “GitEx” as well as with keywords including the term "issue(s)" and action keywords such as “create”, “retrieve”, “update”, or “delete”.
+    [S2 Return Example] Bot will return the HTTP method & API endpoint used by GitHub’s “Issues” API for the action that has been stated by the user.
+3.4 Alternative Flows
+    [E1 Action Unspecified] Action verb such as “create”, “retrieve”, “update”, or “delete” was not specified. Bot prompts the user to provide an action verb.
+    [E2 Action or Path Unclear] Request keywords provided by the user could pertain to multiple API endpoints or HTTP verbs. Bot prompts the user to delineate between the potential endpoints or verbs in order to return the correct example.
+    [E3 Message Not Understood] The message submitted by the user includes “GitEx” but a keyword was not found to determine if the request is to create or manage an issue.
 ```
 
 ### Wireframes
+<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/designSketches/wireframeM1.png">
+<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/designSketches/wireframeE1.png">
+<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/designSketches/wireframeE2.png">
+<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/designSketches/wireframeE3.png">
 
 ### Storyboard
 
