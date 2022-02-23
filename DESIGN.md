@@ -25,7 +25,18 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
 ```
 2. Retrieve examples related to GitHub's ["Repositories" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/repos).
 ```
-Insert Here.
+2.1 Preconditions
+    User must be logged into their Mattermost account.
+2.2 Main Flow
+    User states they need to perform an action related to creating or managing a Github repository [S1].
+    Bot returns an example of the API call [S2].
+2.3 Subflows
+    [S1 Request Example] User submits a message with the word “gitex” as well as with keywords such as “repo,” “repository,” or “repositories” and action keywords such as “create,” “retrieve”, “update,” or “delete.”
+    [S2 Return Example] Bot will return the HTTP method and an example of an API call used for the action stated.
+2.4 Alternative Flows
+    [E1 Action Unspecified] A verb such as “create”, “retrieve”, “update”, or “delete” was not specified. Bot prompts the user to provide an action verb.
+    [E2 Action or Path Unclear] Request keywords provided by the user could pertain to multiple API endpoints or multiple HTTP verbs. Bot prompts the user to delineate between the potential endpoints or verbs in order to return the correct example.
+    [E3 Message Not Understood] The message submitted by the user includes “gitex” but a keyword was not found to determine that the request is to create or manage a repository.
 ```
 3. Retrieve examples related to GitHub's ["Issues" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/issues).
 ```
