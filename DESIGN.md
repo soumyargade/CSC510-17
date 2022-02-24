@@ -76,3 +76,27 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
 ![Story Board](https://media.github.ncsu.edu/user/23443/files/23aa675e-c479-4934-8739-8fe38860db94)
 
 ## Architecture Design
+#### 1. Diagram
+![ComponentsDiagram](https://media.github.ncsu.edu/user/23472/files/434a7bed-6131-4fdf-a173-0f40c73a1d71)  
+[Diagram 1 - Gives an overview of the main components of the Bot and their interactions with each other]  
+Inside gitex: Notification service, keyword processing service (utilizing synonym api)
+
+#### 2. Components
+**The main components of our bot will be as follows:**  
+* **GitEx Bot:** Conversation bot created to provide HTTP verbs and sample endpoints to use with the Github REST API in response to user requests.  
+* **Mattermost:** Chat service primarily used for collaboration during the software development life cycle. The GitEx bot will be embedded within Mattermost.
+
+**3rd Party services that our bot may use are as follows:**  
+* **Merriam-Webster Dictionary API:** A collection of dictionary and thesaurus content available for use by developers. The GitEx bot will communicate with the Merriam-Webster Dictionary API specifically for its thesaurus content to identify the correct HTTP verb based on the content of the Mattermost user’s message. This API will be useful in making sure we can properly respond to different types of requests made by users. For example, if a user enters a valid request but uses a synonym of an allowed verb, this API will make sure that the bot understands this and still process their response regardless.  
+* **Web scraper tool:** Based on suggestions from Dr. Ore we plan to initially hardcode our responses. We will do this to ensure that the functionality of our bot is correct. Afterwards we will work on adding a web scraping tool to dynamically collect the API responses from Github.com. Web scraping will make our bot more extendable for future use.  
+* **GitHub Documentation:** After ensuring that our bot is functioning properly we will add in web scraping tools which will rely on GitHub documentation to retrieve the proper API response the user has requested.
+
+#### 3. Constraints and/or Guidelines
+* **Account necessary:** Users will need to have an account with MatterMost in order to access our Bot as we plan to embed GitEx within MatterMost.  
+* **Limitations for Dictionary API:** free as long as it is for non-commercial use, usage does not exceed 1000 queries per day per API key, and use is limited to two reference APIs.  
+* **Keyword necessary:** Within Mattermost chat, users must state the keyword “gitex” before any communication with the GitEx bot. This will be an indication that the user is wishing to make a request for an example.  
+* **English:** Conversation in Mattermost must be in English to communicate with the GitEx bot. An error message will be displayed if a request is made in another language.  
+* **3 key requests:** A requested GitEx example from a Mattermost user must pertain to creating or managing a repository, issue, or pull request. 
+
+#### 4. Relevant Additional Design Patterns
+
