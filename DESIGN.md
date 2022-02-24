@@ -73,5 +73,6 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/designSketches/wireframeE3.png">
 
 ### Storyboard
+![Story Board](https://media.github.ncsu.edu/user/23443/files/23aa675e-c479-4934-8739-8fe38860db94)
 
 ## Architecture Design
