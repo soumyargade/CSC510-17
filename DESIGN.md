@@ -98,7 +98,7 @@ The third party services our bot will use are **Merriam-Webster Dictionary API**
 * **Keyword Necessary:** Within Mattermost, users must state the keyword “GitEx” before any communication with the GitEx Bot can commence. The use of this keyword will be an indication that the user is wishing to make a request to GitEx Bot for an example.
 * **English:** Conversation in Mattermost must be in English to communicate with GitEx. We plan to display an error message if a request is made in another language that GitEx is unable to process.
 * **3 Key Requests:** A requested GitEx example from a Mattermost user must pertain to creating or managing a repository, issue, or pull request as GitEx will only have information on endpoints from GitHub's Repositories, Issues, & Pulls APIs.
-#additional-patterns
+<a name="additional-patterns"></a>
 ### Relevant Additional Design Patterns
 *  Behavioral Pattern 
     * Chain of Responsibility → way of passing request between a chain of objects.
