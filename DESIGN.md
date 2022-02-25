@@ -99,3 +99,7 @@ This diagram provides an overview of the main components of our GitEx Bot & thei
 * **3 Key Requests:** A requested GitEx example from a Mattermost user must pertain to creating or managing a repository, issue, or pull request as GitEx will only have information on endpoints from GitHub's Repositories, Issues, & Pulls APIs.
 
 ### Relevant Additional Design Patterns
+*  Behavioral Pattern 
+    * Chain of Responsibility → way of passing request between a chain of objects.
+    * This may be a relevant design pattern for our bot since we will be dealing with responses from the user that will need to be processed. The initial request will be processed through a series of functions before reaching an answer to respond to the user’s initial request.
+    * A more detailed description of our planned functions will be provided in diagram 2, which highlights the intended methods we plan on implementing and how the initial request will be processed to ultimately get an answer for the user.
