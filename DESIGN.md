@@ -76,8 +76,8 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
 ![Story Board](https://media.github.ncsu.edu/user/23443/files/23aa675e-c479-4934-8739-8fe38860db94)
 
 ## Architecture Design
-### Diagram
-![ComponentsDiagram](https://media.github.ncsu.edu/user/23472/files/434a7bed-6131-4fdf-a173-0f40c73a1d71)  
+### Bot Components Diagram
+<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/architectureDesign/botComponents.jpg">
 [Diagram 1 - Gives an overview of the main components of the Bot and their interactions with each other]  
 Inside gitex: Notification service, keyword processing service (utilizing synonym api)
 
