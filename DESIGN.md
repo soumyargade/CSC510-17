@@ -77,9 +77,9 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
 
 ## Architecture Design
 ### Bot Components Diagram
-<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/architectureDesign/botComponents.jpg">
-[Diagram 1 - Gives an overview of the main components of the Bot and their interactions with each other]  
-Inside gitex: Notification service, keyword processing service (utilizing synonym api)
+This diagram provides an overview of the main components of our GitEx Bot & their interactions with each other as well as the third party services that are being used (each of which is described in detail underneath the diagram). Within GitEx, there are listener, validator, processing, & scraping services (all described in more detail under our GitEx Sequence Diagram located a bit further down in this README).
+
+<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/architectureDesign/botComponents.jpg" width=795 height=600>
 
 ### Components
 **The main components of our bot will be as follows:**  
