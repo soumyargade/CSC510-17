@@ -77,9 +77,10 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
 
 ## Architecture Design
 ### Bot Components Diagram
-This diagram provides an overview of the main components of our GitEx Bot & their interactions with each other as well as the third party services that are being used (each of which is described in detail underneath the diagram). Within GitEx, there are listener, validator, processing, & scraping services (all described in more detail under our GitEx Sequence Diagram located a bit further down in this README).
+This diagram provides an overview of the main components of our GitEx Bot & their interactions with each other as well as the third party services that are being used (each of which is described in detail underneath the diagram). Within GitEx, there are listener, validator, processing, & scraping services (all described in more detail under our GitEx Sequence Diagram [Diagram 2] located further down in the [Relevant Additional Design Patterns](#additional-patterns) section).
 
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/architectureDesign/botComponents.jpg" width=795 height=600>
+[Diagram 1 - Gives an overview of the main components of the Bot and their interactions with each other.]
 
 ### Description of Components
 The main components of our design are **GitEx Bot** & **Mattermost**:
@@ -97,15 +98,15 @@ The third party services our bot will use are **Merriam-Webster Dictionary API**
 * **Keyword Necessary:** Within Mattermost, users must state the keyword “GitEx” before any communication with the GitEx Bot can commence. The use of this keyword will be an indication that the user is wishing to make a request to GitEx Bot for an example.
 * **English:** Conversation in Mattermost must be in English to communicate with GitEx. We plan to display an error message if a request is made in another language that GitEx is unable to process.
 * **3 Key Requests:** A requested GitEx example from a Mattermost user must pertain to creating or managing a repository, issue, or pull request as GitEx will only have information on endpoints from GitHub's Repositories, Issues, & Pulls APIs.
-
+#additional-patterns
 ### Relevant Additional Design Patterns
 *  Behavioral Pattern 
     * Chain of Responsibility → way of passing request between a chain of objects.
     * This may be a relevant design pattern for our bot since we will be dealing with responses from the user that will need to be processed. The initial request will be processed through a series of functions before reaching an answer to respond to the user’s initial request.
-    * A more detailed description of our planned functions will be provided in diagram 2, which highlights the intended methods we plan on implementing and how the initial request will be processed to ultimately get an answer for the user.
+    * A more detailed description of our planned functions will be provided in Diagram 2, which highlights the intended methods we plan on implementing and how the initial request will be processed to ultimately get an answer for the user.
 
 * Sequence Diagram
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/architectureDesign/Seq_diagram.PNG">
-[Diagram 2 - shows the sequence of function calls that will be made when a user asks the bot a question.]
-
-The flow of data begins with the Mattermost client. A user will send a phrase containing the phrase “gitex” and the API call that they are requesting an example for. The client passes this phrase to the Listener Service. This service listens for requests sent to the GitEx server, stores them in a queue, and sends them to the Validator Service one-by-one. The Validator Service performs initial validation of the phrase. If a phrase is invalid, for example if the phrase contains multiple CRUD operations or is missing a CRUD operation, the Validator Service will return false which will return an error to the Client. If the phrase is valid, the phrase gets sent to the Processing Service which acts as the central command unit of the application. It is responsible for parsing the phrase and returning the example of the API call to the Client. If the phrase does not contain a CRUD keyword (Create, Read, Update, Delete), the Processing Service calls the Merriam-Webster Dictionary API to check if one of the keywords the user entered is a synonym of one of the CRUD keywords. If it is, the processing service constructs the API search string which will be searched for within the Github REST API documentation. If no such keyword exists, an error will be sent to the client. The Scraping Service is responsible for scraping the Github REST API documentation for the search string that was requested. Once it finds the requested string, it returns an example API call back to the Processing Service which sends it to the Client (Mattermost).
+[Diagram 2 - shows the sequence of function calls that will be made when a user asks the bot a question.]  
+<br><br>
+The flow of data begins with the Mattermost client. A user will send a phrase containing the phrase “gitex” and the GitHub API call that they are requesting an example for. The client passes this phrase to the Listener Service. This service listens for requests sent to the GitEx server, stores them in a queue, and sends them to the Validator Service one-by-one. The Validator Service performs initial validation of the phrase. If a phrase is invalid, for example if the phrase contains multiple CRUD operations or is missing a CRUD operation, the Validator Service will return false which will return an error to the Client. If the phrase is valid, the phrase gets sent to the Processing Service which acts as the central command unit of the application. It is responsible for parsing the phrase and returning the example of the API call to the Client. If the phrase does not contain a CRUD keyword (**C**reate, **R**ead, **U**pdate, **D**elete), the Processing Service calls the Merriam-Webster Dictionary API to check if one of the keywords the user entered is a synonym of one of the CRUD keywords. If it is, the processing service constructs the API search string which will be searched for within the Github REST API documentation. If no such keyword exists, an error will be sent to the client. The Scraping Service is responsible for scraping the Github REST API documentation for the search string that was requested. Once it finds the requested string, it returns an example API call back to the Processing Service which sends it to the Client (Mattermost).
