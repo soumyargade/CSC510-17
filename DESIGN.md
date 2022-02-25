@@ -81,15 +81,15 @@ This diagram provides an overview of the main components of our GitEx Bot & thei
 
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/architectureDesign/botComponents.jpg" width=795 height=600>
 
-### Components
-**The main components of our bot will be as follows:**  
-* **GitEx Bot:** Conversation bot created to provide HTTP verbs and sample endpoints to use with the Github REST API in response to user requests.  
-* **Mattermost:** Chat service primarily used for collaboration during the software development life cycle. The GitEx bot will be embedded within Mattermost.
+### Description of Components
+The main components of our design are **GitEx Bot** & **Mattermost**:
+* **GitEx Bot:** Conversation bot created to provide HTTP verbs and example REST API endpoints to use with the GitHub REST API in response to user requests within their Mattermost chat channel. GitEx will be comprised of four services (listener, validator, processing, & scraping), each of which is discussed in greater detail in the description that follows our sequence diagram near the end of this README.
+* **Mattermost:** Open source chat solution primarily used for collaboration during the software development life cycle. Our GitEx bot will be embedded within Mattermost using the course provided website at https://chat.robotcodelab.com. The user will be able to interact with GitEx through Mattermost by addressing requests with the phrase "GitEx" at the beginning of their call.
 
-**3rd Party services that our bot may use are as follows:**  
-* **Merriam-Webster Dictionary API:** A collection of dictionary and thesaurus content available for use by developers. The GitEx bot will communicate with the Merriam-Webster Dictionary API specifically for its thesaurus content to identify the correct HTTP verb based on the content of the Mattermost user’s message. This API will be useful in making sure we can properly respond to different types of requests made by users. For example, if a user enters a valid request but uses a synonym of an allowed verb, this API will make sure that the bot understands this and still process their response regardless.  
-* **Web scraper tool:** Based on suggestions from Dr. Ore we plan to initially hardcode our responses. We will do this to ensure that the functionality of our bot is correct. Afterwards we will work on adding a web scraping tool to dynamically collect the API responses from Github.com. Web scraping will make our bot more extendable for future use.  
-* **GitHub Documentation:** After ensuring that our bot is functioning properly we will add in web scraping tools which will rely on GitHub documentation to retrieve the proper API response the user has requested.
+The third party services our bot will use are **Merriam-Webster Dictionary API**, a **web scraper**, & **GitHub's API docs**:
+* **Merriam-Webster Dictionary API:** A collection of dictionary and thesaurus content available for use by developers. The GitEx bot will communicate with the Merriam-Webster Dictionary API specifically for its thesaurus content to identify the correct HTTP verb based on the content of the Mattermost user’s message. This API will be useful in making sure we can properly respond to different types of requests made by users. For example, if a user enters a valid request but uses a synonym of an allowed verb, this API will make sure that the bot understands this and is still able to process their response regardless.
+* **Web scraper tool:** Based on suggestions from Dr. Ore, we plan to initially hardcode our responses to ensure that the functionality of our bot is correct. However, after we are able to get that working, we plan to incorporate a web scraping tool to *dynamically* collect the API endpoint examples from Github.com. Web scraping will make our bot more extendable for future use.
+* **GitHub API Docs:** After ensuring that our bot is functioning properly, we will add in web scraping tools which will rely on GitHub's API documentation (specifically documentation from their Pulls, Repositories, & Issues APIs) to retrieve the proper API endpoint examples the user has requested.
 
 ### Constraints & Guidelines
 * **Account Necessary:** Users need to have a Mattermost account to access GitEx as we plan for it to be implemented within Mattermost.
