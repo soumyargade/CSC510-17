@@ -11,9 +11,18 @@ async function main()
     client.on('message', function(msg)
     {
         console.log(msg);
-        if( hears(msg, "hello") )
+        if( hears(msg, "gitex") )
         {
-            parseMessage(msg);            
+            if (hears(msg, "pull") || hears(msg, "pulls")) {
+                parsePulls(msg);
+            } else if (hears(msg, "issue") || hears(msg, "issues")) {
+                parseIssues(msg);
+            } else if (hears(msg, "repository") || hears(msg, "repositories")) {
+                parseRepositories(msg);
+            } else {
+                let channel = msg.broadcast.channel_id;
+                client.postMessage("request is unclear", channel);
+            }
         }
     });
 }
@@ -32,10 +41,30 @@ function hears(msg, text)
     return false;
 }
 
-async function parseMessage(msg)
+async function parsePulls(msg)
 {
     let channel = msg.broadcast.channel_id;
-    let test = "testing gitex";
+    let test = "fetching from Pulls API...";
+    if( test )
+    {
+        client.postMessage(test, channel);
+    }
+}
+
+async function parseIssues(msg)
+{
+    let channel = msg.broadcast.channel_id;
+    let test = "fetching from Issues API...";
+    if( test )
+    {
+        client.postMessage(test, channel);
+    }
+}
+
+async function parseRepositories(msg)
+{
+    let channel = msg.broadcast.channel_id;
+    let test = "fetching from Repositories API...";
     if( test )
     {
         client.postMessage(test, channel);
