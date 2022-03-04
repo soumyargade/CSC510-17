@@ -8,11 +8,10 @@
 | Alexander Chtcheprov | aachtche |
 | Dibya Baidya | dbaidya |
 
-<br>
 
 ### Deliverables
 * [Design: Milestone](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/DESIGN.md)
-* Bot: Milestone
+* [Bot: Milestone](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/BOT.md)
 * Process: Milestone
 * Deploy: Milestone
 * Report
