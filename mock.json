@@ -28,7 +28,7 @@
         ]
     ],
     
-        "syn_list_get":[
+    "syn_list_get":[
       [
         {"wd":"learn"},
         {"wd":"master"},
@@ -316,6 +316,73 @@
           {"wd":"retake"}
         ]
     ],
+    
+    "syn_list_list":[
+      [
+        {"wd":"canon"},
+        {"wd":"catalog"},
+        {"wd":"catalogue"},
+        {"wd":"checklist"},
+        {"wd":"listing"},
+        {"wd":"menu"},
+        {"wd":"register"},
+        {"wd":"registry"},
+        {"wd":"roll"},
+        {"wd":"roll call"},
+        {"wd":"roster"},
+        {"wd":"schedule"},
+        {"wd":"table"},
+        {"wd":"angling"},
+        {"wd":"bend"},
+        {"wd":"cock"},
+        {"wd":"inclination"},
+        {"wd":"tilt"},
+        {"wd":"tip"},
+        {"wd":"ribbon"},
+        {"wd":"slip"},
+        {"wd":"strip"},
+        {"wd":"enumerate"},
+        {"wd":"inventory"},
+        {"wd":"itemize"},
+        {"wd":"numerate"},
+        {"wd":"catalog"},
+        {"wd":"catalogue"},
+        {"wd":"enroll"},
+        {"wd":"enrol"},
+        {"wd":"enter"},
+        {"wd":"index"},
+        {"wd":"inscribe"},
+        {"wd":"put down"},
+        {"wd":"record"},
+        {"wd":"register"},
+        {"wd":"schedule"},
+        {"wd":"slate"},
+        {"wd":"enroll"},
+        {"wd":"enrol"},
+        {"wd":"inscribe"},
+        {"wd":"matriculate"},
+        {"wd":"register"},
+        {"wd":"detail"},
+        {"wd":"enumerate"},
+        {"wd":"itemize"},
+        {"wd":"numerate"},
+        {"wd":"recite"},
+        {"wd":"reel off"},
+        {"wd":"rehearse"},
+        {"wd":"tick (off)"},
+        {"wd":"angle"},
+        {"wd":"cant"},
+        {"wd":"cock"},
+        {"wd":"heel"},
+        {"wd":"incline"},
+        {"wd":"lean"},
+        {"wd":"pitch"},
+        {"wd":"slant"},
+        {"wd":"slope"},
+        {"wd":"tilt"},
+        {"wd":"tip"}
+      ]
+  ],
 
     "syn_list_update":[
         [
