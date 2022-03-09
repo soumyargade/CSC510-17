@@ -73,5 +73,13 @@ async function parseRepositories(msg)
 
 (async () => 
 {
-    await main();
+    if (process.env.NODE_ENV != 'test') {
+        await main();
+    }
 })()
+
+module.exports.hears = hears;
+module.exports.parsePulls = parsePulls;
+module.exports.parseIssues = parseIssues;
+module.exports.parseRepositories = parseRepositories;
+module.exports.main = main;
