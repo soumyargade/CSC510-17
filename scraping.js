@@ -1,8 +1,14 @@
 const data = require("./mock.json")
 
 async function getPullsAPITitles(){
-
-    console.log("here");
+    // let pullsTitles = await webScraper.getPullsTitles();
+    var results = data.pull;
+    var headers = new Array();
+    for (let result in results) {
+        // console.log(results[result].title);
+        headers.push(results[result].title);
+    }
+    return headers;
 }
 
 async function getIssuesAPITitles(){

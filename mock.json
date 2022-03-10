@@ -1599,6 +1599,7 @@
     "pull" :
     {
       "create": {
+        "title": "Create a pull request",
         "path": "/repos/{owner}/{repo}/pulls",
         "shell": "curl -X POST -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world/pulls -d '{\"head\":\"head\",\"base\":\"base\"}'",
         "javascript": "await octokit.request('POST /repos/{owner}/{repo}/pulls', {owner: 'octocat',repo: 'hello-world',head: 'head',base: 'base'})",
@@ -2141,6 +2142,7 @@
         }
       },
       "get": {
+        "title": "Get a pull request",
         "path": "/repos/{owner}/{repo}/pulls/{pull_number}",
         "shell": "curl -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world/pulls/42",
         "javascript": "await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', {owner: 'octocat',repo: 'hello-world',pull_number: 42})",
@@ -2683,6 +2685,7 @@
         }
       },
       "update": {
+        "title": "Update a pull request",
         "path": "/repos/{owner}/{repo}/pulls/{pull_number}",
         "shell": "curl -X PATCH -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world/pulls/42 -d '{\"title\":\"title\"}'",
         "javascript": "await octokit.request('PATCH /repos/{owner}/{repo}/pulls/{pull_number}', {owner: 'octocat',repo: 'hello-world',pull_number: 42,title: 'title'})",
