@@ -27,3 +27,7 @@ async function retrieveResponseBody(searchString){
 
 }
 
+module.exports.getIssuesAPITitles = getIssuesAPITitles;
+module.exports.getRepositoriesAPITitles = getRepositoriesAPITitles;
+module.exports.getPullsAPITitles = getPullsAPITitles;
+
