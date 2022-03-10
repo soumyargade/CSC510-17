@@ -56,5 +56,5 @@ function matchString(msg){
 
 }
 
-
+module.exports.getActionVerb = getActionVerb;
 
