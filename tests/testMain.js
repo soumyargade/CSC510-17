@@ -10,7 +10,7 @@ const bot = require("../index.js");
 const data = require("../mock.json")
 
 // Turn off logging
-console.log = function(){};
+// console.log = function(){};
 
 ///////////////////////////
 // TEST SUITE FOR MOCHA
@@ -28,9 +28,10 @@ describe('Tests of other index.js:', function () {
     this.timeout(5000);
     it("ensures that hears() returns false when botName equals sender_name", function() {
         // CREATE TEST OBJECT
-        // console.log("TEST: ", bot)
-        // msg = {"data": {"sender_name": "GitEx"}};
-        // let returnValue = bot.hears(msg, "boop");
-        // assert(returnValue === false);
+        console.log("TEST: ", bot)
+        msg = {"data": {"sender_name": "GitEx"}};
+        let returnValue = bot.hears(msg, "boop");
+        console.log("ReturnValue: ", returnValue);
+        assert(returnValue === false);
     });
 });
