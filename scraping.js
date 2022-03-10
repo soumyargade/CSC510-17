@@ -1,6 +1,8 @@
+const data = require("./mock.json")
+
 async function getPullsAPITitles(){
 
-    return [];
+    console.log("here");
 }
 
 async function getIssuesAPITitles(){
@@ -27,3 +29,10 @@ async function retrieveResponseBody(searchString){
 
 }
 
+exports.getPullsAPITitles = getPullsAPITitles;
+exports.getIssuesAPITitles = getIssuesAPITitles;
+exports.getRepositoriesAPITitles = getRepositoriesAPITitles;
+exports.retrieveAPICall = retrieveAPICall;
+exports.retrieveJSONExample = retrieveJSONExample;
+exports.retrieveShellExample = retrieveShellExample;
+exports.retrieveResponseBody = retrieveResponseBody;
