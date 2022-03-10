@@ -65,7 +65,5 @@ function validateUserInput(msg){
 })()
 
 module.exports.hears = hears;
-module.exports.parsePulls = parsePulls;
-module.exports.parseIssues = parseIssues;
-module.exports.parseRepositories = parseRepositories;
+module.exports.validateUserInput = validateUserInput;
 module.exports.main = main;
