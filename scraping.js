@@ -1,22 +1,35 @@
 const data = require("./mock.json")
 
+// npx run-func scraping.js getPullsAPITitles
+
 async function getPullsAPITitles(){
     // let pullsTitles = await webScraper.getPullsTitles();
     var results = data.pull;
     var headers = new Array();
     for (let result in results) {
-        // console.log(results[result].title);
         headers.push(results[result].title);
     }
     return headers;
 }
 
 async function getIssuesAPITitles(){
-    return [];
+    // let issuesTitles = await webScraper.getIssuesTitles();
+    var results = data.issue;
+    var headers = new Array();
+    for (let result in results) {
+        headers.push(results[result].title);
+    }
+    return headers;
 }
 
 async function getRepositoriesAPITitles(){
-    return [];
+    // let repositoriesTitles = await webScraper.getRepositoriesTitles();
+    var results = data.repo;
+    var headers = new Array();
+    for (let result in results) {
+        headers.push(results[result].title);
+    }
+    return headers;
 }
 
 async function retrieveAPICall(searchString){
