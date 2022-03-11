@@ -32,7 +32,7 @@ describe('Tests of index.js:', function () {
         // CREATE TEST OBJECT
         msg = {"data": {"sender_name": "", "post": JSON.stringify({"message":"smurfy smurf"})}};
         let returnValue = bot.hears(msg, "smurf");
-        console.log("ReturnValue test 0: ", returnValue);
+        console.log("ReturnValue test 1: ", returnValue);
         assert(returnValue === true);
     });
 
@@ -41,12 +41,10 @@ describe('Tests of index.js:', function () {
         // console.log("TEST: ", bot)
         msg = {"data": {"sender_name": "GitEx"}};
         let returnValue = bot.hears(msg, "boop");
-        console.log("ReturnValue test 1: ", returnValue);
+        console.log("ReturnValue test 2: ", returnValue);
         assert(returnValue === false);
     });
-});
 
-describe('Tests of processing.js:', function () {
     //Will have to be updated when validateUserInput() is complete, but this is a start for when it is
     //Test to show an invalid message will return invalid message response
     // it("ensures that validateUserInput() returns false", function() {
@@ -57,6 +55,11 @@ describe('Tests of processing.js:', function () {
     //     console.log("ReturnValue test 3: ", returnValue, " datatype: ", typeof(returnValue));
     //     // assert.typeOf(returnValue, Symbol)
     // });
+
+});
+
+describe('Tests of processing.js:', function () {
+
 
     it("ensures that getActionVerb() returns true when a verb is found", function() {
         // CREATE TEST OBJECT
@@ -76,14 +79,17 @@ describe('Tests of processing.js:', function () {
         assert(returnValue === null);
     });
 
-    it("ensures that processString() returns null when there are no verbs in the message", function() {
-        // CREATE TEST OBJECT
-        // console.log("TEST: ", bot)
-        // msg = {"data": {"sender_name": "GitEx"}};
-        let returnValue = proc.processString("smurf", null);
-        console.log("ReturnValue test 6: ", returnValue);
-        assert(returnValue === null);
-    });
+    //Test for when processString() is done
+    // it("ensures that processString() returns null when there are no verbs in the message", function() {
+    //     // CREATE TEST OBJECT
+    //     // console.log("TEST: ", bot)
+    //     // msg = {"data": {"sender_name": "GitEx"}};
+    //     let returnValue = proc.processString("smurf", null);
+    //     console.log("ReturnValue test 6: ", returnValue);
+    //     assert(returnValue === null);
+    // });
+
+    //Ensure processString() returns true with correct input
 
 });
 
@@ -118,7 +124,7 @@ describe('Tests of scraping.js:', function () {
     //     expect(returnValue).to.equal("");
     // }); 
 
-    //Test for getting Javascript command for create repo
+    //Test for getting endpoint for create repo
     const testOfAPI = nock("https://api.github.com")
     .get("/repo/create/path")
     .reply(200, JSON.stringify(data.repo.create.path));
