@@ -15,18 +15,20 @@ async function main()
         if (hears(msg, "gitex")){
             let validInput = validateUserInput(msg);
             if (!validInput){
-                console.log("User's command passed initial validation")
-                sendInvalidMessage(channel);
-                return;
+                // console.log("User's command passed initial validation")
+                // sendInvalidMessage(channel);
+                // return;
             }
             let resultStr = JSON.parse(msg.data.post);
             resultStr = resultStr.message;
             console.log("User's command: "+ resultStr)
             let returnedMsg = await processor.processString(resultStr.split(" "));
             if (returnedMsg == null){
-                sendInvalidMessage(channel);
-                console.log("User's command was invalid");
-                return;
+                client.postMessage("Request is unclear", channel);
+                // commented out; resulting in infinite loop
+                // sendInvalidMessage(channel);
+                // console.log("User's command was invalid");
+                // return;
             }
             else {
                 // handling if returnedMsg is an object, array, etc.
