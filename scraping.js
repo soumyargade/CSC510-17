@@ -1,21 +1,67 @@
-async function getPullsAPITitles(){
+const data = require("./mock.json")
+const parseHub = require("./parseHub.js")
 
-    return [];
+// npx run-func scraping.js getPullsAPITitles
+
+async function getPullsAPITitles(){
+    let pullsTitles = await parseHub.getPullsInfo();
+    console.log(pullsTitles.createPullRequest[0].name);
+    return pullsTitles;
+    // var results = data.pull;
+    // var headers = new Array();
+    // for (let result in results) {
+        //headers.push(results[result].title);
+    //}
+    // console.log('headers ' + headers);
+    // return headers;
 }
 
-async function getIssuesAPITitles(){
-    return [];
+ function getIssuesAPITitles(){
+    // let issuesTitles = await webScraper.getIssuesTitles();
+    var results = data.issue;
+    var headers = new Array();
+    for (let result in results) {
+        headers.push(results[result].title);
+    }
+    return headers;
 }
 
 async function getRepositoriesAPITitles(){
-    return [];
+    // let repositoriesTitles = await parseHub.getRepositoriesInfo();
+    var results = data.repo;
+    var headers = new Array();
+    for (let result in results) {
+        headers.push(results[result].title);
+    }
+    return headers;
 }
 
-async function retrieveAPICall(searchString){
+ function scrape(searchString, feature, optionalCommand){
+
+    if (!optionalCommand){
+        return retrieveAPICall(searchString, feature);
+    }
+    else if(optionalCommand == 'Shell'){
+        return retrieveShellExample(searchString);
+    }
+    else if(optionalCommand == 'Javascript'){
+        return retrieveJavascriptExample(searchString);
+    }
+    else if(optionalCommand == 'Response'){
+        return retrieveResponseBody(searchString);
+    }
+}
+
+ function retrieveAPICall(searchString, feature){
+    let action = searchString.split(' ')[0].toLowerCase();
+    console.log(feature);
+    console.log(action)
+    console.log(data[feature][action].path);
+    return data[feature][action].path;
 
 }
 
-async function retrieveJSONExample(searchString){
+async function retrieveJavascriptExample(searchString){
 
 }
 
@@ -27,11 +73,11 @@ async function retrieveResponseBody(searchString){
 
 }
 
-module.exports.getIssuesAPITitles = getIssuesAPITitles;
-module.exports.getRepositoriesAPITitles = getRepositoriesAPITitles;
-module.exports.getPullsAPITitles = getPullsAPITitles;
-module.exports.retrieveAPICall = retrieveAPICall;
-module.exports.retrieveJSONExample = retrieveJSONExample;
-module.exports.retrieveShellExample = retrieveShellExample;
-module.exports.retrieveResponseBody = retrieveResponseBody;
-
+exports.getPullsAPITitles = getPullsAPITitles;
+exports.scrape = scrape;
+exports.getIssuesAPITitles = getIssuesAPITitles;
+exports.getRepositoriesAPITitles = getRepositoriesAPITitles;
+exports.retrieveAPICall = retrieveAPICall;
+exports.retrieveJavascriptExample = retrieveJavascriptExample;
+exports.retrieveShellExample = retrieveShellExample;
+exports.retrieveResponseBody = retrieveResponseBody;
