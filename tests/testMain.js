@@ -95,7 +95,7 @@ describe('Tests of processing.js:', function () {
     //test for synonyms
     const syn = nock("https://www.dictionaryapi.com")
       .get("/api/v3/references/thesaurus/json/make?key=your-api-key")
-      .reply(200, JSON.stringify(data.repo.create.shell));
+      .reply(200, JSON.stringify(data.syn_list_create));
 
     // it('Identify synonym for create', async function() {
     //     let returnValue = await proc.findSynonym("make");
