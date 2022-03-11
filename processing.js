@@ -29,11 +29,13 @@ async function processString(msg){
         return results;
     }
 
-    results = await scraper.getIssuesAPITitles();
-    // console.log(results);
-    return results;
+    let searchString = await findSearchString(action, feature, optionalCommand);
+    console.log(searchString);
 
-    // let searchString = findSearchString(action, feature, optionalCommand);
+    // results = await scraper.getIssuesAPITitles();
+    // console.log(results);
+    return searchString;
+
     // await scraper.scrape(searchString, optionalCommand);
 }
 
@@ -43,8 +45,24 @@ async function processString(msg){
  * @param {*} feature 
  * @param {*} optionalCommand 
  */
-function findSearchString(action, feature, optionalCommand) {
-    
+async function findSearchString(action, feature, optionalCommand) {
+    let results;
+    if (feature == "pulls") {
+        results = await scraper.getPullsAPITitles();
+        for (let i = 0; i < results.length; i++) {
+            if (results[i].toLowerCase().includes(action.toLowerCase())) {
+                console.log(results[i]);
+                return results[i];
+            }
+        }
+    }
+    else if (feature == "issues") {
+        results = await scraper.getIssuesAPITitles();
+    }
+    else if (feature == "repositories") {
+        results = await scraper.getRepositoriesAPITitles();
+    }
+    return results;
 }
 /**
  * Finds the synonym for a verb utilizing the Merriam-Webster Dictionary API
