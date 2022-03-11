@@ -5,10 +5,6 @@ help of the scraping service, returns the output to the client
 */
 const scraper = require("./scraping.js");
 
-var issuesTitles = scraper.getPullsAPITitles; // Contains all the headers for the available API calls under the Issues page in Github
-var repoTitles =  scraper.getRepositoriesAPITitles;  // Contains all the headers for the available API calls under the Repos page in Github
-var pullsTitles =  scraper.getPullsAPITitles;  // Contains all the headers for the available API calls under the Pulls page in Github
-
 
 async function processString(msg){
 
@@ -21,20 +17,22 @@ async function processString(msg){
     // error handling
     if (action == null) {
         results = "Please specify an action";
+        console.log("Invalid command. Missing action specifier.");
         return results;
     }
 
     if (feature == null) {
         results = "Please specify a feature";
+        console.log("Invalid command. Missing feature specifier.");
         return results;
     }
 
     let searchString = await findSearchString(action, feature, optionalCommand);
-    console.log(searchString);
+    console.log('Search Query: ' + searchString);
 
     // results = await scraper.getIssuesAPITitles();
     // console.log(results);
-    return searchString;
+    return scraper.scrape(searchString, feature, optionalCommand);
 
     // await scraper.scrape(searchString, optionalCommand);
 }
@@ -45,31 +43,35 @@ async function processString(msg){
  * @param {*} feature 
  * @param {*} optionalCommand 
  */
-async function findSearchString(action, feature, optionalCommand) {
+ function findSearchString(action, feature, optionalCommand) {
     let results;
-    if (feature == "pulls") {
-        results = await scraper.getPullsAPITitles();
-        for (let i = 0; i < results.length; i++) {
-            if (results[i].toLowerCase().includes(action.toLowerCase())) {
-                console.log(results[i]);
-                return results[i];
-            }
-        }
+    if (feature == "pull") {
+        results = scraper.getPullsAPITitles();
     }
     else if (feature == "issues") {
-        results = await scraper.getIssuesAPITitles();
+        results = scraper.getIssuesAPITitles();
     }
     else if (feature == "repositories") {
-        results = await scraper.getRepositoriesAPITitles();
+        results = scraper.getRepositoriesAPITitles();
     }
-    return results;
+    return findSearchStringHelper(results, action);
+}
+
+function findSearchStringHelper(results, action) {
+    for (let i = 0; i < results.length; i++) {
+        if (results[i].split(" ")[0].toLowerCase() == action.toLowerCase()) { // Check if the action the user specified is equal to the action in the REST API. If not found, we use synonym API
+            return results[i];
+        }
+    }
+    return findSearchStringWithSynonym(action, results);
 }
 /**
  * Finds the synonym for a verb utilizing the Merriam-Webster Dictionary API
  * @param {} verb 
  */
-function findSynonym(verb){
+function findSearchStringWithSynonym(action, results){
 
+    return null;
 }
 
 exports.processString = processString;

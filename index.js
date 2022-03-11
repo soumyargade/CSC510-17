@@ -15,17 +15,18 @@ async function main()
         if (hears(msg, "gitex")){
             let validInput = validateUserInput(msg);
             if (!validInput){
-                client.postMessage("Request is unclear.", channel);
+                console.log("User's command passed initial validation")
+                sendInvalidMessage(channel);
                 return;
             }
-
             let resultStr = JSON.parse(msg.data.post);
             resultStr = resultStr.message;
-
+            console.log("User's command: "+ resultStr)
             let returnedMsg = await processor.processString(resultStr.split(" "));
-
             if (returnedMsg == null){
-                client.postMessage("Request is unclear.", channel);
+                sendInvalidMessage(channel);
+                console.log("User's command was invalid");
+                return;
             }
             else {
                 // handling if returnedMsg is an object, array, etc.
@@ -39,6 +40,11 @@ async function main()
     });
 }
 
+function sendInvalidMessage(channel){
+    client.postMessage("Request is unclear.", channel);
+    client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
+     {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
+}
 function hears(msg, text)
 {
     if( msg.data.sender_name == bot_name) return false;
@@ -58,7 +64,7 @@ function hears(msg, text)
 */
 function validateUserInput(msg){
     // TODO: Add validation logic
-    return true;
+    return true
 }
 
 (async () => 

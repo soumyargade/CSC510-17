@@ -3,7 +3,7 @@ const parseHub = require("./parseHub.js")
 
 // npx run-func scraping.js getPullsAPITitles
 
-async function getPullsAPITitles(){
+function getPullsAPITitles(){
     // let pullsTitles = await parseHub.getPullsTitles();
     // console.log(pullsTitles);
     var results = data.pull;
@@ -11,10 +11,11 @@ async function getPullsAPITitles(){
     for (let result in results) {
         headers.push(results[result].title);
     }
+    console.log('headers ' + headers);
     return headers;
 }
 
-async function getIssuesAPITitles(){
+ function getIssuesAPITitles(){
     // let issuesTitles = await webScraper.getIssuesTitles();
     var results = data.issue;
     var headers = new Array();
@@ -24,7 +25,7 @@ async function getIssuesAPITitles(){
     return headers;
 }
 
-async function getRepositoriesAPITitles(){
+ function getRepositoriesAPITitles(){
     // let repositoriesTitles = await webScraper.getRepositoriesTitles();
     var results = data.repo;
     var headers = new Array();
@@ -34,10 +35,10 @@ async function getRepositoriesAPITitles(){
     return headers;
 }
 
-async function scrape(searchString, optionalCommand){
+ function scrape(searchString, feature, optionalCommand){
 
     if (!optionalCommand){
-        return retrieveAPICall(searchString);
+        return retrieveAPICall(searchString, feature);
     }
     else if(optionalCommand == 'Shell'){
         return retrieveShellExample(searchString);
@@ -50,7 +51,12 @@ async function scrape(searchString, optionalCommand){
     }
 }
 
-async function retrieveAPICall(searchString){
+ function retrieveAPICall(searchString, feature){
+    let action = searchString.split(' ')[0].toLowerCase();
+    console.log(feature);
+    console.log(action)
+    console.log(data[feature][action].path);
+    return data[feature][action].path;
 
 }
 
@@ -67,6 +73,7 @@ async function retrieveResponseBody(searchString){
 }
 
 exports.getPullsAPITitles = getPullsAPITitles;
+exports.scrape = scrape;
 exports.getIssuesAPITitles = getIssuesAPITitles;
 exports.getRepositoriesAPITitles = getRepositoriesAPITitles;
 exports.retrieveAPICall = retrieveAPICall;
