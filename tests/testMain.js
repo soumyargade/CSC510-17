@@ -76,6 +76,16 @@ describe('Tests of processing.js:', function () {
         assert.equal(returnValue, "Please specify an action");
     });
 
+    it("ensures that processString() returns correct error message when no feature is given", async function() {
+        // CREATE TEST OBJECT
+        // console.log("TEST: ", bot)
+        // msg = "gitex";
+        msg = ["gitex", "pulls", null, "shell"]
+        let returnValue = await proc.processString(msg);
+        console.log("ReturnValue test 5: ", returnValue);
+        assert.equal(returnValue, "Please specify a feature");
+    });
+
     // it("ensures that getActionVerb() returns true when a verb is found", function() {
     //     // CREATE TEST OBJECT
     //     // console.log("TEST: ", bot)
@@ -93,20 +103,9 @@ describe('Tests of processing.js:', function () {
     //     console.log("ReturnValue test 5: ", returnValue);
     //     assert(returnValue === null);
     // });
-
-    //Test for when processString() is done
-    // it("ensures that processString() returns null when there are no verbs in the message", function() {
-    //     // CREATE TEST OBJECT
-    //     // console.log("TEST: ", bot)
-    //     // msg = {"data": {"sender_name": "GitEx"}};
-    //     let returnValue = proc.processString("smurf", null);
-    //     console.log("ReturnValue test 6: ", returnValue);
-    //     assert(returnValue === null);
-    // });
-
-    //Ensure processString() returns true with correct input
     
     //test for synonyms
+    
     const syn = nock("https://www.dictionaryapi.com")
       .get("/api/v3/references/thesaurus/json/make?key=your-api-key")
       .reply(200, JSON.stringify(data.syn_list_create));
