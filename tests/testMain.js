@@ -99,7 +99,7 @@ describe('Tests of processing.js:', function () {
 
     // it('Identify synonym for create', async function() {
     //     let returnValue = await proc.findSynonym("create");
-    //     expect(returnValue).to.contain("make");
+    //     expect(returnValue).contains("make");
     // }); 
 
 });
