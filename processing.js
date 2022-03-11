@@ -46,6 +46,7 @@ async function processString(msg){
  */
  async function findSearchString(action, feature, optionalCommand) {
     let results;
+    // returning pulls endpoints, assuming UC1
     if (feature == "pull" || feature == "pulls") {
         // getting info from ParseHub
         results = await scraper.getPullsAPITitles();
@@ -59,6 +60,7 @@ async function processString(msg){
             return "Don't have an endpoint example for the specified action"
         }
     }
+    // returning issues endpoints, assuming UC1
     else if (feature == "issue" || feature == "issues") {
         results = await scraper.getIssuesAPITitles();
         if (action == "get") {
@@ -73,8 +75,20 @@ async function processString(msg){
             return "Don't have an endpoint example for the specified action"
         }
     }
-    else if (feature == "repositories") {
-        results = scraper.getRepositoriesAPITitles();
+    // returning repos endpoints, assuming UC1
+    else if (feature == "repo" || feature == "repository" || feature == "repositories") {
+        results = await scraper.getRepositoriesAPITitles();
+        if (action == "get") {
+            return results.getRepository[0].name;
+        } else if (action == "list") {
+            return results.listRepositories[0].name;
+        } else if (action == "create") {
+            return results.createRepository[0].name;
+        } else if (action == "delete") {
+            return results.deleteRepository[0].name;
+        } else {
+            return "Don't have an endpoint example for the specified action"
+        }
     }
     return results;
     // return findSearchStringHelper(results, action);

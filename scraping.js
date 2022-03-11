@@ -31,12 +31,15 @@ async function getPullsAPITitles(){
 
 async function getRepositoriesAPITitles(){
     // let repositoriesTitles = await parseHub.getRepositoriesInfo();
-    var results = data.repo;
-    var headers = new Array();
-    for (let result in results) {
-        headers.push(results[result].title);
-    }
-    return headers;
+    let repoTitles = await parseHub.getRepositoriesInfo();
+    return repoTitles;
+    
+    // var results = data.repo;
+    // var headers = new Array();
+    // for (let result in results) {
+        // headers.push(results[result].title);
+    // }
+    // return headers;
 }
 
  function scrape(searchString, feature, optionalCommand){
