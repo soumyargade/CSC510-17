@@ -48,37 +48,36 @@ describe('Tests of index.js:', function () {
 
     //Will have to be updated when validateUserInput() is complete, but this is a start for when it is
     //Test to show an invalid message will return invalid message response
-    // it("ensures that validateUserInput() returns false", function() {
-    //     // CREATE TEST OBJECT
-    //     // console.log("TEST: ", bot)
-    //     msg = {"data": {"sender_name": "", "post": JSON.stringify({"message":"smurfy smurf"})}};
-    //     let returnValue = bot.validateUserInput(msg);
-    //     console.log("ReturnValue test 3: ", returnValue, " datatype: ", typeof(returnValue));
-    //     // assert.typeOf(returnValue, Symbol)
-    // });
+    it("ensures that validateUserInput() returns false", function() {
+        // CREATE TEST OBJECT
+        // console.log("TEST: ", bot)
+        msg = {"data": {"sender_name": "", "post": JSON.stringify({"message":"smurfy smurf"})}};
+        let returnValue = bot.validateUserInput(msg);
+        console.log("ReturnValue test 3: ", returnValue, " datatype: ", typeof(returnValue));
+        // assert.typeOf(returnValue, Symbol)
+    });
 
 });
 
 describe('Tests of processing.js:', function () {
 
+    // it("ensures that getActionVerb() returns true when a verb is found", function() {
+    //     // CREATE TEST OBJECT
+    //     // console.log("TEST: ", bot)
+    //     // msg = {"data": {"sender_name": "GitEx"}};
+    //     let returnValue = proc.getActionVerb("create branch");
+    //     console.log("ReturnValue test 4: ", returnValue);
+    //     assert(returnValue === "create");
+    // });
 
-    it("ensures that getActionVerb() returns true when a verb is found", function() {
-        // CREATE TEST OBJECT
-        // console.log("TEST: ", bot)
-        // msg = {"data": {"sender_name": "GitEx"}};
-        let returnValue = proc.getActionVerb("create branch");
-        console.log("ReturnValue test 4: ", returnValue);
-        assert(returnValue === "create");
-    });
-
-    it("ensures that getActionVerb() returns null when there are no verbs found", function() {
-        // CREATE TEST OBJECT
-        // console.log("TEST: ", bot)
-        // msg = {"data": {"sender_name": "GitEx"}};
-        let returnValue = proc.getActionVerb("smurf");
-        console.log("ReturnValue test 5: ", returnValue);
-        assert(returnValue === null);
-    });
+    // it("ensures that getActionVerb() returns null when there are no verbs found", function() {
+    //     // CREATE TEST OBJECT
+    //     // console.log("TEST: ", bot)
+    //     // msg = {"data": {"sender_name": "GitEx"}};
+    //     let returnValue = proc.getActionVerb("smurf");
+    //     console.log("ReturnValue test 5: ", returnValue);
+    //     assert(returnValue === null);
+    // });
 
     //Test for when processString() is done
     // it("ensures that processString() returns null when there are no verbs in the message", function() {
