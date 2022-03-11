@@ -55,15 +55,14 @@ describe('Tests of index.js:', function () {
 
 describe('Tests of processing.js:', function () {
 
-    it("ensures that processString() returns error when a message is in wrong format", async function() {
+    it("ensures that processString() returns search string", async function() {
         // CREATE TEST OBJECT
         // console.log("TEST: ", bot)
         // msg = "what is the weather?";
-        msg = ["what", "is", "the", "weather?"];
+        msg = ["gitex", "create", "repositories"];
         let returnValue = await proc.processString(msg);
         console.log("ReturnValue test 4: ", returnValue);
-        assert.equal(returnValue, "Please specify an action");
-        // assert(returnValue === "Invalid command");
+        assert.equal(returnValue, "Create an organization repository,Get a repository,Update a repository,Delete a repository");
     });
 
     it("ensures that processString() returns correct error message when no action is given", async function() {
