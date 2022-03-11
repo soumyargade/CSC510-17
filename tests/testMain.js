@@ -91,23 +91,33 @@ describe('Tests of processing.js:', function () {
     // });
 
     //Ensure processString() returns true with correct input
+    
+    //test for synonyms
+    const syn = nock("https://www.dictionaryapi.com")
+      .get("/api/v3/references/thesaurus/json/make?key=your-api-key")
+      .reply(200, JSON.stringify(data.repo.create.shell));
+
+    // it('Identify synonym for create', async function() {
+    //     let returnValue = await proc.findSynonym("make");
+    //     expect(returnValue).to.equal("create");
+    // }); 
 
 });
 
 describe('Tests of scraping.js:', function () {
     //Test for getting the shell command for create repo
-    const testOfShell = nock("https://api.github.com")
-      .get("/repo/create/shell")
+    const testOfShell = nock("https://www.parsehub.com")
+      .get("/api/v2/runs/{RUN_TOKEN}/data")
       .reply(200, JSON.stringify(data.repo.create.shell));
 
     // it('Return an example of shell command for create repo', async function() {
     //     let returnValue = await scrap.retrieveShellExample("create repo shell");
-    //     expect(returnValue).to.equal("");
+    //     expect(returnValue).to.equal("curl -X POST -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/orgs/ORG/repos -d '{\"name\":\"name\"}'");
     // }); 
 
     //Test for getting response body for create repo
-    const testOfResponse = nock("https://api.github.com")
-    .get("/repo/create/response")
+    const testOfResponse = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/{RUN_TOKEN}/data")
     .reply(200, JSON.stringify(data.repo.create.response));
 
     // it('Return an example of response body for create repo', async function() {
@@ -116,8 +126,8 @@ describe('Tests of scraping.js:', function () {
     // }); 
 
     //Test for getting Javascript command for create repo
-    const testOfJavascript = nock("https://api.github.com")
-    .get("/repo/create/javascript")
+    const testOfJavascript = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/{RUN_TOKEN}/data")
     .reply(200, JSON.stringify(data.repo.create.javascript));
 
     // it('Return an example of javascript command for create repo', async function() {
@@ -126,8 +136,8 @@ describe('Tests of scraping.js:', function () {
     // }); 
 
     //Test for getting endpoint for create repo
-    const testOfAPI = nock("https://api.github.com")
-    .get("/repo/create/path")
+    const testOfAPI = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/{RUN_TOKEN}/data")
     .reply(200, JSON.stringify(data.repo.create.path));
 
     // it('Return an example of path command for create repo', async function() {
