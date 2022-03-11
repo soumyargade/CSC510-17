@@ -87,3 +87,4 @@ function findSearchStringWithSynonym(action, results){
 }
 
 exports.processString = processString;
+exports.findSearchString = findSearchString;

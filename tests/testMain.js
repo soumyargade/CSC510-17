@@ -61,7 +61,7 @@ describe('Tests of processing.js:', function () {
         // msg = "what is the weather?";
         msg = ["gitex", "create", "repositories"];
         let returnValue = await proc.processString(msg);
-        console.log("ReturnValue test 4: ", returnValue);
+        console.log("ReturnValue - processing test 1: ", returnValue);
         assert.equal(returnValue, "Create an organization repository,Get a repository,Update a repository,Delete a repository");
     });
 
@@ -71,7 +71,7 @@ describe('Tests of processing.js:', function () {
         // msg = "gitex";
         msg = ["gitex", null, "issues", "shell"]
         let returnValue = await proc.processString(msg);
-        console.log("ReturnValue test 5: ", returnValue);
+        console.log("ReturnValue - processing test 2 : ", returnValue);
         assert.equal(returnValue, "Please specify an action");
     });
 
@@ -81,7 +81,7 @@ describe('Tests of processing.js:', function () {
         // msg = "gitex";
         msg = ["gitex", "pulls", null, "shell"]
         let returnValue = await proc.processString(msg);
-        console.log("ReturnValue test 5: ", returnValue);
+        console.log("ReturnValue - processing test 3: ", returnValue);
         assert.equal(returnValue, "Please specify a feature");
     });
 
@@ -113,6 +113,24 @@ describe('Tests of processing.js:', function () {
     //     let returnValue = await proc.findSynonym("create");
     //     expect(returnValue).contains("make");
     // }); 
+
+    it("ensures that findSearchString() returns error for when no endpoint can be found - for a pull", async function() {
+        let returnValue = await proc.findSearchString("eat", "pull");
+        console.log("ReturnValue - processing test 4: ", returnValue);
+        assert.equal(returnValue, "Don't have an endpoint for example for the specified action");
+    });
+
+    it("ensures that findSearchString() returns error for when no endpoint can be found - for a issue", async function() {
+        let returnValue = await proc.findSearchString("eat", "issue");
+        console.log("ReturnValue - processing test 5: ", returnValue);
+        assert.equal(returnValue, "Don't have an endpoint for example for the specified action");
+    });
+
+    it("ensures that findSearchString() returns error fro when no endpoint can be found - for repo", async function() {
+        let returnValue = await proc.findSearchString("eat", "repositories");
+        console.log("ReturnValue - processing test 5: ", returnValue);
+        assert.equal(returnValue.length, "Don't have an endpoint for example for the specified action");
+    });
 
 });
 
