@@ -1,9 +1,5 @@
 const Client = require('mattermost-client');
 const processor = require("./processing.js");
-const UC1 = Symbol("UC1"); // Enum for Use Case 1
-const UC2 = Symbol("UC2"); // Enum for Use Case 2
-const UC3 = Symbol("UC3"); // Enum for Use Case 3
-const Invalid = Symbol("Invalid"); // Enum for invalid input that doesn't match use cases 1-3
 
 let host = "chat.robotcodelab.com"
 let group = "CSC510-S22"
@@ -18,12 +14,12 @@ async function main()
     {
         console.log(msg);
         if(hears(msg, "gitex")){
-            let uc = validateUserInput(msg);
-            if(uc == Invalid){
+            let validInput = validateUserInput(msg);
+            if(!validInput){
                 client.postMessage("Request is unclear.", channel);
                 return;
             }
-            let returnedMsg = processor.processString(msg, uc);
+            let returnedMsg = processor.processString(msg.split(" "));
             if(returnedMsg == null){
                 client.postMessage("Request is unclear.", channel);
             }
@@ -49,12 +45,11 @@ function hears(msg, text)
 }
 /*
     Performs initial validation of the user's command. Ensures that the user command
-    can be mapped to one of the three use cases. Returns which use case the user 
-    is referring to (or Invalid)
+    can be mapped to one of the three use cases.
 */
 function validateUserInput(msg){
     // TODO: Add validation logic
-    return Invalid;
+    return true;
 }
 
 (async () => 
