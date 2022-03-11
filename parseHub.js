@@ -8,7 +8,7 @@ async function getPullsTitles() {
         method: 'GET',
         gzip: true,
         qs: {
-            api_key: "t0V54k8mSraB",
+            api_key: "{API_KEY}",
             format: "json"
         }
     }, function(err, resp, body) {

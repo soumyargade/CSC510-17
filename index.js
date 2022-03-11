@@ -13,7 +13,7 @@ async function main()
     client.on('message', function(msg)
     {
         console.log(msg);
-        if(hears(msg, "gitex")){
+        if (hears(msg, "gitex")){
             let validInput = validateUserInput(msg);
             if(!validInput){
                 client.postMessage("Request is unclear.", channel);

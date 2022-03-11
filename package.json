@@ -14,6 +14,7 @@
         "got": "^10.7.0",
         "install": "^0.13.0",
         "mattermost-client": "^6.4.0",
+        "npx": "^10.2.2",
         "parse-link-header": "^2.0.0"
     },
     "devDependencies": {
