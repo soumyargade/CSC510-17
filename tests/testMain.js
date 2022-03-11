@@ -21,12 +21,6 @@ const data = require("../mock.json")
 ///////////////////////////
 
 describe('Tests of index.js:', function () {
-    // MOCK SERVICE
-    // var mockService = nock("https://api.github.com")
-    // // .log(console.log)
-    // .persist() // This will persist mock interception for lifetime of program.
-    // .get("/repos/testuser/Hello-World/issues")
-    // .reply(200, JSON.stringify(data.pull.path))
 
     this.timeout(5000);
     it("ensures that hears() returns true on a valid message input", function() {
@@ -48,18 +42,27 @@ describe('Tests of index.js:', function () {
 
     //Will have to be updated when validateUserInput() is complete, but this is a start for when it is
     //Test to show an invalid message will return invalid message response
-    it("ensures that validateUserInput() returns false", function() {
-        // CREATE TEST OBJECT
-        // console.log("TEST: ", bot)
-        msg = {"data": {"sender_name": "", "post": JSON.stringify({"message":"smurfy smurf"})}};
-        let returnValue = bot.validateUserInput(msg);
-        console.log("ReturnValue test 3: ", returnValue, " datatype: ", typeof(returnValue));
-        // assert.typeOf(returnValue, Symbol)
-    });
+    // it("ensures that validateUserInput() returns true", function() {
+    //     // CREATE TEST OBJECT
+    //     // console.log("TEST: ", bot)
+    //     msg = {"data": {"sender_name": "", "post": JSON.stringify({"message":"smurfy smurf"})}};
+    //     let returnValue = bot.validateUserInput(msg);
+    //     console.log("ReturnValue test 3: ", returnValue, " datatype: ", typeof(returnValue));
+    //     assert.typeOf(returnValue === true)
+    // });
 
 });
 
 describe('Tests of processing.js:', function () {
+
+    it("ensures that processString() returns error when a message is unclear", function() {
+        // CREATE TEST OBJECT
+        // console.log("TEST: ", bot)
+        msg = "what is the weather?";
+        let returnValue = proc.processString(msg);
+        console.log("ReturnValue test 4: ", returnValue);
+        assert(returnValue === "Invalid command");
+    });
 
     // it("ensures that getActionVerb() returns true when a verb is found", function() {
     //     // CREATE TEST OBJECT
