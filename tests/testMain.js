@@ -98,8 +98,8 @@ describe('Tests of processing.js:', function () {
       .reply(200, JSON.stringify(data.syn_list_create));
 
     // it('Identify synonym for create', async function() {
-    //     let returnValue = await proc.findSynonym("make");
-    //     expect(returnValue).to.equal("create");
+    //     let returnValue = await proc.findSynonym("create");
+    //     expect(returnValue).to.contain("make");
     // }); 
 
 });
