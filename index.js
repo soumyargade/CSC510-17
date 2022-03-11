@@ -18,19 +18,22 @@ async function main()
                 client.postMessage("Request is unclear.", channel);
                 return;
             }
+
             let resultStr = JSON.parse(msg.data.post);
             resultStr = resultStr.message;
-            console.log(resultStr);
 
             let returnedMsg = await processor.processString(resultStr.split(" "));
-            console.log(returnedMsg);
-            console.log(returnedMsg[0]);
 
             if (returnedMsg == null){
                 client.postMessage("Request is unclear.", channel);
             }
             else {
-                client.postMessage(returnedMsg[0], channel);
+                // handling if returnedMsg is an object, array, etc.
+                if (typeof returnedMsg != 'string') {
+                    client.postMessage(JSON.stringify(returnedMsg), channel);
+                } else {
+                    client.postMessage(returnedMsg, channel);
+                }
             }
         }
     });

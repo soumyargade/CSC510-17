@@ -16,8 +16,20 @@ async function processString(msg){
     let action = msg[1];
     let feature = msg[2];
     let optionalCommand = msg[3];
+    let results;
 
-    let results = await scraper.getIssuesAPITitles();
+    // error handling
+    if (action == null) {
+        results = "Please specify an action";
+        return results;
+    }
+
+    if (feature == null) {
+        results = "Please specify a feature";
+        return results;
+    }
+
+    results = await scraper.getIssuesAPITitles();
     // console.log(results);
     return results;
 
