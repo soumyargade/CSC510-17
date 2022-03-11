@@ -12,11 +12,16 @@ var pullsTitles =  scraper.getPullsAPITitles;  // Contains all the headers for t
 
 async function processString(msg){
 
-    let action = msg[0];
-    let feature = msg[1];
-    let optionalCommand = msg[2];
+    // msg[0] will be "gitex"
+    let action = msg[1];
+    let feature = msg[2];
+    let optionalCommand = msg[3];
 
-    let searchString = findSearchString(action, feature, optionalCommand);
+    let results = await scraper.getIssuesAPITitles();
+    // console.log(results);
+    return results;
+
+    // let searchString = findSearchString(action, feature, optionalCommand);
     // await scraper.scrape(searchString, optionalCommand);
 }
 
