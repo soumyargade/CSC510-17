@@ -118,6 +118,13 @@ describe('Tests of processing.js:', function () {
 });
 
 describe('Tests of scraping.js:', function () {
+
+    it("ensures that retrieveAPICall() returns correct path", function() {
+        let returnValue = scrap.retrieveAPICall("create", "issues");
+        console.log("ReturnValue test: ", returnValue);
+        assert.equal(returnValue, "Null");
+    });
+
     //Test for getting the shell command for create repo
     const testOfShell = nock("https://www.parsehub.com")
       .get("/api/v2/runs/{RUN_TOKEN}/data")
