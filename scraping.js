@@ -5,8 +5,9 @@ const parseHub = require("./parseHub.js")
 
 async function getPullsAPITitles(){
     let pullsTitles = await parseHub.getPullsInfo();
-    console.log(pullsTitles.createPullRequest[0].name);
+    // console.log(pullsTitles.createPullRequest[0].name);
     return pullsTitles;
+
     // var results = data.pull;
     // var headers = new Array();
     // for (let result in results) {
@@ -16,14 +17,16 @@ async function getPullsAPITitles(){
     // return headers;
 }
 
- function getIssuesAPITitles(){
-    // let issuesTitles = await webScraper.getIssuesTitles();
-    var results = data.issue;
-    var headers = new Array();
-    for (let result in results) {
-        headers.push(results[result].title);
-    }
-    return headers;
+ async function getIssuesAPITitles(){
+    let issuesTitles = await parseHub.getIssuesInfo();
+    return issuesTitles;
+
+    // var results = data.issue;
+    // var headers = new Array();
+    // for (let result in results) {
+        // headers.push(results[result].title);
+    // }
+    // return headers;
 }
 
 async function getRepositoriesAPITitles(){

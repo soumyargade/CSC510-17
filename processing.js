@@ -47,6 +47,7 @@ async function processString(msg){
  async function findSearchString(action, feature, optionalCommand) {
     let results;
     if (feature == "pull" || feature == "pulls") {
+        // getting info from ParseHub
         results = await scraper.getPullsAPITitles();
         if (action == "get") {
             return results.getPullRequest[0].name;
@@ -58,8 +59,19 @@ async function processString(msg){
             return "Don't have an endpoint example for the specified action"
         }
     }
-    else if (feature == "issues") {
-        results = scraper.getIssuesAPITitles();
+    else if (feature == "issue" || feature == "issues") {
+        results = await scraper.getIssuesAPITitles();
+        if (action == "get") {
+            return results.getIssue[0].name;
+        } else if (action == "list") {
+            return results.listIssue[0].name;
+        } else if (action == "create") {
+            return results.createIssue[0].name;
+        } else if (action == "update") {
+            return results.updateIssue[0].name;
+        } else {
+            return "Don't have an endpoint example for the specified action"
+        }
     }
     else if (feature == "repositories") {
         results = scraper.getRepositoriesAPITitles();
