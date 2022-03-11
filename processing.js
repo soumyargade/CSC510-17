@@ -113,6 +113,7 @@ async function processString(msg){
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
                 return results.createIssue[2].name;
             } else if (optionalCommand == "response") {
+                // pain point, didn't work
                 return results.createIssue[4].name;
             } else {
                 return results.createIssue[0].name;
@@ -150,6 +151,7 @@ async function processString(msg){
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
                 return results.listRepositories[2].name;
             } else if (optionalCommand == "response") {
+                // format is showing up a bit odd
                 return results.listRepositories[4].name;
             } else {
                 return results.listRepositories[0].name;
@@ -170,7 +172,8 @@ async function processString(msg){
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
                 return results.deleteRepository[2].name;
             } else if (optionalCommand == "response") {
-                return results.deleteRepository[4].name;
+                // changed index, no body for delete
+                return results.deleteRepository[3].name;
             } else {
                 return results.deleteRepository[0].name;
             }
