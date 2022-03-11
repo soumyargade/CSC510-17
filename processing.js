@@ -48,14 +48,26 @@ async function processString(msg){
 async function findSearchString(action, feature, optionalCommand) {
     // TODO: find a way to condense, reusing practically same code in all if blocks
     let results;
-    if (feature == "pulls") {
+    if (feature == "pull" || feature == "pulls") {
+
         results = await scraper.getPullsAPITitles();
-        for (let i = 0; i < results.length; i++) {
-            if (results[i].toLowerCase().includes(action.toLowerCase())) {
-                console.log(results[i]);
-                return results[i];
-            }
+
+        if (action == "get") {
+            return results.getPullRequest[0].name;
+        } else if (action == "list") {
+            return results.listPullRequests[0].name;
+        } else if (action == "create") {
+            return results.createPullRequest[0].name;
+        } else {
+            return "Don't have an endpoint example for the specified action"
         }
+        
+        //for (let i = 0; i < results.length; i++) {
+            //if (results[i].toLowerCase().includes(action.toLowerCase())) {
+                //console.log(results[i]);
+                //return results[i];
+            //}
+        //}
     }
     else if (feature == "issues") {
         results = await scraper.getIssuesAPITitles();
