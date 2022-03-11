@@ -5,7 +5,7 @@ const parseHub = require("./parseHub.js")
 
 async function getPullsAPITitles(){
     let pullsTitles = await parseHub.getPullsInfo();
-    // console.log(pullsTitles.createPullRequest[0].name);
+    // console.log(pullsTitles.createPullRequest[4].name);
     return pullsTitles;
 
     // var results = data.pull;
@@ -19,6 +19,7 @@ async function getPullsAPITitles(){
 
  async function getIssuesAPITitles(){
     let issuesTitles = await parseHub.getIssuesInfo();
+    // console.log(issuesTitles.getIssue[1].name)
     return issuesTitles;
 
     // var results = data.issue;
