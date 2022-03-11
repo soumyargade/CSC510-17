@@ -46,23 +46,137 @@ async function processString(msg){
  */
  async function findSearchString(action, feature, optionalCommand) {
     let results;
+    // returning pulls endpoints, assuming UC1
     if (feature == "pull" || feature == "pulls") {
+        // getting info from ParseHub
         results = await scraper.getPullsAPITitles();
         if (action == "get") {
-            return results.getPullRequest[0].name;
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.getPullRequest[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.getPullRequest[2].name;
+            } else if (optionalCommand == "response") {
+                return results.getPullRequest[4].name;
+            } else {
+                return results.getPullRequest[0].name;
+            }
         } else if (action == "list") {
-            return results.listPullRequests[0].name;
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.listPullRequests[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.listPullRequests[2].name;
+            } else if (optionalCommand == "response") {
+                return results.listPullRequests[4].name;
+            } else {
+                return results.listPullRequests[0].name;
+            }
         } else if (action == "create") {
-            return results.createPullRequest[0].name;
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.createPullRequest[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.createPullRequest[2].name;
+            } else if (optionalCommand == "response") {
+                return results.createPullRequest[4].name;
+            } else {
+                return results.createPullRequest[0].name;
+            }
         } else {
             return "Don't have an endpoint example for the specified action"
         }
     }
-    else if (feature == "issues") {
-        results = scraper.getIssuesAPITitles();
+    // returning issues endpoints, assuming UC1
+    else if (feature == "issue" || feature == "issues") {
+        results = await scraper.getIssuesAPITitles();
+        if (action == "get") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.getIssue[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.getIssue[2].name;
+            } else if (optionalCommand == "response") {
+                return results.getIssue[4].name;
+            } else {
+                return results.getIssue[0].name;
+            }
+        } else if (action == "list") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.listIssue[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.listIssue[2].name;
+            } else if (optionalCommand == "response") {
+                return results.listIssue[4].name;
+            } else {
+                return results.listIssue[0].name;
+            }
+        } else if (action == "create") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.createIssue[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.createIssue[2].name;
+            } else if (optionalCommand == "response") {
+                return results.createIssue[4].name;
+            } else {
+                return results.createIssue[0].name;
+            }
+        } else if (action == "update") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.updateIssue[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.updateIssue[2].name;
+            } else if (optionalCommand == "response") {
+                return results.updateIssue[4].name;
+            } else {
+                return results.updateIssue[0].name;
+            }
+        } else {
+            return "Don't have an endpoint example for the specified action"
+        }
     }
-    else if (feature == "repositories") {
-        results = scraper.getRepositoriesAPITitles();
+    // returning repos endpoints, assuming UC1
+    else if (feature == "repo" || feature == "repository" || feature == "repositories") {
+        results = await scraper.getRepositoriesAPITitles();
+        if (action == "get") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.getRepository[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.getRepository[2].name;
+            } else if (optionalCommand == "response") {
+                return results.getRepository[4].name;
+            } else {
+                return results.getRepository[0].name;
+            }
+        } else if (action == "list") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.listRepositories[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.listRepositories[2].name;
+            } else if (optionalCommand == "response") {
+                return results.listRepositories[4].name;
+            } else {
+                return results.listRepositories[0].name;
+            }
+        } else if (action == "create") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.createRepository[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.createRepository[2].name;
+            } else if (optionalCommand == "response") {
+                return results.createRepository[4].name;
+            } else {
+                return results.createRepository[0].name;
+            }
+        } else if (action == "delete") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.deleteRepository[1].name;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.deleteRepository[2].name;
+            } else if (optionalCommand == "response") {
+                return results.deleteRepository[4].name;
+            } else {
+                return results.deleteRepository[0].name;
+            }
+        } else {
+            return "Don't have an endpoint example for the specified action"
+        }
     }
     return results;
     // return findSearchStringHelper(results, action);
