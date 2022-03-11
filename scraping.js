@@ -1,14 +1,35 @@
-async function getPullsAPITitles(){
+const data = require("./mock.json")
 
-    return [];
+// npx run-func scraping.js getPullsAPITitles
+
+async function getPullsAPITitles(){
+    // let pullsTitles = await webScraper.getPullsTitles();
+    var results = data.pull;
+    var headers = new Array();
+    for (let result in results) {
+        headers.push(results[result].title);
+    }
+    return headers;
 }
 
 async function getIssuesAPITitles(){
-    return [];
+    // let issuesTitles = await webScraper.getIssuesTitles();
+    var results = data.issue;
+    var headers = new Array();
+    for (let result in results) {
+        headers.push(results[result].title);
+    }
+    return headers;
 }
 
 async function getRepositoriesAPITitles(){
-    return [];
+    // let repositoriesTitles = await webScraper.getRepositoriesTitles();
+    var results = data.repo;
+    var headers = new Array();
+    for (let result in results) {
+        headers.push(results[result].title);
+    }
+    return headers;
 }
 
 async function scrape(searchString, optionalCommand){
@@ -45,3 +66,10 @@ async function retrieveResponseBody(searchString){
 
 }
 
+exports.getPullsAPITitles = getPullsAPITitles;
+exports.getIssuesAPITitles = getIssuesAPITitles;
+exports.getRepositoriesAPITitles = getRepositoriesAPITitles;
+exports.retrieveAPICall = retrieveAPICall;
+exports.retrieveJSONExample = retrieveJSONExample;
+exports.retrieveShellExample = retrieveShellExample;
+exports.retrieveResponseBody = retrieveResponseBody;
