@@ -25,8 +25,8 @@ function getPullsAPITitles(){
     return headers;
 }
 
- function getRepositoriesAPITitles(){
-    // let repositoriesTitles = await webScraper.getRepositoriesTitles();
+async function getRepositoriesAPITitles(){
+    // let repositoriesTitles = await parseHub.getRepositoriesInfo();
     var results = data.repo;
     var headers = new Array();
     for (let result in results) {

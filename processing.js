@@ -45,7 +45,7 @@ async function processString(msg){
  */
  function findSearchString(action, feature, optionalCommand) {
     let results;
-    if (feature == "pull") {
+    if (feature == "pull" || feature == "pulls") {
         results = scraper.getPullsAPITitles();
     }
     else if (feature == "issues") {
