@@ -5,7 +5,7 @@ const parseHub = require("./parseHub.js")
 
 async function getPullsAPITitles(){
     let pullsTitles = await parseHub.getPullsTitles();
-    console.log(pullsTitles)
+    console.log(pullsTitles);
     //var results = data.pull;
     //var headers = new Array();
     //for (let result in results) {
@@ -36,7 +36,7 @@ async function getRepositoriesAPITitles(){
 
 async function scrape(searchString, optionalCommand){
 
-    if(!optionalCommand){
+    if (!optionalCommand){
         return retrieveAPICall(searchString);
     }
     else if(optionalCommand == 'Shell'){
@@ -48,10 +48,8 @@ async function scrape(searchString, optionalCommand){
     else if(optionalCommand == 'Response'){
         return retrieveResponseBody(searchString);
     }
-
-
-
 }
+
 async function retrieveAPICall(searchString){
 
 }

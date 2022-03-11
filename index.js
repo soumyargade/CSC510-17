@@ -9,17 +9,23 @@ let client = new Client(host, group, {});
 async function main()
 {
     let request = await client.tokenLogin(process.env.BOTTOKEN);
-    let channel = msg.broadcast.channel_id;
     client.on('message', function(msg)
     {
-        console.log(msg);
+        let channel = msg.broadcast.channel_id;
         if (hears(msg, "gitex")){
             let validInput = validateUserInput(msg);
-            if(!validInput){
+            if (!validInput){
                 client.postMessage("Request is unclear.", channel);
                 return;
             }
-            let returnedMsg = processor.processString(msg.split(" "));
+            // let strMsg = JSON.parse(msg.data.post.message);
+            // console.log(msg.data.post);
+            let resultStr = JSON.parse(msg.data.post);
+            resultStr = resultStr.message;
+            console.log(resultStr);
+            // console.log(msg.data.post.message);
+            let returnedMsg = processor.processString(resultStr.split(" "));
+            // let returnedMsg = "";
             if(returnedMsg == null){
                 client.postMessage("Request is unclear.", channel);
             }
@@ -60,7 +66,4 @@ function validateUserInput(msg){
 })()
 
 module.exports.hears = hears;
-module.exports.parsePulls = parsePulls;
-module.exports.parseIssues = parseIssues;
-module.exports.parseRepositories = parseRepositories;
 module.exports.main = main;

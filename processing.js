@@ -17,10 +17,7 @@ async function processString(msg){
     let optionalCommand = msg[2];
 
     let searchString = findSearchString(action, feature, optionalCommand);
-    await scraper.scrape(searchString, optionalCommand);
-
-
-
+    // await scraper.scrape(searchString, optionalCommand);
 }
 
 /**
@@ -40,8 +37,4 @@ function findSynonym(verb){
 
 }
 
-
-
-
-
-
+exports.processString = processString;
