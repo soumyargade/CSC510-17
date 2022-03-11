@@ -130,12 +130,22 @@ describe('Tests of scraping.js:', function () {
     .get("/api/v2/runs/YOUR%20TOKEN%20HERE/data?api_key=YOUR%20KEY%20HERE&format=json")
     .reply(200, JSON.stringify(data.pull.create.title));
 
-    it('Return an example of shell command for create repo', async function() {
+    it('ensure that getPullsAPITitles returns correct list', async function() {
         let returnValue = await scrap.getPullsAPITitles();
         console.log("ReturnValue: ", returnValue);
-        expect(returnValue).to.equal("Create a pull request");
+        expect(returnValue.length).to.equal(3);
     }); 
 
+    //Test for getting the issues title
+    const testOfIssuesTitles = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/YOUR%20TOKEN%20HERE/data?api_key=YOUR%20KEY%20HERE&format=json")
+    .reply(200, JSON.stringify(data.issue.create.title));
+
+    it('ensure that getIssuesAPITitle returns correct list', async function() {
+        let returnValue = await scrap.getIssuesAPITitles();
+        console.log("ReturnValue: ", returnValue);
+        expect(returnValue.length).to.equal(3);
+    }); 
 
     //Test for getting the shell command for create repo
     const testOfShell = nock("https://www.parsehub.com")
