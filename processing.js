@@ -29,10 +29,11 @@ async function processString(msg){
 
     let searchString = await findSearchString(action, feature, optionalCommand);
     console.log('Search Query: ' + searchString);
+    return searchString;
 
     // results = await scraper.getIssuesAPITitles();
     // console.log(results);
-    return scraper.scrape(searchString, feature, optionalCommand);
+    // return scraper.scrape(searchString, feature, optionalCommand);
 
     // await scraper.scrape(searchString, optionalCommand);
 }
@@ -43,10 +44,19 @@ async function processString(msg){
  * @param {*} feature 
  * @param {*} optionalCommand 
  */
- function findSearchString(action, feature, optionalCommand) {
+ async function findSearchString(action, feature, optionalCommand) {
     let results;
     if (feature == "pull" || feature == "pulls") {
-        results = scraper.getPullsAPITitles();
+        results = await scraper.getPullsAPITitles();
+        if (action == "get") {
+            return results.getPullRequest[0].name;
+        } else if (action == "list") {
+            return results.listPullRequests[0].name;
+        } else if (action == "create") {
+            return results.createPullRequest[0].name;
+        } else {
+            return "Don't have an endpoint example for the specified action"
+        }
     }
     else if (feature == "issues") {
         results = scraper.getIssuesAPITitles();
@@ -54,7 +64,8 @@ async function processString(msg){
     else if (feature == "repositories") {
         results = scraper.getRepositoriesAPITitles();
     }
-    return findSearchStringHelper(results, action);
+    return results;
+    // return findSearchStringHelper(results, action);
 }
 
 function findSearchStringHelper(results, action) {
@@ -63,7 +74,8 @@ function findSearchStringHelper(results, action) {
             return results[i];
         }
     }
-    return findSearchStringWithSynonym(action, results);
+    // TODO: not implemented yet
+    // return findSearchStringWithSynonym(action, results);
 }
 /**
  * Finds the synonym for a verb utilizing the Merriam-Webster Dictionary API

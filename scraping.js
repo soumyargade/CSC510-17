@@ -3,16 +3,17 @@ const parseHub = require("./parseHub.js")
 
 // npx run-func scraping.js getPullsAPITitles
 
-function getPullsAPITitles(){
-    // let pullsTitles = await parseHub.getPullsTitles();
-    // console.log(pullsTitles);
-    var results = data.pull;
-    var headers = new Array();
-    for (let result in results) {
-        headers.push(results[result].title);
-    }
-    console.log('headers ' + headers);
-    return headers;
+async function getPullsAPITitles(){
+    let pullsTitles = await parseHub.getPullsInfo();
+    console.log(pullsTitles.createPullRequest[0].name);
+    return pullsTitles;
+    // var results = data.pull;
+    // var headers = new Array();
+    // for (let result in results) {
+        //headers.push(results[result].title);
+    //}
+    // console.log('headers ' + headers);
+    // return headers;
 }
 
  function getIssuesAPITitles(){
