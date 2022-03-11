@@ -17,12 +17,11 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
     This use case begins when a user calls GitEx and states the need to perform an action related to creating or managing repositories, pulls, or issues in GitHub [S1].
     This use case ends when the bot returns an example HTTP method and API endpoint pertinent to the user’s initial request for information [S2].
 1.3 Subflows
-    [S1 Request Example] Request example [S2, E1, E2, E3]. User submits a chat message with the word "GitEx," a keyword indicating GitHub feature ("issue," "pull request," or "repository"), and a verb (such as “create”, “retrieve”, “update”, or “delete").
+    [S1 Request Example] Request example [S2, E1, E2, E3]. User submits a chat message with the word "GitEx," a keyword indicating GitHub feature ("issue," "pull request," or "repository"), and a verb keyword (such as “create”, “retrieve”, “update”, or “delete").
     [S2 Return Example] Bot will return the HTTP method & API endpoint used by GitHub's API for the feature and action specified by the user.
 1.4 Alternative Flows
     [E1 Action Unspecified] Action verb such as “create”, “retrieve”, “update”, or “delete” was not specified. Bot prompts the user to provide an action verb.
-    [E2 Action or Path Unclear] Request keywords provided by the user could pertain to multiple API endpoints or HTTP verbs. Bot prompts the user to delineate between the potential endpoints or verbs in order to return the correct example.
-    [E3 Message Not Understood] The message submitted by the user includes “GitEx” but a keywords were not found to indicate creating or managing issues, pulls, or repositories.
+    [E2 Message Not Understood] The message submitted by the user includes “GitEx” but keywords were not found to indicate creating or managing issues, pulls, or repositories; or the format of the message is incorrect. Bot prompts the user to try again.
 ```
 2. Retrieve Shell command or JavaScript code related to GitHub's ["Pulls" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/pulls), ["Repositories" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/repos), or ["Issues" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/issues).
 ```
@@ -32,12 +31,12 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
     This use case begins when a user calls GitEx and states the need to perform an action related to creating or managing repositories, pulls, or issues in GitHub in a certain language [S1].
     This use case ends when the bot returns a Shell command or JavaScript code to accomplish the user's initial request. [S2].
 2.3 Subflows
-    [S1 Request Example] Request example [S2, E1, E2, E3]. User submits a chat message with the word "GitEx," a keyword indicating GitHub feature ("issue," "pull request," or "repository"), a verb (such as “create”, “retrieve”, “update”, or “delete"), and the keyword to determine language ("Javascript," "Shell," or "curl").
+    [S1 Request Example] Request example [S2, E1, E2, E3]. User submits a chat message with the word "GitEx," a keyword indicating GitHub feature ("issue," "pull request," or "repository"), a verb keyword (such as “create”, “retrieve”, “update”, or “delete"), and the keyword to determine language ("Javascript," "Shell," or "curl").
     [S2 Return Example] Bot will return the either the Shell command or Javascript code, depending on the user's request, used for GitHub's API for the feature and action specified by the user.
 2.4 Alternative Flows
     [E1 Action Unspecified] Action verb such as “create”, “retrieve”, “update”, or “delete” was not specified. Bot prompts the user to provide an action verb.
-    [E2 Action or Path Unclear] Request keywords provided by the user could pertain to multiple API endpoints or HTTP verbs. Bot prompts the user to delineate between the potential endpoints or verbs in order to return the correct example.
-    [E3 Message Not Understood] The message submitted by the user includes “GitEx” but a keyword was not found to determine if the request is to create or manage a repository.
+    [E2 Message Not Understood] The message submitted by the user includes “GitEx” but keywords were not found to indicate creating or managing issues, pulls, or repositories; or the format of the message is incorrect. Bot prompts the user to try again.
+    [E3 Formatting Incorrect] User entered a third keyword to specify a language that was not recognized by the bot. The bot prompts the user to enter the third keyword again.
 ```
 3. Retrieve Response status and body related to GitHub's ["Pulls" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/pulls), ["Repositories" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/repos), or ["Issues" API](https://docs.github.com/en/enterprise-server@3.3/rest/reference/issues).
 ```
@@ -47,12 +46,12 @@ Our bot is a good solution to this problem as it will decrease the amount of tim
     This use case begins when a user calls GitEx and requests the response related to creating or managing repositories, pulls, or issues in GitHub [S1].
     This use case ends when the bot returns an example of the response status and body for the action and GitHub feature specificied. [S2].
 3.3 Subflows
-    [S1 Request Example] Request example [S2, E1, E2, E3]. User submits a chat message with the word "GitEx," a keyword indicating GitHub feature ("issue," "pull request," or "repository"), a verb (such as “create”, “retrieve”, “update”, or “delete"), and the keyword "response."
+    [S1 Request Example] Request example [S2, E1, E2, E3]. User submits a chat message with the word "GitEx," a keyword indicating GitHub feature ("issue," "pull request," or "repository"), a verb keyword (such as “create”, “retrieve”, “update”, or “delete"), and the keyword "response."
     [S2 Return Example] Bot will return the response status and body for GitHub's API for the feature and action specified by the user.
 3.4 Alternative Flows
     [E1 Action Unspecified] Action verb such as “create”, “retrieve”, “update”, or “delete” was not specified. Bot prompts the user to provide an action verb.
-    [E2 Action or Path Unclear] Request keywords provided by the user could pertain to multiple API endpoints or HTTP verbs. Bot prompts the user to delineate between the potential endpoints or verbs in order to return the correct example.
-    [E3 Message Not Understood] The message submitted by the user includes “GitEx” but a keyword was not found to determine if the request is to create or manage an issue.
+    [E2 Message Not Understood] The message submitted by the user includes “GitEx” but keywords were not found to indicate creating or managing issues, pulls, or repositories; or the format of the message is incorrect. Bot prompts the user to try again.
+    [E3 Formatting Incorrect] User entered a third keyword that should be used to distinguish a request for a response was not recognized by the bot. The bot prompts the user to enter the third keyword again.
 ```
 
 ### Wireframes
@@ -96,6 +95,7 @@ The third party services our bot will use are **Merriam-Webster Dictionary API**
 * **Account Necessary:** Users need to have a Mattermost account to access GitEx as we plan for it to be implemented within Mattermost.
 * **Dictionary API Limitations:** Free as long as it is for non-commercial use, usage does not exceed 1000 queries per day per API key, and usage is limited to a maximum of two reference APIs.
 * **Keyword Necessary:** Within Mattermost, users must state the keyword “GitEx” before any communication with the GitEx Bot can commence. The use of this keyword will be an indication that the user is wishing to make a request to GitEx Bot for an example.
+* **Required Format:** Within Mattermost, the message to the GitEx Bot must be 2-3 words following this format: `[verb] [GitHub feature] [Optional Keyword to Specify Language/Request Response]`; for example, `create issue javascript`.
 * **English:** Conversation in Mattermost must be in English to communicate with GitEx. We plan to display an error message if a request is made in another language that GitEx is unable to process.
 * **3 Key Requests:** A requested GitEx example from a Mattermost user must pertain to creating or managing a repository, issue, or pull request as GitEx will only have information on endpoints from GitHub's Repositories, Issues, & Pulls APIs.
 <a name="additional-patterns"></a>
