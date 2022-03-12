@@ -55,10 +55,11 @@ describe('Tests of index.js:', function () {
 
 describe('Tests of processing.js:', function () {
 
+    const testOfPullsTitles = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/YOUR%20TOKEN%20HERE/data?api_key=YOUR%20KEY%20HERE&format=json")
+    .reply(200, JSON.stringify(data.repo.create));
+
     it("ensures that processString() returns search string", async function() {
-        // CREATE TEST OBJECT
-        // console.log("TEST: ", bot)
-        // msg = "what is the weather?";
         msg = ["gitex", "create", "repositories"];
         let returnValue = await proc.processString(msg);
         console.log("ReturnValue - processing test 1: ", returnValue);
@@ -114,6 +115,7 @@ describe('Tests of processing.js:', function () {
     //     expect(returnValue).contains("make");
     // }); 
 
+
     it("ensures that findSearchString() returns error for when no endpoint can be found - for a pull", async function() {
         let returnValue = await proc.findSearchString("eat", "pull");
         console.log("ReturnValue - processing test 4: ", returnValue);
@@ -126,9 +128,19 @@ describe('Tests of processing.js:', function () {
         assert.equal(returnValue, "Don't have an endpoint for example for the specified action");
     });
 
-    it("ensures that findSearchString() returns error fro when no endpoint can be found - for repo", async function() {
+    it("ensures that findSearchString() returns error for when no endpoint can be found - for repo", async function() {
         let returnValue = await proc.findSearchString("eat", "repositories");
-        console.log("ReturnValue - processing test 5: ", returnValue);
+        console.log("ReturnValue - processing test 6: ", returnValue);
+        assert.equal(returnValue.length, "Don't have an endpoint for example for the specified action");
+    });
+
+    const testOfFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/YOUR%20RUN%20TOKEN/data?api_key=YOUR%20API%20KEY&format=json")
+    .reply(200, JSON.stringify(data));
+    
+    it("ensures that findSearchString() returns error for when no endpoint can be found - for repo", async function() {
+        let returnValue = await proc.findSearchString("get", "pull");
+        console.log("ReturnValue - processing test 6: ", returnValue);
         assert.equal(returnValue.length, "Don't have an endpoint for example for the specified action");
     });
 
@@ -144,7 +156,7 @@ describe('Tests of scraping.js:', function () {
 
     //Test for getting the pulls title
     const testOfPullsTitles = nock("https://www.parsehub.com")
-    .get("/api/v2/runs/YOUR%20TOKEN%20HERE/data?api_key=YOUR%20KEY%20HERE&format=json")
+    .get("/api/v2/runs/YOUR%20RUN%20TOKEN/data?api_key=YOUR%20API%20KEY&format=json")
     .reply(200, JSON.stringify(data.pull.create.title));
 
     it('ensure that getPullsAPITitles returns correct list', async function() {
