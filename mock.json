@@ -420,6 +420,7 @@
     "repo" :
     {
       "create": {
+        "title": "Create an organization repository",
         "path": "/orgs/{org}/repos",
         "shell": "curl -X POST -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/orgs/ORG/repos -d '{\"name\":\"name\"}'",
         "javascript": "await octokit.request('POST /orgs/{org}/repos', {org: 'org',name: 'name'})",
@@ -553,6 +554,7 @@
         }
       },
       "get": {
+        "title": "Get a repository",
         "path": "/repos/{owner}/{repo}",
         "shell": "curl -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world",
         "javascript": "await octokit.request('GET /repos/{owner}/{repo}', {owner: 'octocat',repo: 'hello-world'})",
@@ -1069,6 +1071,7 @@
         }
       },
       "update": {
+        "title": "Update a repository",
         "path": "/repos/{owner}/{repo}",
         "shell": "curl -X PATCH -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world -d '{\"name\":\"name\"}'",
         "javascript": "await octokit.request('PATCH /repos/{owner}/{repo}', {owner: 'octocat',repo: 'hello-world',name: 'name'})",
@@ -1587,6 +1590,7 @@
         }
       },
       "delete": {
+        "title": "Delete a repository",
         "path": "/repos/{owner}/{repo}",
         "shell": "curl -X DELETE -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world",
         "javascript": "await octokit.request('DELETE /repos/{owner}/{repo}', {owner: 'octocat',repo: 'hello-world'})",
@@ -1599,6 +1603,7 @@
     "pull" :
     {
       "create": {
+        "title": "Create a pull request",
         "path": "/repos/{owner}/{repo}/pulls",
         "shell": "curl -X POST -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world/pulls -d '{\"head\":\"head\",\"base\":\"base\"}'",
         "javascript": "await octokit.request('POST /repos/{owner}/{repo}/pulls', {owner: 'octocat',repo: 'hello-world',head: 'head',base: 'base'})",
@@ -2141,6 +2146,7 @@
         }
       },
       "get": {
+        "title": "Get a pull request",
         "path": "/repos/{owner}/{repo}/pulls/{pull_number}",
         "shell": "curl -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world/pulls/42",
         "javascript": "await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', {owner: 'octocat',repo: 'hello-world',pull_number: 42})",
@@ -2683,6 +2689,7 @@
         }
       },
       "update": {
+        "title": "Update a pull request",
         "path": "/repos/{owner}/{repo}/pulls/{pull_number}",
         "shell": "curl -X PATCH -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world/pulls/42 -d '{\"title\":\"title\"}'",
         "javascript": "await octokit.request('PATCH /repos/{owner}/{repo}/pulls/{pull_number}', {owner: 'octocat',repo: 'hello-world',pull_number: 42,title: 'title'})",
@@ -3229,6 +3236,7 @@
     "issue" :
     {
       "create": {
+        "title": "Create an issue",
         "path": "/repos/{owner}/{repo}/issues",
         "shell": "curl -X POST -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world/issues -d '{\"title\":\"title\"}'",
         "javascript": "await octokit.request('POST /repos/{owner}/{repo}/issues', {owner: 'octocat',repo: 'hello-world',title: 'title'})",
@@ -3395,6 +3403,7 @@
         }
       },
       "get": {
+        "title": "Get an issue",
         "path": "/repos/{owner}/{repo}/issues/{issue_number}",
         "shell": "curl -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world/issues/42",
         "javascript": "await octokit.request('GET /repos/{owner}/{repo}/issues/{issue_number}', {owner: 'octocat',repo: 'hello-world',issue_number: 42})",
@@ -3561,6 +3570,7 @@
         }
       },
       "update": {
+        "title": "Update an issue",
         "path": "/repos/{owner}/{repo}/issues/{issue_number}",
         "shell": "curl -X PATCH -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/repos/octocat/hello-world/issues/42 -d '\"title\":\"title\"}'",
         "javascript": "await octokit.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {owner: 'octocat',repo: 'hello-world',issue_number: 42,title: 'title'})",

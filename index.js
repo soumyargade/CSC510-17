@@ -1,4 +1,5 @@
 const Client = require('mattermost-client');
+const processor = require("./processing.js");
 
 let host = "chat.robotcodelab.com"
 let group = "CSC510-S22"
@@ -8,25 +9,43 @@ let client = new Client(host, group, {});
 async function main()
 {
     let request = await client.tokenLogin(process.env.BOTTOKEN);
-    client.on('message', function(msg)
+    client.on('message', async function(msg)
     {
-        console.log(msg);
-        if( hears(msg, "gitex") )
-        {
-            if (hears(msg, "pull") || hears(msg, "pulls")) {
-                parsePulls(msg);
-            } else if (hears(msg, "issue") || hears(msg, "issues")) {
-                parseIssues(msg);
-            } else if (hears(msg, "repository") || hears(msg, "repositories")) {
-                parseRepositories(msg);
-            } else {
-                let channel = msg.broadcast.channel_id;
-                client.postMessage("request is unclear", channel);
+        let channel = msg.broadcast.channel_id;
+        if (hears(msg, "gitex")){
+            // let validInput = validateUserInput(msg);
+            // if (!validInput){
+                // console.log("User's command passed initial validation")
+                // sendInvalidMessage(channel);
+                // return;
+            // }
+            let resultStr = JSON.parse(msg.data.post);
+            resultStr = resultStr.message;
+            console.log("User's command: "+ resultStr)
+            let returnedMsg = await processor.processString(resultStr.split(" "));
+            if (returnedMsg == null){
+                // sendInvalidMessage(channel);
+                // console.log("User's command was invalid");
+                // return;
+                client.postMessage("Request is unclear", channel);
+            }
+            else {
+                // handling if returnedMsg is an object, array, etc.
+                if (typeof returnedMsg != 'string') {
+                    client.postMessage(JSON.stringify(returnedMsg), channel);
+                } else {
+                    client.postMessage(returnedMsg, channel);
+                }
             }
         }
     });
 }
 
+// function sendInvalidMessage(channel){
+    // client.postMessage("Request is unclear.", channel);
+    // client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
+    // {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
+// }
 function hears(msg, text)
 {
     if( msg.data.sender_name == bot_name) return false;
@@ -40,36 +59,14 @@ function hears(msg, text)
     }
     return false;
 }
-
-async function parsePulls(msg)
-{
-    let channel = msg.broadcast.channel_id;
-    let test = "fetching from Pulls API...";
-    if( test )
-    {
-        client.postMessage(test, channel);
-    }
-}
-
-async function parseIssues(msg)
-{
-    let channel = msg.broadcast.channel_id;
-    let test = "fetching from Issues API...";
-    if( test )
-    {
-        client.postMessage(test, channel);
-    }
-}
-
-async function parseRepositories(msg)
-{
-    let channel = msg.broadcast.channel_id;
-    let test = "fetching from Repositories API...";
-    if( test )
-    {
-        client.postMessage(test, channel);
-    }
-}
+/*
+    Performs initial validation of the user's command. Ensures that the user command
+    can be mapped to one of the three use cases.
+*/
+// function validateUserInput(msg){
+    // TODO: Add validation logic
+    // return true
+// }
 
 (async () => 
 {
@@ -79,7 +76,4 @@ async function parseRepositories(msg)
 })()
 
 module.exports.hears = hears;
-module.exports.parsePulls = parsePulls;
-module.exports.parseIssues = parseIssues;
-module.exports.parseRepositories = parseRepositories;
 module.exports.main = main;
