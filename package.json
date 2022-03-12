@@ -4,14 +4,13 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "mocha tests\\testMain --reporter spec"
+        "test": "mocha tests/testMain --reporter spec"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "axios": "^0.22.0",
         "chalk": "^2.4.2",
-        "got": "^10.7.0",
         "install": "^0.13.0",
         "mattermost-client": "^6.4.0",
         "npx": "^10.2.2",
@@ -20,7 +19,7 @@
     "devDependencies": {
         "c8": "^7.11.0",
         "chai": "^4.3.6",
-        "got": "^10.0.0",
+        "got": "^10.7.0",
         "nock": "^13.2.4",
         "pos": "^0.4.2"
     }

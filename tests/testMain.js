@@ -12,16 +12,37 @@ const scrap = require("../scraping.js");
 // Load mock data
 const data = require("../mock.json")
 
-// Turn off logging
-// console.log = function(){};
+describe('Tests of pullsTitles in scraping.js:', function () {
 
-///////////////////////////
-// TEST SUITE FOR MOCHA
-// based off of code given in HW2 and Mocking lab
-///////////////////////////
+    //Test for getting the pulls title
+    const testOfPullsTitles = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data.pull.create.title));
 
-describe('Tests of index.js:', function () {
+    it('ensure that getPullsAPITitles returns correct list', async function() {
+        let returnValue = await scrap.getPullsAPITitles();
+        console.log("ReturnValue: ", returnValue);
+        expect(returnValue.length).to.equal(21);
+    }); 
 
+});
+
+describe('Tests of issuesTitles in scraping.js:', function () {
+
+    //Test for getting the issues title
+    const testOfIssuesTitles = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data.issue.create.title));
+
+    it('ensure that getIssuesAPITitle returns correct list HERE', async function() {
+        let returnValue = await scrap.getIssuesAPITitles();
+        console.log("ReturnValue: ", returnValue);
+        expect(returnValue.length).to.equal(15);
+    });
+
+});
+
+describe('Test hears() in index.js', function () {
     this.timeout(5000);
     it("ensures that hears() returns true on a valid message input", function() {
         // CREATE TEST OBJECT
@@ -39,182 +60,283 @@ describe('Tests of index.js:', function () {
         console.log("ReturnValue test 2: ", returnValue);
         assert(returnValue === false);
     });
+});
 
-    //Will have to be updated when validateUserInput() is complete, but this is a start for when it is
-    //Test to show an invalid message will return invalid message response
-    // it("ensures that validateUserInput() returns true", function() {
-    //     // CREATE TEST OBJECT
-    //     // console.log("TEST: ", bot)
-    //     msg = {"data": {"sender_name": "", "post": JSON.stringify({"message":"smurfy smurf"})}};
-    //     let returnValue = bot.validateUserInput(msg);
-    //     console.log("ReturnValue test 3: ", returnValue, " datatype: ", typeof(returnValue));
-    //     assert.typeOf(returnValue === true)
-    // });
+describe('Testing invalid action for processString()', function () {
+
+    const testOfPullsTitles = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data.repo.create));
+
+    it("ensures that processString() returns error when action is invalid", async function() {
+        msg = ["gitex", "eat", "repositories"];
+        let returnValue = await proc.processString(msg);
+        assert.equal(returnValue, "Don't have an endpoint example for the specified action");
+    });
 
 });
 
-describe('Tests of processing.js:', function () {
+describe('Testing invalid feature for processString()', function () {
 
     const testOfPullsTitles = nock("https://www.parsehub.com")
-    .get("/api/v2/runs/YOUR%20TOKEN%20HERE/data?api_key=YOUR%20KEY%20HERE&format=json")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
     .reply(200, JSON.stringify(data.repo.create));
 
-    it("ensures that processString() returns search string", async function() {
-        msg = ["gitex", "create", "repositories"];
+    it("ensures that processString() returns error when feature is not present", async function() {
+        msg = ["gitex", "create"];
         let returnValue = await proc.processString(msg);
-        console.log("ReturnValue - processing test 1: ", returnValue);
-        assert.equal(returnValue, "Create an organization repository,Get a repository,Update a repository,Delete a repository");
-    });
-
-    it("ensures that processString() returns correct error message when no action is given", async function() {
-        // CREATE TEST OBJECT
-        // console.log("TEST: ", bot)
-        // msg = "gitex";
-        msg = ["gitex", null, "issues", "shell"]
-        let returnValue = await proc.processString(msg);
-        console.log("ReturnValue - processing test 2 : ", returnValue);
-        assert.equal(returnValue, "Please specify an action");
-    });
-
-    it("ensures that processString() returns correct error message when no feature is given", async function() {
-        // CREATE TEST OBJECT
-        // console.log("TEST: ", bot)
-        // msg = "gitex";
-        msg = ["gitex", "pulls", null, "shell"]
-        let returnValue = await proc.processString(msg);
-        console.log("ReturnValue - processing test 3: ", returnValue);
         assert.equal(returnValue, "Please specify a feature");
     });
 
-    // it("ensures that getActionVerb() returns true when a verb is found", function() {
-    //     // CREATE TEST OBJECT
-    //     // console.log("TEST: ", bot)
-    //     // msg = {"data": {"sender_name": "GitEx"}};
-    //     let returnValue = proc.getActionVerb("create branch");
-    //     console.log("ReturnValue test 4: ", returnValue);
-    //     assert(returnValue === "create");
-    // });
+});
 
-    // it("ensures that getActionVerb() returns null when there are no verbs found", function() {
-    //     // CREATE TEST OBJECT
-    //     // console.log("TEST: ", bot)
-    //     // msg = {"data": {"sender_name": "GitEx"}};
-    //     let returnValue = proc.getActionVerb("smurf");
-    //     console.log("ReturnValue test 5: ", returnValue);
-    //     assert(returnValue === null);
-    // });
-    
-    //test for synonyms
-    
-    const syn = nock("https://www.dictionaryapi.com")
-      .get("/api/v3/references/thesaurus/json/make?key=your-api-key")
-      .reply(200, JSON.stringify(data.syn_list_create));
+describe('Testing invalid action for processString()', function () {
 
-    // it('Identify synonym for create', async function() {
-    //     let returnValue = await proc.findSynonym("create");
-    //     expect(returnValue).contains("make");
-    // }); 
+    const testOfPullsTitles = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data.repo.create));
 
+    it("ensures that processString() returns error when action is not present", async function() {
+        msg = ["gitex"];
+        let returnValue = await proc.processString(msg);
+        assert.equal(returnValue, "Please specify an action");
+    });
+
+});
+
+describe('Testing findSearchString() error handling for pull(s)', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
 
     it("ensures that findSearchString() returns error for when no endpoint can be found - for a pull", async function() {
         let returnValue = await proc.findSearchString("eat", "pull");
         console.log("ReturnValue - processing test 4: ", returnValue);
-        assert.equal(returnValue, "Don't have an endpoint for example for the specified action");
-    });
-
-    it("ensures that findSearchString() returns error for when no endpoint can be found - for a issue", async function() {
-        let returnValue = await proc.findSearchString("eat", "issue");
-        console.log("ReturnValue - processing test 5: ", returnValue);
-        assert.equal(returnValue, "Don't have an endpoint for example for the specified action");
-    });
-
-    it("ensures that findSearchString() returns error for when no endpoint can be found - for repo", async function() {
-        let returnValue = await proc.findSearchString("eat", "repositories");
-        console.log("ReturnValue - processing test 6: ", returnValue);
-        assert.equal(returnValue.length, "Don't have an endpoint for example for the specified action");
-    });
-
-    const testOfFindSearchString = nock("https://www.parsehub.com")
-    .get("/api/v2/runs/YOUR%20RUN%20TOKEN/data?api_key=YOUR%20API%20KEY&format=json")
-    .reply(200, JSON.stringify(data));
-    
-    it("ensures that findSearchString() returns error for when no endpoint can be found - for repo", async function() {
-        let returnValue = await proc.findSearchString("get", "pull");
-        console.log("ReturnValue - processing test 6: ", returnValue);
-        assert.equal(returnValue.length, "Don't have an endpoint for example for the specified action");
+        assert.equal(returnValue, "Don't have an endpoint example for the specified action");
     });
 
 });
 
-describe('Tests of scraping.js:', function () {
+describe('Testing findSearchString() error handling for issue', function () {
 
-    it("ensures that retrieveAPICall() returns correct path", function() {
-        let returnValue = scrap.retrieveAPICall("create", "issue");
-        console.log("ReturnValue test: ", returnValue);
-        assert.equal(returnValue, "/repos/{owner}/{repo}/issues");
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that findSearchString() returns error for when no endpoint can be found - for a issue", async function() {
+        let returnValue = await proc.findSearchString("eat", "issue");
+        console.log("ReturnValue - processing test 5: ", returnValue);
+        assert.equal(returnValue, "Don't have an endpoint example for the specified action");
     });
 
-    //Test for getting the pulls title
-    const testOfPullsTitles = nock("https://www.parsehub.com")
-    .get("/api/v2/runs/YOUR%20RUN%20TOKEN/data?api_key=YOUR%20API%20KEY&format=json")
-    .reply(200, JSON.stringify(data.pull.create.title));
+});
 
-    it('ensure that getPullsAPITitles returns correct list', async function() {
-        let returnValue = await scrap.getPullsAPITitles();
-        console.log("ReturnValue: ", returnValue);
-        expect(returnValue.length).to.equal(3);
-    }); 
+describe('Testing findSearchString() error handling for repo', function () {
 
-    //Test for getting the issues title
-    const testOfIssuesTitles = nock("https://www.parsehub.com")
-    .get("/api/v2/runs/YOUR%20TOKEN%20HERE/data?api_key=YOUR%20KEY%20HERE&format=json")
-    .reply(200, JSON.stringify(data.issue.create.title));
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
 
-    it('ensure that getIssuesAPITitle returns correct list', async function() {
-        let returnValue = await scrap.getIssuesAPITitles();
-        console.log("ReturnValue: ", returnValue);
-        expect(returnValue.length).to.equal(3);
-    }); 
+    it("ensures that findSearchString() returns error for when no endpoint can be found - for repo", async function() {
+        let returnValue = await proc.findSearchString("eat", "repositories");
+        console.log("ReturnValue - processing test 6: ", returnValue);
+        assert.equal(returnValue, "Don't have an endpoint example for the specified action");
+    });
 
-    //Test for getting the shell command for create repo
-    const testOfShell = nock("https://www.parsehub.com")
-      .get("/api/v2/runs/{RUN_TOKEN}/data")
-      .reply(200, JSON.stringify(data.repo.create.shell));
+});
 
-    // it('Return an example of shell command for create repo', async function() {
-    //     let returnValue = await scrap.retrieveShellExample("create repo shell");
-    //     expect(returnValue).to.equal("curl -X POST -H \"Accept: application/vnd.github.v3+json\" http(s)://{hostname}/api/v3/orgs/ORG/repos -d '{\"name\":\"name\"}'");
-    // }); 
+describe('Test delete repo endpoint', function () {
 
-    //Test for getting response body for create repo
-    const testOfResponse = nock("https://www.parsehub.com")
-    .get("/api/v2/runs/{RUN_TOKEN}/data")
-    .reply(200, JSON.stringify(data.repo.create.response));
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
 
-    // it('Return an example of response body for create repo', async function() {
-    //     let returnValue = await scrap.retrieveResponseBody("create repo response");
-    //     expect(returnValue).to.equal("");
-    // }); 
+    it("ensures that delete works for a repo", async function() {
+        let returnValue = await proc.findSearchString("delete", "repo");
+        assert.equal(returnValue, "delete /repos/{owner}/{repo}");
+    });
 
-    //Test for getting Javascript command for create repo
-    const testOfJavascript = nock("https://www.parsehub.com")
-    .get("/api/v2/runs/{RUN_TOKEN}/data")
-    .reply(200, JSON.stringify(data.repo.create.javascript));
+});
 
-    // it('Return an example of javascript command for create repo', async function() {
-    //     let returnValue = await scrap.retrieveJSONExample("create repo javascript");
-    //     expect(returnValue).to.equal("");
-    // }); 
+describe('Test create issue endpoint', function () {
 
-    //Test for getting endpoint for create repo
-    const testOfAPI = nock("https://www.parsehub.com")
-    .get("/api/v2/runs/{RUN_TOKEN}/data")
-    .reply(200, JSON.stringify(data.repo.create.path));
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
 
-    // it('Return an example of path command for create repo', async function() {
-    //     let returnValue = await scrap.retrieveAPICall("create repo path");
-    //     expect(returnValue).to.equal("");
-    // });
+    it("ensures that create works for an issue", async function() {
+        let returnValue = await proc.findSearchString("create", "issue");
+        assert.equal(returnValue, "post /repos/{owner}/{repo}/issues");
+    });
 
+});
+
+describe('Test create pull request endpoint', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that create works for a pull request", async function() {
+        let returnValue = await proc.findSearchString("create", "pulls");
+        assert.equal(returnValue, "post /repos/{owner}/{repo}/pulls");
+    });
+
+});
+
+describe('Test get repo shell command', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that get repo shell works", async function() {
+        let returnValue = await proc.findSearchString("get", "repo", "shell");
+        assert.equal(returnValue, 'curl \ -H "Accept: application/vnd.github.v3+json" \ https://api.github.com/repos/octocat/hello-world');
+    });
+
+});
+
+describe('Test get repo javascript command', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that get repo javascript works", async function() {
+        let returnValue = await proc.findSearchString("get", "repo", "javascript");
+        assert.equal(returnValue, "await octokit.request('GET /repos/{owner}/{repo}', { owner: 'octocat', repo: 'hello-world' })");
+    });
+
+});
+
+describe('Test list issue javascript command', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that list issue javascript works", async function() {
+        let returnValue = await proc.findSearchString("list", "issue", "javascript");
+        assert.equal(returnValue, "await octokit.request('GET /issues')");
+    });
+
+});
+
+describe('Test list issue curl command', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that list issue curl works", async function() {
+        let returnValue = await proc.findSearchString("list", "issue", "curl");
+        assert.equal(returnValue, 'curl \ -H "Accept: application/vnd.github.v3+json" \ https://api.github.com/issues');
+    });
+
+});
+
+describe('Test list issue', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that list issue works", async function() {
+        let returnValue = await proc.findSearchString("list", "issue");
+        assert.equal(returnValue, "get /issues");
+    });
+
+});
+
+describe('Test list pull requests', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that list pull requests works", async function() {
+        let returnValue = await proc.findSearchString("list", "pulls");
+        assert.equal(returnValue, "get /repos/{owner}/{repo}/pulls");
+    });
+
+});
+
+describe('Test list pull requests curl command', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that list pull requests curl works", async function() {
+        let returnValue = await proc.findSearchString("list", "pulls", "curl");
+        assert.equal(returnValue, 'curl \ -H "Accept: application/vnd.github.v3+json" \ https://api.github.com/repos/octocat/hello-world/pulls');
+    });
+
+});
+
+describe('Test delete repo', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that delete repo works", async function() {
+        let returnValue = await proc.findSearchString("delete", "repo");
+        assert.equal(returnValue, "delete /repos/{owner}/{repo}");
+    });
+
+});
+
+describe('Test list repo', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that list repo works", async function() {
+        let returnValue = await proc.findSearchString("list", "repo");
+        assert.equal(returnValue, "get /orgs/{org}/repos");
+    });
+
+});
+
+describe('Test create repo', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that create repo works", async function() {
+        let returnValue = await proc.findSearchString("create", "repo");
+        assert.equal(returnValue, "post /orgs/{org}/repos");
+    });
+
+});
+
+describe('Test create repo javascript', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that create repo shell javascript", async function() {
+        let returnValue = await proc.findSearchString("create", "repo", "javascript");
+        assert.equal(returnValue, "await octokit.request('POST /orgs/{org}/repos', { org: 'org', name: 'name' })");
+    });
+
+});
+
+describe('Test get pull request', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that get pull request", async function() {
+        let returnValue = await proc.findSearchString("get", "pulls");
+        assert.equal(returnValue, "get /repos/{owner}/{repo}/pulls/{pull_number}");
+    });
 
 });
