@@ -15,8 +15,11 @@ After [discussion with Dr.Ore](https://github.ncsu.edu/csc510-s2022/CSC510-17/is
 A more in depth view of the modifications of our use cases can be seen in our [`DESIGN.md`](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/DESIGN.md#use-cases).
 
 ## Testing
+Implemented a set of tests to achieve >80% code coverage, as measured by `c8`. All of the tests have meaningful assert statements & can be run with the command `npx c8 npm test` as is demonstrated in our screencast.
+
+<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/img/testCoverage.png">
 
 ## Mocking Infrastructure
 
 ## Screencast
-Link to Screencast: https://youtu.be/tS1IVhVxeoI
+Link to Screencast: https://youtu.be/tS1IVhVxeoI.
