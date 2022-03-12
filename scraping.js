@@ -19,7 +19,7 @@ async function getPullsAPITitles(){
 
  async function getIssuesAPITitles(){
     let issuesTitles = await parseHub.getIssuesInfo();
-    // console.log(issuesTitles.getIssue[1].name)
+    // console.log(issuesTitles.createIssue[2].name)
     return issuesTitles;
 
     // var results = data.issue;
