@@ -10,7 +10,9 @@
 Implemented hooks into **Mattermost** platform such that gitex is able to respond to basic commands from the user. We've supported the ability for the user to fully have an interaction with gitex as defined by all three of our use cases by working with ParseHub's web scraper. Requests made to ParseHub's API retrieve data from "runs" that were performed on specific pages from GitHub's API documentation. This data is then filtered based off the command that was made by the user such that the necessary endpoint, code sample, or response body is retrieved. We also have a `mock.json` file that we've used in our testing suite for mocking the responses expected to be received from the web scraper's API.
 
 ## Use Cases Refinement
-After [discussion with Dr.Ore](https://github.ncsu.edu/csc510-s2022/CSC510-17/issues/11), we went back to the drawing board and completely revised our second & third use cases. Whereas previously each use case pertained to retrieving a different section of GitHub's API endpoints, 
+After [discussion with Dr.Ore](https://github.ncsu.edu/csc510-s2022/CSC510-17/issues/11), we went back to the drawing board and completely revised our second & third use cases. Whereas previously each use case pertained to retrieving a different section of GitHub's API endpoints, we've now expanded UC1 to cover functionality for retrieving API endpoints from all three of GitHub's Pulls, Issues, & Repositories APIs. UC2 now pertains to retrieving the **shell commands** or **javascript code** pertaining to these APIs while UC3 pertains to retrieving the **response status and response body** for these APIs.
+
+A more in depth view of the modifications of our use cases can be seen in our [`DESIGN.md`](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/DESIGN.md#use-cases).
 
 ## Testing
 
