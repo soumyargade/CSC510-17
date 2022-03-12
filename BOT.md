@@ -20,6 +20,7 @@ Implemented a set of tests to achieve >80% code coverage, as measured by `c8`. A
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/img/testCoverage.png">
 
 ## Mocking Infrastructure
+We implemented mocking in [`tests/testMain.js`](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/tests/testMain.js) with the use of the `nock` library. We set up a file called [`mock.json`](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/mock.json) that held the entirety of the output we expected to be receiving from our web scraper in the aftermath of scraping GitHub's API documentation. Thus, calls being made to ParseHub's API in our test suite were instead redirected to the mock data that we had present in `mock.json`.
 
 ## Screencast
 Link to Screencast: https://youtu.be/tS1IVhVxeoI.
