@@ -43,48 +43,48 @@ async function getRepositoriesAPITitles(){
     // return headers;
 }
 
- function scrape(searchString, feature, optionalCommand){
+ // function scrape(searchString, feature, optionalCommand){
 
-    if (!optionalCommand){
-        return retrieveAPICall(searchString, feature);
-    }
-    else if(optionalCommand == 'Shell'){
-        return retrieveShellExample(searchString);
-    }
-    else if(optionalCommand == 'Javascript'){
-        return retrieveJavascriptExample(searchString);
-    }
-    else if(optionalCommand == 'Response'){
-        return retrieveResponseBody(searchString);
-    }
-}
+    // if (!optionalCommand){
+        // return retrieveAPICall(searchString, feature);
+    // }
+    // else if(optionalCommand == 'Shell'){
+        // return retrieveShellExample(searchString);
+    // }
+    // else if(optionalCommand == 'Javascript'){
+        // return retrieveJavascriptExample(searchString);
+    // }
+    // else if(optionalCommand == 'Response'){
+        // return retrieveResponseBody(searchString);
+    // }
+// }
 
- function retrieveAPICall(searchString, feature){
-    let action = searchString.split(' ')[0].toLowerCase();
-    console.log(feature);
-    console.log(action)
-    console.log(data[feature][action].path);
-    return data[feature][action].path;
+// function retrieveAPICall(searchString, feature){
+    // let action = searchString.split(' ')[0].toLowerCase();
+    // console.log(feature);
+    // console.log(action)
+    // console.log(data[feature][action].path);
+    // return data[feature][action].path;
 
-}
+// }
 
-async function retrieveJavascriptExample(searchString){
+// async function retrieveJavascriptExample(searchString){
 
-}
+// }
 
-async function retrieveShellExample(searchString){
+// async function retrieveShellExample(searchString){
 
-}
+// }
 
-async function retrieveResponseBody(searchString){
+// async function retrieveResponseBody(searchString){
 
-}
+// }
 
 exports.getPullsAPITitles = getPullsAPITitles;
-exports.scrape = scrape;
+// exports.scrape = scrape;
 exports.getIssuesAPITitles = getIssuesAPITitles;
 exports.getRepositoriesAPITitles = getRepositoriesAPITitles;
-exports.retrieveAPICall = retrieveAPICall;
-exports.retrieveJavascriptExample = retrieveJavascriptExample;
-exports.retrieveShellExample = retrieveShellExample;
-exports.retrieveResponseBody = retrieveResponseBody;
+// exports.retrieveAPICall = retrieveAPICall;
+// exports.retrieveJavascriptExample = retrieveJavascriptExample;
+// exports.retrieveShellExample = retrieveShellExample;
+// exports.retrieveResponseBody = retrieveResponseBody;

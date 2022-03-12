@@ -182,25 +182,25 @@ async function processString(msg){
         }
     }
     return results;
-    // return findSearchStringHelper(results, action);
 }
 
-function findSearchStringHelper(results, action) {
-    for (let i = 0; i < results.length; i++) {
-        if (results[i].split(" ")[0].toLowerCase() == action.toLowerCase()) { // Check if the action the user specified is equal to the action in the REST API. If not found, we use synonym API
-            return results[i];
-        }
-    }
+// function findSearchStringHelper(results, action) {
+    // for (let i = 0; i < results.length; i++) {
+        // if (results[i].split(" ")[0].toLowerCase() == action.toLowerCase()) { // Check if the action the user specified is equal to the action in the REST API. If not found, we use synonym API
+            // return results[i];
+        // }
+    // }
     // TODO: not implemented yet
     // return findSearchStringWithSynonym(action, results);
-}
+// }
 /**
  * Finds the synonym for a verb utilizing the Merriam-Webster Dictionary API
  * @param {} verb 
  */
-function findSearchStringWithSynonym(action, results){
+// function findSearchStringWithSynonym(action, results){
 
-    return null;
-}
+    // return null;
+// }
 
 exports.processString = processString;
+exports.findSearchString = findSearchString;
