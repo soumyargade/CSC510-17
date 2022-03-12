@@ -321,7 +321,7 @@ describe('Test create repo javascript', function () {
     .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
     .reply(200, JSON.stringify(data));
 
-    it("ensures that create repo shell javascript", async function() {
+    it("ensures that create repo shell javascript works", async function() {
         let returnValue = await proc.findSearchString("create", "repo", "javascript");
         assert.equal(returnValue, "await octokit.request('POST /orgs/{org}/repos', { org: 'org', name: 'name' })");
     });
@@ -334,9 +334,22 @@ describe('Test get pull request', function () {
     .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
     .reply(200, JSON.stringify(data));
 
-    it("ensures that get pull request", async function() {
+    it("ensures that get pull request works", async function() {
         let returnValue = await proc.findSearchString("get", "pulls");
         assert.equal(returnValue, "get /repos/{owner}/{repo}/pulls/{pull_number}");
+    });
+
+});
+
+describe('Test get pull request javascript', function () {
+
+    const testFindSearchString = nock("https://www.parsehub.com")
+    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
+    .reply(200, JSON.stringify(data));
+
+    it("ensures that get pull request javascript works", async function() {
+        let returnValue = await proc.findSearchString("get", "pulls", "js");
+        assert.equal(returnValue, "await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', { owner: 'octocat', repo: 'hello-world', pull_number: 42 })");
     });
 
 });
