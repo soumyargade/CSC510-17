@@ -4,6 +4,7 @@ which is in charge of processing the user's command and with the
 help of the scraping service, returns the output to the client
 */
 const scraper = require("./scraping.js");
+const synonym = require("./thesaurus.js")
 
 
 async function processString(msg){
@@ -19,6 +20,13 @@ async function processString(msg){
         results = "Please specify an action";
         console.log("Invalid command. Missing action specifier.");
         return results;
+    } else {
+        //change to elseif so that call to merriam webster is not made it action is one of the verbs we already identified?
+        action == synonym.HTTPverb;
+        let action = await synonym.getSynonym().catch( 
+            err => client.postMessage("Cannot find specified action. Sorry!", channel) );
+        //remove below after testing in Mattermost
+        console.log("HTTP Verb: " + action);
     }
 
     if (feature == null) {
