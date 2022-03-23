@@ -28,7 +28,8 @@ function getSynonym()
     {
 		axios(options)
 			.then(function (response) {
-        data = response.meta
+        var data = JSON.stringify(response.data)
+        var HTTPverb = "Could not match action used to a HTTP verb.";
 
         // for (element in response){
         //   if (response.hasOwnProperty(element)){  // Filter out prototypes' (parents') properties
@@ -37,8 +38,13 @@ function getSynonym()
         // }
         // console.log('headers: ' + JSON.stringify(response.headers));
         // console.log('data: ' + JSON.stringify(data));
-        var s = data.syns[0];
-        resolve(s);
+
+        //!!!! add logic to find synonym and return word
+        if (data.includes("essay")) {
+            HTTPverb = "create"
+        };
+        var v = HTTPverb;
+        resolve(v);
 			})
 			.catch(function (error) {
 				console.log(chalk.red(error));
@@ -50,6 +56,6 @@ function getSynonym()
 exports.getSynonym = getSynonym;
 
 (async () => {
-    let w = await getSynonym();
-    console.log(w);
+    let v = await getSynonym();
+    console.log(v);
 })();
