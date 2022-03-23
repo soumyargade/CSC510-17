@@ -1,4 +1,9 @@
 ## Process
+### Story Creation & Assignment
+#### Iteration One
+<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationOne.png">
+
+#### Iteration Two
 
 ## Practices
 ### Scrum Meeting Notes
