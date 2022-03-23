@@ -20,14 +20,12 @@ async function processString(msg){
         results = "Please specify an action";
         console.log("Invalid command. Missing action specifier.");
         return results;
+    } else if (action.toLowerCase() === "create" || "get" || "update" || "delete") {
+        action = action;
     } else {
-        //change to elseif so that call to merriam webster is not made it action is one of the verbs we already identified?
-        action == synonym.HTTPverb;
         let action = await synonym.getSynonym().catch( 
-            err => client.postMessage("Cannot find specified action. Sorry!", channel) );
-        //remove below after testing in Mattermost
-        console.log("HTTP Verb: " + action);
-    }
+            err => client.postMessage("Cannot find HTTP verb. Sorry!", channel) );
+    }   
 
     if (feature == null) {
         results = "Please specify a feature";
