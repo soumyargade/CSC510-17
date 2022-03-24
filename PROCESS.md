@@ -11,6 +11,10 @@ At the beginning of this iteration we divided each of our three use cases into s
 #### Iteration Two
 
 ## Practices
+### Core & Corollary Practices
+A core practice we have integrated into our software development is **pair programming**.
+
+A corollary practice we have integrated into our software development is **incremental deployment**.
 ### Scrum Meeting Notes
 #### Iteration One
 | Date   | Progress & Blockers   |  Next Steps
