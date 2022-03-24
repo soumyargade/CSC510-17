@@ -1,6 +1,8 @@
 ## Process
 ### Story Creation & Assignment
 #### Iteration One
+At the beginning of this iteration we divided each of our three use cases into stories & assigned story points as well as a developer to each of the tasks (as can be seen in the screenshot of our GitHub Project board below). For this iteration we plan to focus our efforts on fine tuning our web scraper's implementation as it is a foundational piece to the working of each of our use cases.
+
 <img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationOne.png">
 
 #### Iteration Two
