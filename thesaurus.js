@@ -21,7 +21,8 @@ function getDefaultOptions(endpoint, method)
 function getSynonym()
 {
     //need to add logic for setting word
-    var word = "test";
+    var word = "initiate";
+    var syns = [];
     let options = getDefaultOptions(`/thesaurus/json/${word}?`, "GET");
 
     return new Promise(function(resolve,reject)
@@ -29,20 +30,29 @@ function getSynonym()
 		axios(options)
 			.then(function (response) {
         var data = JSON.stringify(response.data)
-        var HTTPverb = "Could not match action used to a HTTP verb.";
+        var HTTPverb = "Could not match action to a HTTP verb.";
 
-        // for (element in response){
-        //   if (response.hasOwnProperty(element)){  // Filter out prototypes' (parents') properties
-        //     console.log(element)
-        //   }
-        // }
-        // console.log('headers: ' + JSON.stringify(response.headers));
-        // console.log('data: ' + JSON.stringify(data));
+        for(let i = 0, len = (data.match(/"meta"/g) || []).length; i < len; i++) {
+            syns[i] = JSON.stringify(response.data[i].meta.syns);
+        };
 
         //!!!! add logic to find synonym and return word
-        if (data.includes("essay")) {
-            HTTPverb = "create"
+        if (data.indexOf("create")>-1) {
+            HTTPverb = "create";
+        } else if (data.indexOf("get")>-1) {
+            HTTPverb = "get";
+        } else if (data.indexOf("retrieve")>-1) {
+            HTTPverb = "get";
+        } else if (data.indexOf("list")>-1) {
+            HTTPverb = "get";
+        }  else if (data.indexOf("update")>-1) {
+            HTTPverb = "update";
+        }  else if (data.indexOf("edit")>-1) {
+            HTTPverb = "edit";
+        } else if (data.indexOf("delete")>-1) {
+            HTTPverb = "delete";
         };
+
         var v = HTTPverb;
         resolve(v);
 			})
