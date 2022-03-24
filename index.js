@@ -70,24 +70,41 @@ function validateUserInput(msg){
     if(msgArray.length != 3 || msgArray.length != 4){
         return false;
     }
-    let action = msgArray[1];
-    let feature = msgArray[2];
-    let optionalCommand = msgArray[3];
+
+    let features = ['pulls', 'repos', 'issues'];
+    let optionalCommands = ['javascript, shell', 'response'];
+
+    let action = msgArray[1].toLowerCase();
+    let feature = msgArray[2].toLowerCase();
+    let optionalCommand = msgArray[3].toLowerCase();
 
     // error handling
     if (action == null) {
         results = "Please specify an action";
         sendMessageToClient(results, channel)
         console.log("Invalid command. Missing action specifier.");
-        return results;
+        return false;
     }
 
     if (feature == null) {
         results = "Please specify a feature";
         sendMessageToClient(results, channel)
         console.log("Invalid command. Missing feature specifier.");
-        return results;
+        return false;
     }
+
+    let validFeature = false;
+    features.forEach(element => {
+        if(element.includes(feature){
+            validFeature = true;
+        }
+    });
+
+    if(!validFeature){
+        return false;
+    }
+
+
     return true
 }
 
