@@ -1,9 +1,9 @@
 const axios = require('axios');
-const api_key = "YOUR API KEY"
+const api_key = "t0V54k8mSraB"
 
 // TODO: can try to condense this by passing in run_token, api_key as args
 async function getPullsInfo() {
-    const run_token = "YOUR RUN TOKEN";
+    const run_token = "tteWJx56HMLW";
     const response = await axios.get(`https://www.parsehub.com/api/v2/runs/runToken/data?api_key=apiKey&format=json`);
     return response.data;
 }
