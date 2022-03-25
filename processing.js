@@ -8,25 +8,6 @@ const scraper = require("./scraping.js");
 
 async function processString(msg){
 
-    // msg[0] will be "gitex"
-    let action = msg[1];
-    let feature = msg[2];
-    let optionalCommand = msg[3];
-    let results;
-
-    // error handling
-    if (action == null) {
-        results = "Please specify an action";
-        console.log("Invalid command. Missing action specifier.");
-        return results;
-    }
-
-    if (feature == null) {
-        results = "Please specify a feature";
-        console.log("Invalid command. Missing feature specifier.");
-        return results;
-    }
-
     let searchString = await findSearchString(action, feature, optionalCommand);
     console.log('Search Query: ' + searchString);
     return searchString;
