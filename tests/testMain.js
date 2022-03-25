@@ -353,3 +353,31 @@ describe('Test get pull request javascript', function () {
     });
 
 });
+
+describe('Test invalid user input', function (){
+    it('ensures that function returns false on invalid function', async function(){
+        let returnValue = bot.validateUserInput("gitex list index");
+        assert.isFalse(returnValue);
+    })
+});
+
+describe('Test invalid user input', function (){
+    it('ensures that function returns false on invalid optional command', async function(){
+        let returnValue = bot.validateUserInput("gitex list repos xyz");
+        assert.isFalse(returnValue);
+    })
+});
+
+describe('Test valid user input', function (){
+    it('ensures that function returns true on valid input', async function(){
+        let returnValue = bot.validateUserInput("gitex list repos");
+        assert.isTrue(returnValue);
+    })
+});
+
+describe('Test valid user input', function (){
+    it('ensures that function returns true on valid input with optional command', async function(){
+        let returnValue = bot.validateUserInput("gitex list repos Javascript");
+        assert.isTrue(returnValue);
+    })
+});
