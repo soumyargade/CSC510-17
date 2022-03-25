@@ -15,14 +15,14 @@ async function main()
             channel = msg.broadcast.channel_id;
             firstMessage = false;
             if (hears(msg, "gitex")){
-                let validInput = validateUserInput(msg);
+                let resultStr = JSON.parse(msg.data.post);
+                resultStr = resultStr.message;
+                let validInput = validateUserInput(resultStr);
                 if (!validInput){
                     console.log("User's command failed to pass initial validation")
                     invalidAttempts++;
                 }
                 else{
-                    let resultStr = JSON.parse(msg.data.post);
-                    resultStr = resultStr.message;
                     console.log("User's command: "+ resultStr)
                     let returnedMsg = await processor.processString(resultStr.split(" "));
                     if (returnedMsg == null){
@@ -70,6 +70,7 @@ function hears(msg, text)
 */
 function validateUserInput(msg){
     let msgArray = msg.toString().split(" ");
+    console.log(msg)
     let results = "";
     if(msgArray.length > 4 || msgArray.length < 3){
         results = "Too many action specifiers.";

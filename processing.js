@@ -22,7 +22,9 @@ async function processString(msg){
     let results;
     action =action.toLowerCase();
     feature =feature.toLowerCase();
-    optionalCommand=optionalCommand.toLowerCase();
+    if(optionalCommand != null){
+        optionalCommand=optionalCommand.toLowerCase();
+    }
     // returning pulls endpoints, assuming UC1
     if (feature == "pull" || feature == "pulls") {
         // getting info from ParseHub
