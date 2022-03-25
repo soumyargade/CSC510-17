@@ -11,25 +11,44 @@ const parse = require("../parseHub.js");
 
 // Load mock data
 const data = require("../mock.json");
-
 // Turn off logging
-console.log = function(){};
+// console.log = function(){};
 
-describe('Tests of pullsTitles in scraping.js:', function () {
+describe('Tests of findSearchString in processing.js:', function () {
 
     //Test for getting the pulls title
     const testOfPullsTitles = nock("https://www.parsehub.com")
-    .get("/api/v2/runs/runToken/data?api_key=apiKey&format=json")
-    .reply(200, JSON.stringify(data.pull.create.title));
+    .get("/api/v2/runs/%CSC510PULLSTOKEN%/data?api_key=%CSC510APIKEY%&format=json")
+    .reply(200, JSON.stringify(data.pull.get.path));
 
     it('ensure that getPullsInfo returns the correct path', async function() {
         // let returnValue = await scrap.getPullsAPITitles();
-        let returnValue = await parse.getPullsInfo();
-        console.log("ReturnValue: ", returnValue);
-        expect(returnValue).equal("/repos/{owner}/{repo}/pulls")
+        let returnValue = await proc.findSearchString("get", "pull", "path");
+        // let returnValue = await parse.getPullsInfo();
+        console.log("ReturnValue: ", typeof(returnValue));
+        expect(returnValue).equal("/repos/{owner}/{repo}/pulls");
     }); 
 
 });
+
+// describe('Tests of getPullsInfo:', function () {
+
+//     //Test for getting the pulls title
+//     const testOfPullsTitles = nock("https://www.parsehub.com")
+//     .get("/api/v2/runs/%CSC510PULLSTOKEN%/data?api_key=%CSC510APIKEY%&format=json")
+//     .reply(200, JSON.stringify(data.pull.get.path));
+
+//     it('ensure that getPullsInfo returns the correct path', async function() {
+//         // let returnValue = await scrap.getPullsAPITitles();
+//         // let returnValue = await proc.findSearchString("get", "pull", "path");
+//         let returnValue = await parse.getPullsInfo();
+//         console.log("ReturnValue: ", returnValue);
+//         expect(returnValue).equal("/repos/{owner}/{repo}/pulls");
+//     }); 
+
+// });
+
+console.log("heyo")
 
 // describe('Tests of issuesTitles in scraping.js:', function () {
 
