@@ -18,12 +18,14 @@ function getDefaultOptions(endpoint, method)
 	return options;
 }
 
-function getSynonym()
+function getSynonym(action)
 {
     //need to add logic for setting word
-    var word = "initiate";
     var syns = [];
-    let options = getDefaultOptions(`/thesaurus/json/${word}?`, "GET");
+    var syn_meta = [];
+    var syn_def  = [];
+    var syn_list = [];
+    let options = getDefaultOptions(`/thesaurus/json/${action}?`, "GET");
 
     return new Promise(function(resolve,reject)
     {
@@ -32,24 +34,36 @@ function getSynonym()
         var data = JSON.stringify(response.data)
         var HTTPverb = "Could not match action to a HTTP verb.";
 
+        //store syns from response
         for(let i = 0, len = (data.match(/"meta"/g) || []).length; i < len; i++) {
-            syns[i] = JSON.stringify(response.data[i].meta.syns);
+            syns[i] = response.data[i].meta.syns;
         };
 
-        //!!!! add logic to find synonym and return word
-        if (data.indexOf("create")>-1) {
+        //parse 3-level nested array to store synonym values
+        for(let i = 0, len = syns.length; i < len; i++) {
+            for(let j = 0, len = (syns[i].length); j < len; j++) {
+                for(let k = 0, len = syns[i][j].length; k < len; k++) {
+                    syn_meta[k]  = syns[i][j][k]
+                }
+                syn_def = syn_def.concat(syn_meta);
+            }
+            syn_list = syn_list.concat(syn_def);
+        };
+
+        //logic to find synonym and return word
+        if (syn_list.includes("create")) {
             HTTPverb = "create";
-        } else if (data.indexOf("get")>-1) {
+        } else if (syn_list.includes("get")) {
             HTTPverb = "get";
-        } else if (data.indexOf("retrieve")>-1) {
+        } else if (syn_list.includes("retrieve")) {
             HTTPverb = "get";
-        } else if (data.indexOf("list")>-1) {
+        } else if (syn_list.includes("list")) {
             HTTPverb = "get";
-        }  else if (data.indexOf("update")>-1) {
+        }  else if (syn_list.includes("update")) {
             HTTPverb = "update";
-        }  else if (data.indexOf("edit")>-1) {
+        }  else if (syn_list.includes("edit")) {
             HTTPverb = "edit";
-        } else if (data.indexOf("delete")>-1) {
+        } else if (syn_list.includes("delete")) {
             HTTPverb = "delete";
         };
 
@@ -65,7 +79,7 @@ function getSynonym()
 }
 exports.getSynonym = getSynonym;
 
-(async () => {
-    let v = await getSynonym();
-    console.log(v);
-})();
+// (async () => {
+//     let v = await getSynonym();
+//     console.log(v);
+// })();
