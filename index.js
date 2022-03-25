@@ -5,13 +5,13 @@ let host = "chat.robotcodelab.com"
 let group = "CSC510-S22"
 let bot_name = "gitex";
 let client = new Client(host, group, {});
-
+let channel;
 async function main()
 {
     let request = await client.tokenLogin(process.env.BOTTOKEN);
     client.on('message', async function(msg)
     {
-        let channel = msg.broadcast.channel_id;
+        channel = msg.broadcast.channel_id;
         if (hears(msg, "gitex")){
             let validInput = validateUserInput(msg);
             if (!validInput){
@@ -68,7 +68,7 @@ function hears(msg, text)
 function validateUserInput(msg){
     let msgArray = msg.split(" ");
     let results = "";
-    if(msgArray.length != 3 || msgArray.length != 4){
+    if(msgArray.length != 3 && msgArray.length != 4){
         return false;
     }
 
@@ -77,7 +77,10 @@ function validateUserInput(msg){
 
     let action = msgArray[1].toLowerCase();
     let feature = msgArray[2].toLowerCase();
-    let optionalCommand = msgArray[3].toLowerCase();
+    let optionalCommand = "";
+    if(msgArray.length == 4){
+        optionalCommand = msgArray[3].toLowerCase();
+    }
 
     // error handling
     if (action == null) {
@@ -99,6 +102,7 @@ function validateUserInput(msg){
     for(let el of features){
         if(el.includes(feature)){
             validFeature = true;
+            break;
         }
     }
     if(!validFeature){
@@ -108,7 +112,7 @@ function validateUserInput(msg){
         return false;
     }
 
-    if(optionalCommand){
+    if(optionalCommand != null){
         let validCommand = false;
         for(let el of optionalCommands){
             if(el.includes(optionalCommand)){
@@ -134,3 +138,4 @@ function validateUserInput(msg){
 
 module.exports.hears = hears;
 module.exports.main = main;
+module.exports.validateUserInput = validateUserInput;
