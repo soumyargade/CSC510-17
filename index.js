@@ -5,29 +5,33 @@ let host = "chat.robotcodelab.com"
 let group = "CSC510-S22"
 let bot_name = "gitex";
 let client = new Client(host, group, {});
-
+let channel;
 async function main()
 {
     let request = await client.tokenLogin(process.env.BOTTOKEN);
+    let firstMessage = true;
     client.on('message', async function(msg)
     {
-        let channel = msg.broadcast.channel_id;
+        if(firstMessage){
+            client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
+            {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
+        }
+        firstMessage = false;
+        channel = msg.broadcast.channel_id;
         if (hears(msg, "gitex")){
-            // let validInput = validateUserInput(msg);
-            // if (!validInput){
-                // console.log("User's command passed initial validation")
-                // sendInvalidMessage(channel);
-                // return;
-            // }
+            let validInput = validateUserInput(msg);
+            if (!validInput){
+                console.log("User's command passed initial validation")
+                sendInvalidMessage(channel);
+                return;
+            }
             let resultStr = JSON.parse(msg.data.post);
             resultStr = resultStr.message;
             console.log("User's command: "+ resultStr)
             let returnedMsg = await processor.processString(resultStr.split(" "));
             if (returnedMsg == null){
-                // sendInvalidMessage(channel);
-                // console.log("User's command was invalid");
-                // return;
-                client.postMessage("Request is unclear", channel);
+                sendInvalidMessage(channel);
+                return;
             }
             else {
                 // handling if returnedMsg is an object, array, etc.
@@ -41,11 +45,9 @@ async function main()
     });
 }
 
-// function sendInvalidMessage(channel){
-    // client.postMessage("Request is unclear.", channel);
-    // client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
-    // {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
-// }
+function sendMessageToClient(msg, channel){
+    client.postMessage(msg, channel);
+}
 function hears(msg, text)
 {
     if( msg.data.sender_name == bot_name) return false;
@@ -63,10 +65,69 @@ function hears(msg, text)
     Performs initial validation of the user's command. Ensures that the user command
     can be mapped to one of the three use cases.
 */
-// function validateUserInput(msg){
-    // TODO: Add validation logic
-    // return true
-// }
+function validateUserInput(msg){
+    let msgArray = msg.split(" ");
+    let results = "";
+    if(msgArray.length != 3 && msgArray.length != 4){
+        return false;
+    }
+
+    let features = ['pulls', 'repos', 'issues'];
+    let optionalCommands = ['javascript, shell', 'response'];
+
+    let action = msgArray[1].toLowerCase();
+    let feature = msgArray[2].toLowerCase();
+    let optionalCommand = "";
+    if(msgArray.length == 4){
+        optionalCommand = msgArray[3].toLowerCase();
+    }
+
+    // error handling
+    if (action == null) {
+        results = "Please specify an action";
+        sendMessageToClient(results, channel);
+        console.log("Invalid command. Missing action specifier.");
+        return false;
+    }
+
+    if (feature == null) {
+        results = "Please specify a feature";
+        sendMessageToClient(results, channel);
+        console.log("Invalid command. Missing feature specifier.");
+        return false;
+    }
+
+    let validFeature = false;
+
+    for(let el of features){
+        if(el.includes(feature)){
+            validFeature = true;
+            break;
+        }
+    }
+    if(!validFeature){
+        results = "Invalid feature. Please select one of the following features: Pulls, Repos, Issues";
+        sendMessageToClient(results, channel);
+        console.log(results);
+        return false;
+    }
+
+    if(optionalCommand != null){
+        let validCommand = false;
+        for(let el of optionalCommands){
+            if(el.includes(optionalCommand)){
+                validCommand = true;
+            }
+        }
+        if(!validCommand){
+            results = "Invalid optional command. Please select one of the following optional commands: Javascript, Shell, Response";
+            sendMessageToClient(results, channel);
+            console.log(results);
+            return false;
+        }
+    }
+    return true;
+}
 
 (async () => 
 {
@@ -77,3 +138,4 @@ function hears(msg, text)
 
 module.exports.hears = hears;
 module.exports.main = main;
+module.exports.validateUserInput = validateUserInput;
