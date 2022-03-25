@@ -67,6 +67,7 @@ function hears(msg, text)
 */
 function validateUserInput(msg){
     let msgArray = msg.split(" ");
+    let results = "";
     if(msgArray.length != 3 || msgArray.length != 4){
         return false;
     }
@@ -81,31 +82,47 @@ function validateUserInput(msg){
     // error handling
     if (action == null) {
         results = "Please specify an action";
-        sendMessageToClient(results, channel)
+        sendMessageToClient(results, channel);
         console.log("Invalid command. Missing action specifier.");
         return false;
     }
 
     if (feature == null) {
         results = "Please specify a feature";
-        sendMessageToClient(results, channel)
+        sendMessageToClient(results, channel);
         console.log("Invalid command. Missing feature specifier.");
         return false;
     }
 
     let validFeature = false;
-    features.forEach(element => {
-        if(element.includes(feature){
+
+    for(let el of features){
+        if(el.includes(feature)){
             validFeature = true;
         }
-    });
-
+    }
     if(!validFeature){
+        results = "Invalid feature. Please select one of the following features: Pulls, Repos, Issues";
+        sendMessageToClient(results, channel);
+        console.log(results);
         return false;
     }
 
-
-    return true
+    if(optionalCommand){
+        let validCommand = false;
+        for(let el of optionalCommands){
+            if(el.includes(optionalCommand)){
+                validCommand = true;
+            }
+        }
+        if(!validCommand){
+            results = "Invalid optional command. Please select one of the following optional commands: Javascript, Shell, Response";
+            sendMessageToClient(results, channel);
+            console.log(results);
+            return false;
+        }
+    }
+    return true;
 }
 
 (async () => 
