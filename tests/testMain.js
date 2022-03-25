@@ -7,7 +7,7 @@ const nock = require("nock");
 process.env.NODE_ENV = 'test'
 const bot = require("../index.js");
 const proc = require("../processing.js");
-const scrap = require("../scraping.js");
+// const scrap = require("../scraping.js");
 
 // Load mock data
 const data = require("../mock.json")
