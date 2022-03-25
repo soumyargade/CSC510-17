@@ -9,8 +9,14 @@ let channel;
 async function main()
 {
     let request = await client.tokenLogin(process.env.BOTTOKEN);
+    let firstMessage = true;
     client.on('message', async function(msg)
     {
+        if(firstMessage){
+            client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
+            {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
+        }
+        firstMessage = false;
         channel = msg.broadcast.channel_id;
         if (hears(msg, "gitex")){
             let validInput = validateUserInput(msg);
@@ -41,8 +47,6 @@ async function main()
 
 function sendInvalidMessage(channel){
     client.postMessage("Request is unclear.", channel);
-    client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
-     {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
 }
 
 function sendMessageToClient(msg, channel){
