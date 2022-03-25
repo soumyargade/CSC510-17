@@ -7,7 +7,7 @@ const parseHub = require("./parseHub.js");
 
 async function processString(msg){
 
-    let searchString = await findSearchString(action, feature, optionalCommand);
+    let searchString = await findSearchString(msg[1], msg[2], msg[3]);
     console.log('Search Query: ' + searchString);
     return searchString;
 }
@@ -20,6 +20,11 @@ async function processString(msg){
  */
  async function findSearchString(action, feature, optionalCommand) {
     let results;
+    action =action.toLowerCase();
+    feature =feature.toLowerCase();
+    if(optionalCommand != null){
+        optionalCommand=optionalCommand.toLowerCase();
+    }
     // returning pulls endpoints, assuming UC1
     if (feature == "pull" || feature == "pulls") {
         // getting info from ParseHub

@@ -6,48 +6,51 @@ let group = "CSC510-S22"
 let bot_name = "gitex";
 let client = new Client(host, group, {});
 let channel;
+let invalidAttempts = 0;
 async function main()
 {
     let request = await client.tokenLogin(process.env.BOTTOKEN);
-    let firstMessage = true;
     client.on('message', async function(msg)
-    {
-        if(firstMessage){
-            client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
-            {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
-        }
-        firstMessage = false;
-        channel = msg.broadcast.channel_id;
-        if (hears(msg, "gitex")){
-            let validInput = validateUserInput(msg);
-            if (!validInput){
-                console.log("User's command passed initial validation")
-                sendInvalidMessage(channel);
-                return;
-            }
-            let resultStr = JSON.parse(msg.data.post);
-            resultStr = resultStr.message;
-            console.log("User's command: "+ resultStr)
-            let returnedMsg = await processor.processString(resultStr.split(" "));
-            if (returnedMsg == null){
-                sendInvalidMessage(channel);
-                return;
-            }
-            else {
-                // handling if returnedMsg is an object, array, etc.
-                if (typeof returnedMsg != 'string') {
-                    client.postMessage(JSON.stringify(returnedMsg), channel);
-                } else {
-                    client.postMessage(returnedMsg, channel);
+        {
+            channel = msg.broadcast.channel_id;
+            firstMessage = false;
+            if (hears(msg, "gitex")){
+                let resultStr = JSON.parse(msg.data.post);
+                resultStr = resultStr.message;
+                let validInput = validateUserInput(resultStr);
+                if (!validInput){
+                    console.log("User's command failed to pass initial validation")
+                    invalidAttempts++;
+                }
+                else{
+                    console.log("User's command: "+ resultStr)
+                    let returnedMsg = await processor.processString(resultStr.split(" "));
+                    if (returnedMsg == null){
+                        invalidAttempts++;
+                    }
+                    else {
+                        // handling if returnedMsg is an object, array, etc.
+                        if (typeof returnedMsg != 'string') {
+                            client.postMessage(JSON.stringify(returnedMsg), channel);
+                        } else {
+                            client.postMessage(returnedMsg, channel);
+                        }
+                    }
                 }
             }
-        }
-    });
+        });
 }
 
 function sendMessageToClient(msg, channel){
-    client.postMessage(msg, channel);
+    if(invalidAttempts > 2){
+        client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
+                {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
+    }
+    else{
+        client.postMessage(msg, channel);
+    }
 }
+
 function hears(msg, text)
 {
     if( msg.data.sender_name == bot_name) return false;
@@ -66,9 +69,13 @@ function hears(msg, text)
     can be mapped to one of the three use cases.
 */
 function validateUserInput(msg){
-    let msgArray = msg.split(" ");
+    let msgArray = msg.toString().split(" ");
+    console.log(msg)
     let results = "";
-    if(msgArray.length != 3 && msgArray.length != 4){
+    if(msgArray.length > 4 || msgArray.length < 3){
+        results = "Too many action specifiers.";
+        sendMessageToClient(results, channel);
+        console.log("Invalid command. Too many action specifiers.");
         return false;
     }
 
