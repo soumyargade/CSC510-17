@@ -14,7 +14,8 @@ At the beginning of this iteration we divided each of our three use cases into s
 ### Core & Corollary Practices
 A core practice we have integrated into our software development is **pair programming**.
 
-A corollary practice we have integrated into our software development is **incremental deployment**.
+A corollary practice we have integrated into our software development is **incremental deployment**, or in other words, gradually deploying functionality. This is a beneficial practice as in industry big deployment is high risk & can have high human and economic costs (slide 33 of Process_and_Git_Branches). For example, in our first sprint we deployed functionality for retrieving GitHub API documentation from our web scraper, ParseHub's, API as can be seen in the PR [here](https://github.ncsu.edu/csc510-s2022/CSC510-17/pull/43). After we were able to confirm that this was working we began working on functionality for integrating the Merriam-Webster dictionary API to map words in a user's request to the proper HTTP verbs. This functionality can be seen in the PR [here](https://github.ncsu.edu/csc510-s2022/CSC510-17/pull/49). This was deployed after the team was able to confirm that it was passing the required tests.
+
 ### Scrum Meeting Notes
 #### Iteration One
 | Date   | Progress & Blockers   |  Next Steps
