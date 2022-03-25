@@ -45,10 +45,6 @@ async function main()
     });
 }
 
-function sendInvalidMessage(channel){
-    client.postMessage("Request is unclear.", channel);
-}
-
 function sendMessageToClient(msg, channel){
     client.postMessage(msg, channel);
 }
