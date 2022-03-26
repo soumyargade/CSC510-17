@@ -3,39 +3,13 @@ This file fulfills the logic of the Processing Service
 which is in charge of processing the user's command and with the 
 help of the scraping service, returns the output to the client
 */
-const scraper = require("./scraping.js");
-
+const parseHub = require("./parseHub.js");
 
 async function processString(msg){
 
-    // msg[0] will be "gitex"
-    let action = msg[1];
-    let feature = msg[2];
-    let optionalCommand = msg[3];
-    let results;
-
-    // error handling
-    if (action == null) {
-        results = "Please specify an action";
-        console.log("Invalid command. Missing action specifier.");
-        return results;
-    }
-
-    if (feature == null) {
-        results = "Please specify a feature";
-        console.log("Invalid command. Missing feature specifier.");
-        return results;
-    }
-
-    let searchString = await findSearchString(action, feature, optionalCommand);
+    let searchString = await findSearchString(msg[1], msg[2], msg[3]);
     console.log('Search Query: ' + searchString);
     return searchString;
-
-    // results = await scraper.getIssuesAPITitles();
-    // console.log(results);
-    // return scraper.scrape(searchString, feature, optionalCommand);
-
-    // await scraper.scrape(searchString, optionalCommand);
 }
 
 /**
@@ -46,87 +20,102 @@ async function processString(msg){
  */
  async function findSearchString(action, feature, optionalCommand) {
     let results;
+    action =action.toLowerCase();
+    feature =feature.toLowerCase();
+    if(optionalCommand != null){
+        optionalCommand=optionalCommand.toLowerCase();
+    }
     // returning pulls endpoints, assuming UC1
     if (feature == "pull" || feature == "pulls") {
         // getting info from ParseHub
-        results = await scraper.getPullsAPITitles();
+        results = await parseHub.getPullsInfo();
         if (action == "get") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.getPullRequest[1].name;
+                return results.getPullRequest[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.getPullRequest[2].name;
+                return results.getPullRequest[0].javascript;
             } else if (optionalCommand == "response") {
-                return results.getPullRequest[4].name;
+                return results.getPullRequest[0].responseBody;
             } else {
-                return results.getPullRequest[0].name;
+                return results.getPullRequest[0].endpoint;
             }
         } else if (action == "list") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.listPullRequests[1].name;
+                return results.listPullRequests[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.listPullRequests[2].name;
+                return results.listPullRequests[0].javascript;
             } else if (optionalCommand == "response") {
-                return results.listPullRequests[4].name;
+                return results.listPullRequests[0].responseBody;
             } else {
-                return results.listPullRequests[0].name;
+                return results.listPullRequests[0].endpoint;
             }
         } else if (action == "create") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.createPullRequest[1].name;
+                return results.createPullRequest[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.createPullRequest[2].name;
+                return results.createPullRequest[0].javascript;
             } else if (optionalCommand == "response") {
-                return results.createPullRequest[4].name;
+                return results.createPullRequest[0].responseBody;
             } else {
-                return results.createPullRequest[0].name;
+                return results.createPullRequest[0].endpoint;
             }
-        } else {
+        } else if (action == "update") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.updatePullRequest[0].shell;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.updatePullRequest[0].javascript;
+            } else if (optionalCommand == "response") {
+                return results.updatePullRequest[0].responseBody;
+            } else {
+                return results.updatePullRequest[0].endpoint;
+            }
+        }
+        else {
             return "Don't have an endpoint example for the specified action"
         }
     }
     // returning issues endpoints, assuming UC1
     else if (feature == "issue" || feature == "issues") {
-        results = await scraper.getIssuesAPITitles();
+        results = await parseHub.getIssuesInfo();
         if (action == "get") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.getIssue[1].name;
+                return results.getIssue[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.getIssue[2].name;
+                return results.getIssue[0].javascript;
             } else if (optionalCommand == "response") {
-                return results.getIssue[4].name;
+                return results.getIssue[0].responseBody;
             } else {
-                return results.getIssue[0].name;
+                return results.getIssue[0].endpoint;
             }
         } else if (action == "list") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.listIssue[1].name;
+                return results.listIssue[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.listIssue[2].name;
+                return results.listIssue[0].javascript;
             } else if (optionalCommand == "response") {
-                return results.listIssue[4].name;
+                return results.listIssue[0].responseBody;
             } else {
-                return results.listIssue[0].name;
+                return results.listIssue[0].endpoint;
             }
         } else if (action == "create") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.createIssue[1].name;
+                return results.createIssue[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.createIssue[2].name;
+                return results.createIssue[0].javascript;
             } else if (optionalCommand == "response") {
-                // pain point, didn't work
-                return results.createIssue[4].name;
+                return results.createIssue[0].responseBody;
             } else {
-                return results.createIssue[0].name;
+                return results.createIssue[0].endpoint;
             }
         } else if (action == "update") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.updateIssue[1].name;
+                return results.updateIssue[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.updateIssue[2].name;
+                return results.updateIssue[0].javascript;
             } else if (optionalCommand == "response") {
-                return results.updateIssue[4].name;
+                return results.updateIssue[0].responseBody;
             } else {
-                return results.updateIssue[0].name;
+                return results.updateIssue[0].endpoint;
             }
         } else {
             return "Don't have an endpoint example for the specified action"
@@ -134,48 +123,57 @@ async function processString(msg){
     }
     // returning repos endpoints, assuming UC1
     else if (feature == "repo" || feature == "repository" || feature == "repositories") {
-        results = await scraper.getRepositoriesAPITitles();
+        results = await parseHub.getReposInfo();
         if (action == "get") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.getRepository[1].name;
+                return results.getRepo[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.getRepository[2].name;
+                return results.getRepo[0].javascript;
             } else if (optionalCommand == "response") {
-                return results.getRepository[4].name;
+                return results.getRepo[0].responseBody;
             } else {
-                return results.getRepository[0].name;
+                return results.getRepo[0].endpoint;
             }
         } else if (action == "list") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.listRepositories[1].name;
+                return results.listRepos[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.listRepositories[2].name;
+                return results.listRepos[0].javascript;
             } else if (optionalCommand == "response") {
-                // format is showing up a bit odd
-                return results.listRepositories[4].name;
+                return results.listRepos[0].responseBody;
             } else {
-                return results.listRepositories[0].name;
+                return results.listRepos[0].endpoint;
             }
         } else if (action == "create") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.createRepository[1].name;
+                return results.createRepo[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.createRepository[2].name;
+                return results.createRepo[0].javascript;
             } else if (optionalCommand == "response") {
-                return results.createRepository[4].name;
+                return results.createRepo[0].responseBody;
             } else {
-                return results.createRepository[0].name;
+                return results.createRepo[0].endpoint;
             }
-        } else if (action == "delete") {
+        } else if (action == "update") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
-                return results.deleteRepository[1].name;
+                return results.updateRepo[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.deleteRepository[2].name;
+                return results.updateRepo[0].javscript;
             } else if (optionalCommand == "response") {
-                // changed index, no body for delete
-                return results.deleteRepository[3].name;
+                return results.updateRepo[0].responseBody;
             } else {
-                return results.deleteRepository[0].name;
+                return results.updateRepo[0].endpoint;
+            }
+        }
+        else if (action == "delete") {
+            if (optionalCommand == "curl" || optionalCommand == "shell") {
+                return results.deleteRepo[0].shell;
+            } else if (optionalCommand == "javascript" || optionalCommand == "js") {
+                return results.deleteRepo[0].javascript;
+            } else if (optionalCommand == "response") {
+                return results.deleteRepo[0].responseBody;
+            } else {
+                return results.deleteRepo[0].endpoint;
             }
         } else {
             return "Don't have an endpoint example for the specified action"
@@ -183,24 +181,6 @@ async function processString(msg){
     }
     return results;
 }
-
-// function findSearchStringHelper(results, action) {
-    // for (let i = 0; i < results.length; i++) {
-        // if (results[i].split(" ")[0].toLowerCase() == action.toLowerCase()) { // Check if the action the user specified is equal to the action in the REST API. If not found, we use synonym API
-            // return results[i];
-        // }
-    // }
-    // TODO: not implemented yet
-    // return findSearchStringWithSynonym(action, results);
-// }
-/**
- * Finds the synonym for a verb utilizing the Merriam-Webster Dictionary API
- * @param {} verb 
- */
-// function findSearchStringWithSynonym(action, results){
-
-    // return null;
-// }
 
 exports.processString = processString;
 exports.findSearchString = findSearchString;
