@@ -20,7 +20,6 @@ async function processString(msg){
             err => client.postMessage("Cannot find HTTP verb. Sorry!", channel) );
     }   
     let searchString = await findSearchString(action, msg[2], msg[3]);
-    console.log(action);
     console.log('Search Query: ' + searchString);
     return searchString;
 }
