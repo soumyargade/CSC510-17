@@ -57,7 +57,7 @@ function getSynonym(action)
         } else if (syn_list.includes("retrieve")) {
             HTTPverb = "get";
         } else if (syn_list.includes("list")) {
-            HTTPverb = "get";
+            HTTPverb = "list";
         }  else if (syn_list.includes("update")) {
             HTTPverb = "update";
         }  else if (syn_list.includes("edit")) {
