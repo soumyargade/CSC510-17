@@ -30,7 +30,7 @@ A corollary practice we have integrated into our software development is **incre
 #### Iteration Two
 | Date   | Progress & Blockers   |  Next Steps
 | ------------- | ------------  |  ------------
-| Monday, March 28      |           | <ul><li>**Kim**: </li><li>**Dibya**: </li><li>**Alex**: </li><li>**Soumya**: </li></ul>
+| Monday, March 28      | <ul><li>**Kim**: Worked on modifying tests. </li><li>**Dibya**: Reviewed code and researched to identify where to call the Merriam-Webster API. </li><li>**Alex**: Worked on validation. </li><li>**Soumya**: </li></ul> | <ul><li>**Kim**: Working on modifying tests, but is blocked by an error in regards to parsehub. Kim will troubleshoot with Soumya. </li><li>**Dibya**: Add Merriam-Webster API call to index.js. Update README.md to include instructions to store MW token. </li><li>**Alex**: Contine validations. </li><li>**Soumya**: Troubleshoot test errors with Kim. Update parsehub.js to use tokens stored in environment variables and update README.md to include instructions to store parsehub tokens. </li></ul>
 | Tuesday, March 29      |              | <ul><li>**Kim**: </li><li>**Dibya**: </li><li>**Alex**: </li><li>**Soumya**: </li></ul>
 | Wednesday, March 30      |              | <ul><li>**Kim**: </li><li>**Dibya**: </li><li>**Alex**: </li><li>**Soumya**: </li></ul>
 | Thursday, March 31      |              | <ul><li>**Kim**: </li><li>**Dibya**: </li><li>**Alex**: </li><li>**Soumya**: </li></ul>
