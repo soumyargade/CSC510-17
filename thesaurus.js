@@ -20,7 +20,6 @@ function getDefaultOptions(endpoint, method)
 
 function getSynonym(action)
 {
-    //need to add logic for setting word
     var syns = [];
     var syn_meta = [];
     var syn_def  = [];
