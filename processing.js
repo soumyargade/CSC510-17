@@ -5,12 +5,12 @@ help of the scraping service, returns the output to the client
 */
 const parseHub = require("./parseHub.js");
 
-async function processString(msg){
+// async function processString(msg){
 
-    let searchString = await findSearchString(action, feature, optionalCommand);
-    console.log('Search Query: ' + searchString);
-    return searchString;
-}
+//     let searchString = await findSearchString(action, feature, optionalCommand);
+//     console.log('Search Query: ' + searchString);
+//     return searchString;
+// }
 
 /**
  * Searches for the API title that will be scraped based on the users input
@@ -177,5 +177,5 @@ async function processString(msg){
     return results;
 }
 
-exports.processString = processString;
+// exports.processString = processString;
 exports.findSearchString = findSearchString;

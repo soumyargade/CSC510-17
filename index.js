@@ -8,7 +8,7 @@ let client = new Client(host, group, {});
 let channel;
 async function main()
 {
-    let request = await client.tokenLogin(process.env.BOTTOKEN);
+    let request = await client.tokenLogin(process.env.BOTTOKEN); //
     let firstMessage = true;
     client.on('message', async function(msg)
     {
@@ -28,7 +28,7 @@ async function main()
             let resultStr = JSON.parse(msg.data.post);
             resultStr = resultStr.message;
             console.log("User's command: "+ resultStr)
-            let returnedMsg = await processor.processString(resultStr.split(" "));
+            let returnedMsg = await processor.findSearchString(resultStr.split(" "));
             if (returnedMsg == null){
                 sendInvalidMessage(channel);
                 return;
@@ -69,6 +69,8 @@ function validateUserInput(msg){
     let msgArray = msg.split(" ");
     let results = "";
     if(msgArray.length != 3 && msgArray.length != 4){
+        results = "Invalid command. Please specify what action and feature you would like.";
+        console.log("Invalid command. Missing action and/or feature.");
         return false;
     }
 
@@ -83,19 +85,19 @@ function validateUserInput(msg){
     }
 
     // error handling
-    if (action == null) {
-        results = "Please specify an action";
-        sendMessageToClient(results, channel);
-        console.log("Invalid command. Missing action specifier.");
-        return false;
-    }
+    // if (action == null) {
+    //     results = "Please specify an action";
+    //     sendMessageToClient(results, channel);
+    //     console.log("Invalid command. Missing action specifier.");
+    //     return false;
+    // }
 
-    if (feature == null) {
-        results = "Please specify a feature";
-        sendMessageToClient(results, channel);
-        console.log("Invalid command. Missing feature specifier.");
-        return false;
-    }
+    // if (feature == null) {
+    //     results = "Please specify a feature";
+    //     sendMessageToClient(results, channel);
+    //     console.log("Invalid command. Missing feature specifier.");
+    //     return false;
+    // }
 
     let validFeature = false;
 

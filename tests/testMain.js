@@ -9,6 +9,15 @@ const bot = require("../index.js");
 const proc = require("../processing.js");
 const parse = require("../parseHub.js");
 
+// Testing index.js
+// describe('Tests of main() in index.js', function () {
+//     it("ensures that main() return proper response", async function() {
+//         let returnValue = await bot.main();
+//         assert(returnValue === true);
+//     });
+// });
+
+
 // Testing Mattermost integration functionality
 describe('Tests of hears() in index.js', function () {
     // this.timeout(5000);
@@ -65,6 +74,13 @@ describe('Tests of findSearchString() in processing.js:', function () {
         expect(returnValue).equal(`curl \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world/pulls/42`);
     });
 
+    it('ensures that "get pull response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("get", "pull", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(25242);
+    });
+
     it('ensures that "list pull" returns the correct path', async function() {
         let returnValue = await proc.findSearchString("list", "pull");
         expect(returnValue).equal("get /repos/{owner}/{repo}/pulls");
@@ -78,6 +94,13 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "list pull curl" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("list", "pull", "curl");
         expect(returnValue).equal(`curl \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world/pulls`);
+    });
+
+    it('ensures that "list pull response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("list", "pull", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(24460);
     });
 
     it('ensures that "create pull" returns the correct path', async function() {
@@ -95,6 +118,13 @@ describe('Tests of findSearchString() in processing.js:', function () {
         expect(returnValue).equal(`curl \\ -X POST \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world/pulls \\ -d '{"head":"head","base":"base"}'`);
     });
 
+    it('ensures that "create pull response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("create", "pull", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(25242);
+    });    
+
     it('ensures that "update pull" returns the correct path', async function() {
         let returnValue = await proc.findSearchString("update", "pull");
         expect(returnValue).equal("patch /repos/{owner}/{repo}/pulls/{pull_number}");
@@ -108,6 +138,13 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "update pull curl" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("update", "pull", "curl");
         expect(returnValue).equal(`curl \\ -X PATCH \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world/pulls/42 \\ -d '{"title":"title"}'`);
+    });
+
+    it('ensures that "update pull response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("update", "pull", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(25242);
     });
 
     // Commands related to GitHub's Issues API
@@ -174,6 +211,34 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "update issue curl" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("update", "issue", "curl");
         expect(returnValue).equal(`curl \\ -X PATCH \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world/issues/42 \\ -d '{"title":"title"}'`);
+    });
+
+    it('ensures that "get issue response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("get", "issue", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(7243);
+    });
+
+    it('ensures that "list issue response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("list", "issue", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(12383);
+    });
+
+    it('ensures that "create issue response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("create", "issue", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(7243);
+    });
+
+    it('ensures that "update issue response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("update", "issue", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(7243);
     });
 
     // Commands related to GitHub's Repos API
@@ -256,4 +321,33 @@ describe('Tests of findSearchString() in processing.js:', function () {
         let returnValue = await proc.findSearchString("get", "repo", "curl");
         expect(returnValue).equal(`curl \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world`);
     });
+
+    it('ensures that "get repo response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("get", "repo", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(25866);
+    });
+
+    it('ensures that "list repo response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("list", "repo", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(5590);
+    });
+
+    it('ensures that "create repo response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("create", "repo", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(6166);
+    });
+
+    it('ensures that "update repo response" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("update", "repo", "response");
+        let JSONResults = JSON.stringify(returnValue);
+        // let JSONResults = returnValue.json();
+        expect(JSONResults.length).equal(25944);
+    });
+
 });
