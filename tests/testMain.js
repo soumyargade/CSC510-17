@@ -27,10 +27,17 @@ describe('Tests of hears() in index.js', function () {
         // console.log("ReturnValue test 2: ", returnValue);
         assert(returnValue === false);
     });
+});
 
-    it("ensures that hears() returns false when botName equals sender_name", function() {
-        let returnValue = bot.validateUserInput("gitex");
-        assert(returnValue === false);
+describe('Tests of validateUserInput() in index.js', function () {
+    it("ensures that validateUserInput() returns true with valid request", function() {
+        let returnValue = bot.validateUserInput("gitex get pull");
+        assert(returnValue === true);
+    });
+
+    it("ensures that validateUserInput() returns false with unspecified action", function() {
+        let returnValue = bot.validateUserInput("gitex ");
+        assert(returnValue == false);
     });
 });
 
