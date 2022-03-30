@@ -50,9 +50,29 @@ describe('Tests of findSearchString() in processing.js:', function () {
         expect(returnValue).equal("get /repos/{owner}/{repo}/pulls/{pull_number}");
     });
 
+    it('ensures that "get pull js" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("get", "pull", "js");
+        expect(returnValue).equal("await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', { owner: 'octocat', repo: 'hello-world', pull_number: 42 })");
+    });
+
+    it('ensures that "get pull curl" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("get", "pull", "curl");
+        expect(returnValue).equal(`curl \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world/pulls/42`);
+    });
+
     it('ensures that "list pull" returns the correct path', async function() {
         let returnValue = await proc.findSearchString("list", "pull");
         expect(returnValue).equal("get /repos/{owner}/{repo}/pulls");
+    });
+
+    it('ensures that "list pull js" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("list", "pull", "js");
+        expect(returnValue).equal("await octokit.request('GET /repos/{owner}/{repo}/pulls', { owner: 'octocat', repo: 'hello-world' })");
+    });
+
+    it('ensures that "list pull curl" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("list", "pull", "curl");
+        expect(returnValue).equal(`curl \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world/pulls`);
     });
 
     it('ensures that "create pull" returns the correct path', async function() {
@@ -60,9 +80,29 @@ describe('Tests of findSearchString() in processing.js:', function () {
         expect(returnValue).equal("post /repos/{owner}/{repo}/pulls");
     });
 
+    it('ensures that "create pull js" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("create", "pull", "js");
+        expect(returnValue).equal("await octokit.request('POST /repos/{owner}/{repo}/pulls', { owner: 'octocat', repo: 'hello-world', head: 'head', base: 'base' })");
+    });
+
+    it('ensures that "create pull curl" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("create", "pull", "curl");
+        expect(returnValue).equal(`curl \\ -X POST \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world/pulls \\ -d '{"head":"head","base":"base"}'`);
+    });
+
     it('ensures that "update pull" returns the correct path', async function() {
         let returnValue = await proc.findSearchString("update", "pull");
         expect(returnValue).equal("patch /repos/{owner}/{repo}/pulls/{pull_number}");
+    });
+
+    it('ensures that "update pull js" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("update", "pull", "js");
+        expect(returnValue).equal("await octokit.request('PATCH /repos/{owner}/{repo}/pulls/{pull_number}', { owner: 'octocat', repo: 'hello-world', pull_number: 42, title: 'title' })");
+    });
+
+    it('ensures that "update pull curl" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("update", "pull", "curl");
+        expect(returnValue).equal(`curl \\ -X PATCH \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world/pulls/42 \\ -d '{"title":"title"}'`);
     });
 
     // Commands related to GitHub's Issues API
@@ -84,6 +124,11 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "list issue" returns the correct path', async function() {
         let returnValue = await proc.findSearchString("list", "issue");
         expect(returnValue).equal("get /issues");
+    });
+
+    it('ensures that "eat issue" returns error message', async function() {
+        let returnValue = await proc.findSearchString("eat", "issue");
+        expect(returnValue).equal("Don't have an endpoint example for the specified action");
     });
 
     it('ensures that "get issue js" returns the correct code', async function() {
@@ -127,6 +172,11 @@ describe('Tests of findSearchString() in processing.js:', function () {
     });
 
     // Commands related to GitHub's Repos API
+    it('ensures that "get repo" returns the correct path', async function() {
+        let returnValue = await proc.findSearchString("get", "repo");
+        expect(returnValue).equal("get /repos/{owner}/{repo}");
+    });
+
     it('ensures that "create repo" returns the correct path', async function() {
         let returnValue = await proc.findSearchString("create", "repo");
         expect(returnValue).equal("post /orgs/{org}/repos");
@@ -190,5 +240,15 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "update repo curl" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("update", "repo", "curl");
         expect(returnValue).equal(`curl \\ -X PATCH \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world \\ -d '{"name":"name"}'`);
+    });
+
+    it('ensures that "get repo js" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("get", "repo", "js");
+        expect(returnValue).equal("await octokit.request('GET /repos/{owner}/{repo}', { owner: 'octocat', repo: 'hello-world' })");
+    });
+
+    it('ensures that "get repo curl" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("get", "repo", "curl");
+        expect(returnValue).equal(`curl \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world`);
     });
 });
