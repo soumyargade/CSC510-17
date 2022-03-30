@@ -57,7 +57,6 @@ function getSynonym(action)
             }
             syn_list = syn_list.concat(syn_def);
         };
-        console.log(syn_list.length);
 
         //logic to find synonym and return word
         if (syn_list.length == 0){
