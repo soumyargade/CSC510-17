@@ -1,5 +1,6 @@
 const Client = require('mattermost-client');
 const processor = require("./processing.js");
+const { getSynonym } = require('./thesaurus.js');
 
 let host = "chat.robotcodelab.com"
 let group = "CSC510-S22"
@@ -80,7 +81,7 @@ function validateUserInput(msg){
     }
 
     let features = ['pulls', 'repos', 'issues'];
-    let optionalCommands = ['javascript, shell', 'response'];
+    let optionalCommands = ['javascript', 'js', 'shell', 'response'];
 
     let action = msgArray[1].toLowerCase();
     let feature = msgArray[2].toLowerCase();
@@ -89,7 +90,6 @@ function validateUserInput(msg){
         optionalCommand = msgArray[3].toLowerCase();
     }
 
-    // error handling
     if (action == null) {
         results = "Please specify an action";
         sendMessageToClient(results, channel);
@@ -103,6 +103,15 @@ function validateUserInput(msg){
         console.log("Invalid command. Missing feature specifier.");
         return false;
     }
+
+    getSynonym(action).catch( 
+        err => {
+            sendMessageToClient(err, channel);
+            console.log("Invalid action entered. Please make sure it maps to a CRUD keyword.");
+            return false;
+        });;
+
+
 
     let validFeature = false;
 
