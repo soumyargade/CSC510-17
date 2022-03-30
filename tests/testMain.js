@@ -35,6 +35,11 @@ describe('Tests of validateUserInput() in index.js', function () {
         assert(returnValue === true);
     });
 
+    it("ensures that validateUserInput() returns true to valid request with optional command", function() {
+        let returnValue = bot.validateUserInput("gitex get pulls javascript");
+        assert(returnValue === true);
+    });
+
     it("ensures that validateUserInput() returns false with unspecified action", function() {
         let returnValue = bot.validateUserInput("gitex ");
         assert(returnValue == false);
