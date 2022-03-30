@@ -3,6 +3,15 @@ const chalk = require('chalk');
 
 config = {}
 config.token = process.env.MERRIAMWEBSTERTOKEN;
+
+if( !config.token )
+{
+	console.log(chalk`{red.bold MERRIAMWEBSTERTOKEN is not defined!}`);
+	console.log(`Please set your environment variables with appropriate token.`);
+	console.log(chalk`{italic You may need to refresh your shell in order for your changes to take place.}`);
+	process.exit(1);
+}
+
 var urlRoot = "https://dictionaryapi.com/api/v3/references";
 
 function getDefaultOptions(endpoint, method)
