@@ -40,7 +40,7 @@ function getSynonym(action)
 		axios(options)
 			.then(function (response) {
         var data = JSON.stringify(response.data)
-        var HTTPverb = "";
+        var HTTPverb = action;
 
         //store syns from response
         for(let i = 0, len = (data.match(/"meta"/g) || []).length; i < len; i++) {
