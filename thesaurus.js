@@ -40,7 +40,7 @@ function getSynonym(action)
 		axios(options)
 			.then(function (response) {
         var data = JSON.stringify(response.data)
-        var HTTPverb = "Could not match action to a HTTP verb.";
+        var HTTPverb = "";
 
         //store syns from response
         for(let i = 0, len = (data.match(/"meta"/g) || []).length; i < len; i++) {
@@ -57,9 +57,12 @@ function getSynonym(action)
             }
             syn_list = syn_list.concat(syn_def);
         };
+        console.log(syn_list.length);
 
         //logic to find synonym and return word
-        if (syn_list.includes("create")) {
+        if (syn_list.length == 0){
+            HTTPverb = "Could not match action to a HTTP verb."
+        } else if (syn_list.includes("create")) {
             HTTPverb = "create";
         } else if (syn_list.includes("get")) {
             HTTPverb = "get";
