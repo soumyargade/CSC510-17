@@ -6,9 +6,25 @@
 #### Iteration One
 At the beginning of this iteration we divided each of our three use cases into stories & assigned story points as well as a developer to each of the tasks (as can be seen in the screenshot of our GitHub Project board below). For this iteration we plan to focus our efforts on fine tuning our web scraper's implementation as it is a foundational piece to the working of each of our use cases.
 
-<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationOne.png">
+| ![iterationOne.png](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationOne.png) | 
+|:--:| 
+| *Screenshot of GitHub Projects board at the start of Iteration One* |
+
+The screenshot below is a depiction of how our GitHub Project board looked at the **end** of this iteration. We were able to get the web scraper functionality working through ParseHub which means we're in good shape for finishing up our use cases in the next sprint. Work that remains on the board includes testing for each of the use cases as well as making sure that the implementation of the Merriam-Webster Dictionary API is correct & able to fetch synonyms that correspond to HTTP verbs from user commands.
+
+| ![iterationOneEnd.png](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationOneEnd.png) | 
+|:--:| 
+| *Screenshot of GitHub Projects board at the end of Iteration One* |
+
+***Process Reflection***: Daily 15-20 minute scrum meetings in which we discussed progress & blockers really helped to keep our team on track and finish out tasks well before the deadline for this first sprint. We also began incorporating pair programming as one of our development practices as Kim & Soumya worked together for a coding session on the web scraper functionality with Soumya acting as the driver. We discovered that meeting more frequently helped to increase team cohesiveness as we were all more aware of what each other was working on which meant we could more effectively help out if necessary.
 
 #### Iteration Two
+
+At the beginning of this iteration we created a few more tasks for our use cases involving refactoring & refinement (ex: replace hard coded strings with env variables for API tokens). We moved issues to the "In Progress" column such that each team member would be able to start off working on a component of GitEx that was still incomplete (Kim & Soumya doing testing, Alex working on validation & error handling, & Dibya handling Merriam-Webster API integration with the other working components of GitEx already in place).
+
+| ![iterationTwo.png](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationTwo.png) | 
+|:--:| 
+| *Screenshot of GitHub Projects board at the start of Iteration Two* |
 
 ## Practices
 ### Core & Corollary Practices
@@ -30,8 +46,9 @@ A corollary practice we have integrated into our software development is **incre
 #### Iteration Two
 | Date   | Progress & Blockers   |  Next Steps
 | ------------- | ------------  |  ------------
-| Monday, March 28      | <ul><li>**Kim**: Worked on modifying tests. </li><li>**Dibya**: Reviewed code and researched to identify where to call the Merriam-Webster API. </li><li>**Alex**: Worked on validation. </li><li>**Soumya**: </li></ul> | <ul><li>**Kim**: Working on modifying tests, but is blocked by an error in regards to parsehub. Kim will troubleshoot with Soumya. </li><li>**Dibya**: Add Merriam-Webster API call to index.js. Update README.md to include instructions to store MW token. </li><li>**Alex**: Contine validations. </li><li>**Soumya**: Troubleshoot test errors with Kim. Update parsehub.js to use tokens stored in environment variables and update README.md to include instructions to store parsehub tokens. </li></ul>
-| Tuesday, March 29      |              | <ul><li>**Kim**: </li><li>**Dibya**: </li><li>**Alex**: </li><li>**Soumya**: </li></ul>
-| Wednesday, March 30      |              | <ul><li>**Kim**: </li><li>**Dibya**: </li><li>**Alex**: </li><li>**Soumya**: </li></ul>
-| Thursday, March 31      |              | <ul><li>**Kim**: </li><li>**Dibya**: </li><li>**Alex**: </li><li>**Soumya**: </li></ul>
-| Friday, April 1      |        | <ul><li>**Kim**: </li><li>**Dibya**: </li><li>**Alex**: </li><li>**Soumya**: </li></ul>
+| Saturday, March 26 & Sunday, March 27 | The team discussed work that will need to be completed for this sprint, created the necessary user stories, & added them to the project's Kanban board. | Each team member will be focusing on a component of GitEx. Kim will work on end to end testing, Alex on validation, Dibya on Merriam-Webster Dictionary API integration, & Soumya on testing for the webscraper functionality. Thus, next steps are for each person to draft out a plan of how they will go about approaching these tasks.
+| Monday, March 28      | <ul><li>**Kim**: Worked on modifying tests. </li><li>**Dibya**: Reviewed code & researched to identify where in the codebase the Merriam-Webster API should be called. </li><li>**Alex**: Worked on validation. </li><li>**Soumya**: Updated some documentation.</li></ul> | <ul><li>**Kim**: Working on modifying tests, but is blocked by an error with regards to ParseHub. Plans to troubleshoot with Soumya. </li><li>**Dibya**: Add Merriam-Webster API call to `processing.js`. Update README.md to include instructions to store MW token. </li><li>**Alex**: Continue validations (fix errors that have been identified by the rest of the team during testing). </li><li>**Soumya**: Troubleshoot ParseHub test errors with Kim. Update `parsehub.js` to use tokens stored in env variables & update README.md to include instructions to store ParseHub tokens. </li></ul>
+| Tuesday, March 29      | <ul><li>**Kim**: Working through ParseHub test errors with Soumya. </li><li>**Dibya**: Updated `processing.js` to include Merriam-Webster API. PR in review. </li><li>**Alex**: Fixed a few of the validation errors, continuing to debug. </li><li>**Soumya**: Working through ParseHub test errors with Kim. </li></ul> | <ul><li>**Kim**: Continue to troubleshoot ParseHub test errors. </li><li>**Dibya**: Assist with test errors & validations as necessary. </li><li>**Alex**: Work on validations for synonyms. </li><li>**Soumya**: Continue to troubleshoot ParseHub test errors. </li></ul>
+| Wednesday, March 30      | <ul><li>**Kim**: Updated tests with Soumya to reach 84% coverage & all passing. PR in review. </li><li>**Dibya**: Updated thesaurus API logic to message incorrect or nonexistent token in response to testing. </li><li>**Alex**: Created validation for synonyms but is running into an issue. </li><li>**Soumya**: Updated tests with Kim to reach 84% coverage & all passing. PR in review.</li></ul> | <ul><li>**Kim**: Smoke test and ensure team is prepared for demo. </li><li>**Dibya**: Work with Alex to resolve issues in the synonyms validations. Update README.md with Merriam-Webster token instructions. </li><li>**Alex**: Work through issues in the synonyms validations with Dibya. </li><li>**Soumya**: Update README.md with Parsehub token instructions & add documentation to PROCESS.md regarding practices, story creation, etc. </li></ul>
+| Thursday, March 31      | <ul><li>**Kim**: Finished up with smoke testing & proofread remaining PR's.</li><li>**Dibya**: Updated tests to account for integration of `thesaurus.js`.</li><li>**Alex**: Finished up general validation & validation for synonyms.</li><li>**Soumya**: Wrote up a bunch of documentation & proofread remaining PR's.</li></ul>| The team will spend some time preparing for the demo & double check that all of the necessary functionality for each of our use cases is in place and working as expected. We will also work on writing up remaining documentation for this milestone.
+| Friday, April 1      | Demoed functionality to TA at 6:50PM. Wrapped up the sprint & overall milestone by double checking that all of the necessary documentation was in place & ran through the testing suite once again to make sure there were no unexpected bugs popping up prior to submission. | The team plans to reflect on this milestone (what processes + practices worked/didn't work) & take what we learned into the DEPLOY and REPORT milestones that are to come.

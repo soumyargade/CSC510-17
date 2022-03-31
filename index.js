@@ -77,7 +77,6 @@ async function validateUserInput(msg){
     if(msgArray.length == 4){
         optionalCommand = msgArray[3].toLowerCase();
     }
-
     if (action == null) {
         results = "Please specify an action";
         sendMessageToClient(results, channel);
@@ -85,12 +84,12 @@ async function validateUserInput(msg){
         return false;
     }
 
-    if (feature == null) {
+     if (feature == null) {
         results = "Please specify a feature";
         sendMessageToClient(results, channel);
         console.log("Invalid command. Missing feature specifier.");
         return false;
-    }
+     }
 
     if(!actions.includes(action)){
         let synonym = await getSynonym(action);
