@@ -6,9 +6,23 @@
 #### Iteration One
 At the beginning of this iteration we divided each of our three use cases into stories & assigned story points as well as a developer to each of the tasks (as can be seen in the screenshot of our GitHub Project board below). For this iteration we plan to focus our efforts on fine tuning our web scraper's implementation as it is a foundational piece to the working of each of our use cases.
 
-<img src="https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationOne.png">
+| ![iterationOne.png](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationOne.png) | 
+|:--:| 
+| *Screenshot of GitHub Projects board at the start of Iteration One* |
+
+The screenshot below is a depiction of how our GitHub Project board looked at the **end** of this iteration. We were able to get the web scraper functionality working through ParseHub which means we're in good shape for finishing up our use cases in the next sprint. Work that remains on the board includes testing for each of the use cases as well as making sure that the implementation of the Merriam-Webster Dictionary API is correct & able to fetch synonyms that correspond to HTTP verbs from user commands.
+
+| ![iterationOneEnd.png](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationOneEnd.png) | 
+|:--:| 
+| *Screenshot of GitHub Projects board at the end of Iteration One* |
 
 #### Iteration Two
+
+At the beginning of this iteration we created a few more tasks for our use cases involving refactoring & refinement (ex: replace hard coded strings with env variables for API tokens). We moved issues to the "In Progress" column such that each team member would be able to start off working on a component of GitEx that was still incomplete (Kim & Soumya doing testing, Alex working on validation & error handling, & Dibya handling Merriam-Webster API integration with the other working components of GitEx already in place).
+
+| ![iterationTwo.png](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationTwo.png) | 
+|:--:| 
+| *Screenshot of GitHub Projects board at the start of Iteration Two* |
 
 ## Practices
 ### Core & Corollary Practices
