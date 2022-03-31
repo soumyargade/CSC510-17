@@ -4,13 +4,29 @@ which is in charge of processing the user's command and with the
 help of the scraping service, returns the output to the client
 */
 const parseHub = require("./parseHub.js");
+const synonym = require("./thesaurus.js");
 
-// async function processString(msg){
-
-//     let searchString = await findSearchString(action, feature, optionalCommand);
-//     console.log('Search Query: ' + searchString);
-//     return searchString;
-// }
+ async function processString(msg){
+    if (msg[1].toLowerCase() == "create" || msg[1].toLowerCase() == "get" || msg[1].toLowerCase() == "update" || 
+    msg[1].toLowerCase() == "delete" || msg[1].toLowerCase() == "list") {
+        action = msg[1];
+    } else if (msg[1].toLowerCase() == "retrieve") {
+        action = "get";
+    }  else if (msg[1].toLowerCase() == "edit") {
+        action = "update";
+    } else {
+        action = await synonym.getSynonym(msg[1]).catch( 
+            err => console.log("Cannot find HTTP verb. Sorry!") );
+        if (action.split(" ").length > 1){
+            console.log(action + " Please set your MERRIAMWEBSTERTOKEN environment variable with the appropriate token.")
+            return action;
+        }
+        } 
+    let searchString = await findSearchString(action, msg[2], msg[3]);
+    console.log("Action: " + action);
+    console.log('Search Query: ' + searchString);
+    return searchString;
+}
 
 /**
  * Searches for the API title that will be scraped based on the users input
@@ -20,6 +36,11 @@ const parseHub = require("./parseHub.js");
  */
  async function findSearchString(action, feature, optionalCommand) {
     let results;
+    action =action.toLowerCase();
+    feature =feature.toLowerCase();
+    if(optionalCommand != null){
+        optionalCommand=optionalCommand.toLowerCase();
+    }
     // returning pulls endpoints, assuming UC1
     if (feature == "pull" || feature == "pulls") {
         // getting info from ParseHub
@@ -177,5 +198,5 @@ const parseHub = require("./parseHub.js");
     return results;
 }
 
-// exports.processString = processString;
+exports.processString = processString;
 exports.findSearchString = findSearchString;
