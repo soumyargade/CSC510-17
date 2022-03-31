@@ -7,7 +7,6 @@ let group = "CSC510-S22"
 let bot_name = "gitex";
 let client = new Client(host, group, {});
 let channel;
-let invalidAttempts = 0;
 async function main()
 {
     let request = await client.tokenLogin(process.env.BOTTOKEN);
@@ -21,21 +20,15 @@ async function main()
                 let validInput = validateUserInput(resultStr);
                 if (!validInput){
                     console.log("User's command failed to pass initial validation")
-                    invalidAttempts++;
                 }
                 else{
                     console.log("User's command: "+ resultStr)
                     let returnedMsg = await processor.processString(resultStr.split(" "));
-                    if (returnedMsg == null){
-                        invalidAttempts++;
-                    }
-                    else {
-                        // handling if returnedMsg is an object, array, etc.
-                        if (typeof returnedMsg != 'string') {
-                            client.postMessage(JSON.stringify(returnedMsg), channel);
-                        } else {
-                            client.postMessage(returnedMsg, channel);
-                        }
+                    // handling if returnedMsg is an object, array, etc.
+                    if (typeof returnedMsg != 'string') {
+                        client.postMessage(JSON.stringify(returnedMsg), channel);
+                    } else {
+                        client.postMessage(returnedMsg, channel);
                     }
                 }
             }
@@ -43,13 +36,7 @@ async function main()
 }
 
 function sendMessageToClient(msg, channel){
-    if(invalidAttempts > 2){
-        client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
-                {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
-    }
-    else{
-        client.postMessage(msg, channel);
-    }
+    client.postMessage(msg, channel);
 }
 
 function hears(msg, text)
@@ -82,6 +69,7 @@ function validateUserInput(msg){
 
     let features = ['pulls', 'repos', 'issues'];
     let optionalCommands = ['javascript', 'js', 'shell', 'response'];
+    let actions = ['create', 'get', 'list', 'update', 'edit', 'delete']
 
     let action = msgArray[1].toLowerCase();
     let feature = msgArray[2].toLowerCase();
@@ -104,14 +92,13 @@ function validateUserInput(msg){
         return false;
     }
 
-    getSynonym(action).catch( 
-        err => {
-            sendMessageToClient(err, channel);
-            console.log("Invalid action entered. Please make sure it maps to a CRUD keyword.");
-            return false;
-        });;
-
-
+    // let synonym = getSynonym(action);
+    // if(!actions.includes(synonym)){
+    //     results = "Invalid action entered. Please make sure it maps to a CRUD keyword.";
+    //     sendMessageToClient(results, channel);
+    //     console.log("Invalid action entered. Please make sure it maps to a CRUD keyword.");
+    //     return false;
+    // }
 
     let validFeature = false;
 
