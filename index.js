@@ -92,13 +92,13 @@ function validateUserInput(msg){
         return false;
     }
 
-    // let synonym = getSynonym(action);
-    // if(!actions.includes(synonym)){
-    //     results = "Invalid action entered. Please make sure it maps to a CRUD keyword.";
-    //     sendMessageToClient(results, channel);
-    //     console.log("Invalid action entered. Please make sure it maps to a CRUD keyword.");
-    //     return false;
-    // }
+    let synonym = getSynonym(action);
+    if(!actions.includes(synonym)){
+        results = "Invalid action entered. Please make sure it maps to a CRUD keyword.";
+        sendMessageToClient(results, channel);
+        console.log(results);
+        return false;
+    }
 
     let validFeature = false;
 
