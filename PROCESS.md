@@ -16,6 +16,8 @@ The screenshot below is a depiction of how our GitHub Project board looked at th
 |:--:| 
 | *Screenshot of GitHub Projects board at the end of Iteration One* |
 
+***Process Reflection***: Daily 15-20 minute scrum meetings in which we discussed progress & blockers really helped to keep our team on track and finish out tasks well before the deadline for this first sprint. We also began incorporating pair programming as one of our development practices as Kim & Soumya worked together for a coding session on the web scraper functionality with Soumya acting as the driver. We discovered that meeting more frequently helped to increase team cohesiveness as we were all more aware of what each other was working on which meant we could more effectively help out if necessary.
+
 #### Iteration Two
 
 At the beginning of this iteration we created a few more tasks for our use cases involving refactoring & refinement (ex: replace hard coded strings with env variables for API tokens). We moved issues to the "In Progress" column such that each team member would be able to start off working on a component of GitEx that was still incomplete (Kim & Soumya doing testing, Alex working on validation & error handling, & Dibya handling Merriam-Webster API integration with the other working components of GitEx already in place).
