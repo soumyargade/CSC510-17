@@ -6,8 +6,7 @@ help of the scraping service, returns the output to the client
 const parseHub = require("./parseHub.js");
 const synonym = require("./thesaurus.js");
 
-async function processString(msg){
-
+ async function processString(msg){
     if (msg[1].toLowerCase() == "create" || msg[1].toLowerCase() == "get" || msg[1].toLowerCase() == "update" || 
     msg[1].toLowerCase() == "delete" || msg[1].toLowerCase() == "list") {
         action = msg[1];

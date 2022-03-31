@@ -90,19 +90,19 @@ function validateUserInput(msg){
     }
 
     // error handling
-    if (action == null) {
-        results = "Please specify an action";
-        sendMessageToClient(results, channel);
-        console.log("Invalid command. Missing action specifier.");
-        return false;
-    }
+    // if (action == null) {
+    //     results = "Please specify an action";
+    //     sendMessageToClient(results, channel);
+    //     console.log("Invalid command. Missing action specifier.");
+    //     return false;
+    // }
 
-    if (feature == null) {
-        results = "Please specify a feature";
-        sendMessageToClient(results, channel);
-        console.log("Invalid command. Missing feature specifier.");
-        return false;
-    }
+    // if (feature == null) {
+    //     results = "Please specify a feature";
+    //     sendMessageToClient(results, channel);
+    //     console.log("Invalid command. Missing feature specifier.");
+    //     return false;
+    // }
 
     let validFeature = false;
 
