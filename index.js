@@ -17,7 +17,7 @@ async function main()
             if (hears(msg, "gitex")){
                 let resultStr = JSON.parse(msg.data.post);
                 resultStr = resultStr.message;
-                let validInput = validateUserInput(resultStr);
+                let validInput = await validateUserInput(resultStr);
                 if (!validInput){
                     console.log("User's command failed to pass initial validation")
                 }
@@ -56,7 +56,7 @@ function hears(msg, text)
     Performs initial validation of the user's command. Ensures that the user command
     can be mapped to one of the three use cases.
 */
-function validateUserInput(msg){
+async function validateUserInput(msg){
     let msgArray = msg.toString().split(" ");
     console.log(msg)
     let results = "";
@@ -92,7 +92,7 @@ function validateUserInput(msg){
         return false;
     }
 
-    let synonym = getSynonym(action);
+    let synonym = await getSynonym(action);
     if(!actions.includes(synonym)){
         results = "Invalid action entered. Please make sure it maps to a CRUD keyword.";
         sendMessageToClient(results, channel);
