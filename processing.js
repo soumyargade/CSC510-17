@@ -134,7 +134,7 @@ async function processString(msg){
         }
     }
     // returning repos endpoints, assuming UC1
-    else if (feature == "repo" || feature == "repository" || feature == "repositories") {
+    else if (feature.includes('repo')) {
         results = await parseHub.getReposInfo();
         if (action == "get") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {

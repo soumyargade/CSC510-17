@@ -61,9 +61,9 @@ async function validateUserInput(msg){
     console.log(msg)
     let results = "";
     if(msgArray.length > 4 || msgArray.length < 3){
-        results = "Too many action specifiers.";
+        results = "Invalid number of action specifiers.";
         sendMessageToClient(results, channel);
-        console.log("Invalid command. Too many action specifiers.");
+        console.log("Invalid command. Invalid number of action specifiers.");
         return false;
     }
 
@@ -92,18 +92,21 @@ async function validateUserInput(msg){
         return false;
     }
 
-    let synonym = await getSynonym(action);
-    if(!actions.includes(synonym)){
-        results = "Invalid action entered. Please make sure it maps to a CRUD keyword.";
-        sendMessageToClient(results, channel);
-        console.log(results);
-        return false;
+    if(!actions.includes(action)){
+        let synonym = await getSynonym(action);
+        console.log(synonym);
+        if(!actions.includes(synonym)){
+            results = "Invalid action entered. Please make sure it maps to a CRUD keyword.";
+            sendMessageToClient(results, channel);
+            console.log(results);
+            return false;
+        }
     }
 
     let validFeature = false;
 
     for(let el of features){
-        if(el.includes(feature)){
+        if(el.includes(feature) || feature.includes(el)){
             validFeature = true;
             break;
         }
@@ -118,7 +121,7 @@ async function validateUserInput(msg){
     if(optionalCommand != null){
         let validCommand = false;
         for(let el of optionalCommands){
-            if(el.includes(optionalCommand)){
+            if(el.includes(optionalCommand) || optionalCommand.includes(el)){
                 validCommand = true;
             }
         }
