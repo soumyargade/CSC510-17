@@ -17,9 +17,14 @@ async function processString(msg){
         action = "update";
     } else {
         action = await synonym.getSynonym(msg[1]).catch( 
-            err => client.postMessage("Cannot find HTTP verb. Sorry!", channel) );
-    }   
+            err => console.log("Cannot find HTTP verb. Sorry!") );
+        if (action.split(" ").length > 1){
+            console.log(action + " Please set your MERRIAMWEBSTERTOKEN environment variable with the appropriate token.")
+            return action;
+        }
+        } 
     let searchString = await findSearchString(action, msg[2], msg[3]);
+    console.log("Action: " + action);
     console.log('Search Query: ' + searchString);
     return searchString;
 }
