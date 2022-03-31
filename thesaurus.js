@@ -3,6 +3,15 @@ const chalk = require('chalk');
 
 config = {}
 config.token = process.env.MERRIAMWEBSTERTOKEN;
+
+if( !config.token )
+{
+	console.log(chalk`{red.bold MERRIAMWEBSTERTOKEN is not defined!}`);
+	console.log(`Please set your environment variables with appropriate token.`);
+	console.log(chalk`{italic You may need to refresh your shell in order for your changes to take place.}`);
+	process.exit(1);
+}
+
 var urlRoot = "https://dictionaryapi.com/api/v3/references";
 
 function getDefaultOptions(endpoint, method)
@@ -31,7 +40,7 @@ function getSynonym(action)
 		axios(options)
 			.then(function (response) {
         var data = JSON.stringify(response.data)
-        var HTTPverb = "Could not match action to a HTTP verb.";
+        var HTTPverb = action;
 
         //store syns from response
         for(let i = 0, len = (data.match(/"meta"/g) || []).length; i < len; i++) {
@@ -50,7 +59,9 @@ function getSynonym(action)
         };
 
         //logic to find synonym and return word
-        if (syn_list.includes("create")) {
+        if (syn_list.length == 0){
+            HTTPverb = "Could not match action to a HTTP verb."
+        } else if (syn_list.includes("create")) {
             HTTPverb = "create";
         } else if (syn_list.includes("get")) {
             HTTPverb = "get";
