@@ -4,10 +4,26 @@ which is in charge of processing the user's command and with the
 help of the scraping service, returns the output to the client
 */
 const parseHub = require("./parseHub.js");
+const synonym = require("./thesaurus.js");
 
-async function processString(msg){
-
-    let searchString = await findSearchString(msg[1], msg[2], msg[3]);
+ async function processString(msg){
+    if (msg[1].toLowerCase() == "create" || msg[1].toLowerCase() == "get" || msg[1].toLowerCase() == "update" || 
+    msg[1].toLowerCase() == "delete" || msg[1].toLowerCase() == "list") {
+        action = msg[1];
+    } else if (msg[1].toLowerCase() == "retrieve") {
+        action = "get";
+    }  else if (msg[1].toLowerCase() == "edit") {
+        action = "update";
+    } else {
+        action = await synonym.getSynonym(msg[1]).catch( 
+            err => console.log("Cannot find HTTP verb. Sorry!") );
+        if (action.split(" ").length > 1){
+            console.log(action + " Please set your MERRIAMWEBSTERTOKEN environment variable with the appropriate token.")
+            return action;
+        }
+        } 
+    let searchString = await findSearchString(action, msg[2], msg[3]);
+    console.log("Action: " + action);
     console.log('Search Query: ' + searchString);
     return searchString;
 }
@@ -122,7 +138,7 @@ async function processString(msg){
         }
     }
     // returning repos endpoints, assuming UC1
-    else if (feature == "repo" || feature == "repository" || feature == "repositories") {
+    else if (feature.includes('repo')) {
         results = await parseHub.getReposInfo();
         if (action == "get") {
             if (optionalCommand == "curl" || optionalCommand == "shell") {
