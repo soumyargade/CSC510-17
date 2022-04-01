@@ -9,15 +9,6 @@ const bot = require("../index.js");
 const proc = require("../processing.js");
 const parse = require("../parseHub.js");
 
-// Testing index.js
-// describe('Tests of main() in index.js', function () {
-//     it("ensures that main() return proper response", async function() {
-//         let returnValue = await bot.main();
-//         assert(returnValue === true);
-//     });
-// });
-
-
 // Testing Mattermost integration functionality
 describe('Tests of hears() in index.js', function () {
     // this.timeout(5000);
@@ -99,7 +90,6 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "get pull response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("get", "pull", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(25242);
     });
 
@@ -121,7 +111,6 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "list pull response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("list", "pull", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(24460);
     });
 
@@ -143,7 +132,6 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "create pull response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("create", "pull", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(25242);
     });    
 
@@ -165,7 +153,6 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "update pull response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("update", "pull", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(25242);
     });
 
@@ -238,28 +225,24 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "get issue response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("get", "issue", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(7243);
     });
 
     it('ensures that "list issue response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("list", "issue", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(12383);
     });
 
     it('ensures that "create issue response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("create", "issue", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(7243);
     });
 
     it('ensures that "update issue response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("update", "issue", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(7243);
     });
 
@@ -329,6 +312,11 @@ describe('Tests of findSearchString() in processing.js:', function () {
         expect(returnValue).equal(`curl \\ -X POST \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/orgs/ORG/repos \\ -d '{"name":"name"}'`);
     });
 
+    it('ensures that "update repo js" returns the correct code', async function() {
+        let returnValue = await proc.findSearchString("update", "repo", "js");
+        expect(returnValue).equal("await octokit.request('PATCH /repos/{owner}/{repo}', { owner: 'octocat', repo: 'hello-world', name: 'name' })");
+    });
+
     it('ensures that "update repo curl" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("update", "repo", "curl");
         expect(returnValue).equal(`curl \\ -X PATCH \\ -H "Accept: application/vnd.github.v3+json" \\ https://api.github.com/repos/octocat/hello-world \\ -d '{"name":"name"}'`);
@@ -347,28 +335,24 @@ describe('Tests of findSearchString() in processing.js:', function () {
     it('ensures that "get repo response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("get", "repo", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(25866);
     });
 
     it('ensures that "list repo response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("list", "repo", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(5590);
     });
 
     it('ensures that "create repo response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("create", "repo", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(6166);
     });
 
     it('ensures that "update repo response" returns the correct code', async function() {
         let returnValue = await proc.findSearchString("update", "repo", "response");
         let JSONResults = JSON.stringify(returnValue);
-        // let JSONResults = returnValue.json();
         expect(JSONResults.length).equal(25944);
     });
 
