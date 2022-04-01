@@ -69,7 +69,7 @@ async function validateUserInput(msg){
 
     let features = ['pulls', 'repos', 'issues'];
     let optionalCommands = ['javascript', 'js', 'shell', 'response'];
-    let actions = ['create', 'get', 'list', 'update', 'edit', 'delete']
+    let actions = ['create', 'get', 'list', 'update', 'edit', 'delete', 'retrieve']
 
     let action = msgArray[1].toLowerCase();
     let feature = msgArray[2].toLowerCase();
