@@ -41,17 +41,39 @@ describe('Tests of hears() in index.js', function () {
 describe('Tests of validateUserInput() in index.js', function () {
     it("ensures that validateUserInput() returns true with valid request", function() {
         let returnValue = bot.validateUserInput("gitex get pull");
-        assert(returnValue === true);
+        expect(returnValue === true);
     });
 
     it("ensures that validateUserInput() returns true to valid request with optional command", function() {
         let returnValue = bot.validateUserInput("gitex get pulls javascript");
-        assert(returnValue === true);
+        expect(returnValue === true);
     });
 
     it("ensures that validateUserInput() returns false with unspecified action", function() {
         let returnValue = bot.validateUserInput("gitex ");
-        assert(returnValue == false);
+        expect(returnValue == false);
+    });
+
+    it("ensures that validateUserInput() returns false when action does not match a synonym", function() {
+        let returnValue = bot.validateUserInput("gitex throw repo");
+        expect(returnValue == false);
+    });
+});
+
+describe('Tests of processString() in processing.js:', function() {
+    it('ensures that correct example is returned if action used matches HTTP verb', async function() {
+        let returnValue = await proc.processString("gitex create repo".split(" "));
+        expect(returnValue).equal("post /orgs/{org}/repos");
+    });
+
+    it('ensures identified similar action returns correct example', async function() {
+        let returnValue = await proc.processString("gitex edit issue".split(" "));
+        expect(returnValue).equal("patch /repos/{owner}/{repo}/issues/{issue_number}");
+    });
+
+    it('ensures HTTP verb is identified based on synonyms of action used', async function() {
+        let returnValue = await proc.processString("gitex cancel repo".split(" "));
+        expect(returnValue).equal("delete /repos/{owner}/{repo}");
     });
 });
 
