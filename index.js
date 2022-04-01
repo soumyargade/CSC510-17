@@ -1,12 +1,12 @@
 const Client = require('mattermost-client');
 const processor = require("./processing.js");
+const { getSynonym } = require('./thesaurus.js');
 
 let host = "chat.robotcodelab.com"
 let group = "CSC510-S22"
 let bot_name = "gitex";
 let client = new Client(host, group, {});
 let channel;
-let invalidAttempts = 0;
 async function main()
 {
     let request = await client.tokenLogin(process.env.BOTTOKEN);
@@ -17,24 +17,18 @@ async function main()
             if (hears(msg, "gitex")){
                 let resultStr = JSON.parse(msg.data.post);
                 resultStr = resultStr.message;
-                let validInput = validateUserInput(resultStr);
+                let validInput = await validateUserInput(resultStr);
                 if (!validInput){
                     console.log("User's command failed to pass initial validation")
-                    invalidAttempts++;
                 }
                 else{
                     console.log("User's command: "+ resultStr)
                     let returnedMsg = await processor.processString(resultStr.split(" "));
-                    if (returnedMsg == null){
-                        invalidAttempts++;
-                    }
-                    else {
-                        // handling if returnedMsg is an object, array, etc.
-                        if (typeof returnedMsg != 'string') {
-                            client.postMessage(JSON.stringify(returnedMsg), channel);
-                        } else {
-                            client.postMessage(returnedMsg, channel);
-                        }
+                    // handling if returnedMsg is an object, array, etc.
+                    if (typeof returnedMsg != 'string') {
+                        client.postMessage(JSON.stringify(returnedMsg), channel);
+                    } else {
+                        client.postMessage(returnedMsg, channel);
                     }
                 }
             }
@@ -42,13 +36,7 @@ async function main()
 }
 
 function sendMessageToClient(msg, channel){
-    if(invalidAttempts > 2){
-        client.postMessage("Please enter a command in the following format: gitex {CRUD keyword or synonym} {Pulls/Repositories/Issues}\
-                {Optional: Javascript/Shell/Response}\nExample: gitex get Issues Javascript", channel);
-    }
-    else{
-        client.postMessage(msg, channel);
-    }
+    client.postMessage(msg, channel);
 }
 
 function hears(msg, text)
@@ -68,19 +56,20 @@ function hears(msg, text)
     Performs initial validation of the user's command. Ensures that the user command
     can be mapped to one of the three use cases.
 */
-function validateUserInput(msg){
+async function validateUserInput(msg){
     let msgArray = msg.toString().split(" ");
     console.log(msg)
     let results = "";
     if(msgArray.length > 4 || msgArray.length < 3){
-        results = "Too many action specifiers.";
+        results = "Invalid number of action specifiers.";
         sendMessageToClient(results, channel);
-        console.log("Invalid command. Too many action specifiers.");
+        console.log("Invalid command. Invalid number of action specifiers.");
         return false;
     }
 
     let features = ['pulls', 'repos', 'issues'];
-    let optionalCommands = ['javascript, shell', 'response'];
+    let optionalCommands = ['javascript', 'js', 'shell', 'response'];
+    let actions = ['create', 'get', 'list', 'update', 'edit', 'delete', 'retrieve']
 
     let action = msgArray[1].toLowerCase();
     let feature = msgArray[2].toLowerCase();
@@ -88,26 +77,35 @@ function validateUserInput(msg){
     if(msgArray.length == 4){
         optionalCommand = msgArray[3].toLowerCase();
     }
+    if (action == null) {
+        results = "Please specify an action";
+        sendMessageToClient(results, channel);
+        console.log("Invalid command. Missing action specifier.");
+        return false;
+    }
 
-    // error handling
-    // if (action == null) {
-    //     results = "Please specify an action";
-    //     sendMessageToClient(results, channel);
-    //     console.log("Invalid command. Missing action specifier.");
-    //     return false;
-    // }
+     if (feature == null) {
+        results = "Please specify a feature";
+        sendMessageToClient(results, channel);
+        console.log("Invalid command. Missing feature specifier.");
+        return false;
+     }
 
-    // if (feature == null) {
-    //     results = "Please specify a feature";
-    //     sendMessageToClient(results, channel);
-    //     console.log("Invalid command. Missing feature specifier.");
-    //     return false;
-    // }
+    if(!actions.includes(action)){
+        let synonym = await getSynonym(action);
+        console.log(synonym);
+        if(!actions.includes(synonym)){
+            results = "Invalid action entered. Please make sure it maps to a CRUD keyword.";
+            sendMessageToClient(results, channel);
+            console.log(results);
+            return false;
+        }
+    }
 
     let validFeature = false;
 
     for(let el of features){
-        if(el.includes(feature)){
+        if(el.includes(feature) || feature.includes(el)){
             validFeature = true;
             break;
         }
@@ -122,7 +120,7 @@ function validateUserInput(msg){
     if(optionalCommand != null){
         let validCommand = false;
         for(let el of optionalCommands){
-            if(el.includes(optionalCommand)){
+            if(el.includes(optionalCommand) || optionalCommand.includes(el)){
                 validCommand = true;
             }
         }
