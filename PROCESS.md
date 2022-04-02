@@ -26,6 +26,14 @@ At the beginning of this iteration we created a few more tasks for our use cases
 |:--:| 
 | *Screenshot of GitHub Projects board at the start of Iteration Two* |
 
+The screenshot below is a depiction of our GitHub Project board at the **end** of this iteration & milestone in general. We were able to finish integrating the Merriam-Webster Dictionary API functionality with the rest of the preexisting components of GitEx and also added in synonyms validation. We updated our testing suite to implement comprehensive tests for each of our use cases & got coverage up to 85%. There is no work that remains on the board or incomplete tasks as we were able to finish all that we had set out to do at the start of this sprint.
+
+| ![iterationTwoEnd.png](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/img/iterationTwoEnd.png) | 
+|:--:| 
+| *Screenshot of GitHub Projects board at the end of Iteration Two* |
+
+***Process Reflection***: We continued with our daily scrum meetings & pair programming practices as they'd proven effective in the previous sprint. We also asked each other for help as necessary in order to complete tasks that'd been assigned to us. For example, Alex & Dibya needed to communicate in order to figure out how to complete validation for synonyms as the Merriam Webster component was something Dibya had primarily taken charge of while error validation was a task Alex had been spearheading. Thus, in order to combine these two pieces of functionality, they needed to seek each other's guidance.
+
 ## Practices
 ### Core & Corollary Practices
 A core practice we have integrated into our software development is **pair programming**.
