@@ -174,7 +174,7 @@ const synonym = require("./thesaurus.js");
             if (optionalCommand == "curl" || optionalCommand == "shell") {
                 return results.updateRepo[0].shell;
             } else if (optionalCommand == "javascript" || optionalCommand == "js") {
-                return results.updateRepo[0].javscript;
+                return results.updateRepo[0].javascript;
             } else if (optionalCommand == "response") {
                 return results.updateRepo[0].responseBody;
             } else {
