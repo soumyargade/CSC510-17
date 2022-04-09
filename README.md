@@ -10,8 +10,8 @@
 
 
 ### Deliverables
-* [Design: Milestone](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/DESIGN.md)
-* [Bot: Milestone](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/BOT.md)
-* [Process: Milestone](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/PROCESS.md)
-* Deploy: Milestone
+* [DESIGN](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/DESIGN.md)
+* [BOT](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/BOT.md)
+* [PROCESS](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/PROCESS.md)
+* [DEPLOY](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/DEPLOY.md)
 * Report
