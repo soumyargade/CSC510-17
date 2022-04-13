@@ -21,18 +21,16 @@
   - name: install node modules
     npm:
       path: /home/srgade/gitex
+  - name: check list of running apps
+    become: true
+    become_method: sudo
+    become_user: "{{ lookup('env', 'USER') }}"
+    command: forever list
+    register: forever_list
+    changed_when: false
   - name: start app
     become: true
     become_method: sudo
     become_user: "{{ lookup('env', 'USER') }}"
     command: forever start /home/srgade/gitex/index.js
-    # when: "forever_list.stdout.find('/home/srgade/bot/index.js') == -1"
-
-# clone tokens
-#   environment:
-#     BOTTOKEN: /var/local/BOTTOKEN
-#     CSC510APIKEY: /var/local/CSC510APIKEY
-#     CSC510ISSUESTOKEN: /var/local/CSC510ISSUESTOKEN
-#     CSC510PULLSTOKEN: /var/local/CSC510PULLSTOKEN
-#     CSC510REPOSTOKEN: /var/local/CSC510REPOSTOKEN
-#     MERRIAMWEBSTERTOKEN: /var/local/MERRIAMWEBSTERTOKEN
+    when: "forever_list.stdout.find('/home/srgade/gitex/index.js') == -1"
