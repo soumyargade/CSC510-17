@@ -21,6 +21,13 @@
   - name: install node modules
     npm:
       path: /home/srgade/gitex
+  - name: start app
+    become: true
+    become_method: sudo
+    become_user: "{{ lookup('env', 'USER') }}"
+    command: forever start /home/srgade/gitex/index.js
+    # when: "forever_list.stdout.find('/home/srgade/bot/index.js') == -1"
+
 # clone tokens
 #   environment:
 #     BOTTOKEN: /var/local/BOTTOKEN
