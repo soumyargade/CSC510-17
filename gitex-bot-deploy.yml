@@ -1,16 +1,26 @@
 ---
-- name: Ansible Playbook Setup
-  hosts: srgade@152.7.176.237
+- name: bot setup
+  hosts: localhost
   become: yes
   tasks:
-  - name: Install nodejs
-    apt:
-      name: nodejs
+  - name: install nodejs & npm
+    yum:
+      name: npm
       state: present
-  - name: Install forever globally
+  - name: install forever
     npm:
       name: forever
       global: yes
+      state: present
+  - name: clone repo
+    git:
+      repo: https://{{ lookup("env", "GITHUB_TOKEN") }}@github.ncsu.edu/csc510-s2022/CSC510-17.git
+      dest: /home/srgade/gitex
+      clone: yes
+      update: yes
+  - name: install node modules
+    npm:
+      path: /home/srgade/gitex
 # clone tokens
 #   environment:
 #     BOTTOKEN: /var/local/BOTTOKEN
@@ -19,18 +29,3 @@
 #     CSC510PULLSTOKEN: /var/local/CSC510PULLSTOKEN
 #     CSC510REPOSTOKEN: /var/local/CSC510REPOSTOKEN
 #     MERRIAMWEBSTERTOKEN: /var/local/MERRIAMWEBSTERTOKEN
-
-# unable to create deploy key: https://piazza.com/class/ky09haj6kvc533?cid=532
-#  - name: Pull/clone git repo into a destination
-#    git:
-#      repo: https://github.ncsu.edu/csc510-s2022/CSC510-17.git
-#      version: main
-#      key: 
-#      dest: /home/gitex/
-#      clone: yes
-#      update: yes
-  - name: Install npm packages
-    shell:
-      "npm install"
-    args:
-      chdir: /home/gitex/
