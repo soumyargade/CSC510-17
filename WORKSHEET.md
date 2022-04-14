@@ -51,3 +51,8 @@ Shorthand scrumban meeting notes *(need to format later)*
   * Next:
     * Dibya & Soumya: Work on ansible playbook.
     * Alex & Kim: Work on acceptance test instructions.
+* 4/12
+  * Soumya: Continued working on the Ansible script
+  * Dibya: Created preliminary version of the ansible playbook
+  * Alex: Working on Acceptance test for UC1
+  * Kim: Working on Acceptance test for UC2
