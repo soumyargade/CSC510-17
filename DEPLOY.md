@@ -1,4 +1,4 @@
-<h2><b> General Instructions for running GitEx:</b></h2> <br> 
+<h2><b> General Instructions for running GitEx:</b></h2>
 Start by opening up your Mattermost account and navigating to the channel “Team-17”. 
 
 <img width="630" alt="Screen Shot 2022-04-13 at 8 34 29 PM" src="https://media.github.ncsu.edu/user/23443/files/ec9319ed-65bd-4ee0-a99e-2c1e3170cc3a">
