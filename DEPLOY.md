@@ -53,5 +53,10 @@ The remaining tests should return error messages. Key points to verify for this 
 `gitex something something shell`| Invalid action entered. Please make sure it maps to a CRUD keyword. | Invalid action entered. Please make sure it maps to a CRUD keyword. |
 
 <b> UC3 Tests - Retrieve Response status and body </b>
-| Input   | Expected Output  |  Actual Output  | ✅/  🆇
+TestID | Input   | Expected Output  |  Actual Output  
 | ------------- | ------------  |  ------------ | ------------- |
+testValidPullsResponse | `gitex list pulls response` | |
+testValidRepoResponse | `gitex get repo response` | | 
+testValidUpdatePullResponse | `gitex update pull response` | |
+testInvalidFeatureResponse | `gitex update lorem response` | | 
+testInvalidActionResponse | `gitex lorem pulls response` | | 
