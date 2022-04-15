@@ -55,7 +55,7 @@ The remaining tests should return error messages. Key points to verify for this 
 <b> UC3 Tests - Retrieve Response status and body </b>
 TestID | Input   | Expected Output  |  Actual Output  
 | ------------- | ------------  |  ------------ | ------------- |
-testValidPullsResponse | `gitex list pulls response` | |
+testValidPullsResponse | `gitex list pulls response` | [ <br>{ <br>"url": "https://api.github.com/repos/octocat/Hello-World/pulls/1347", <br>"id": 1, <br>"node_id": "MDExOlB1bGxSZXF1ZXN0MQ==", <br>"html_url": "https://github.com/octocat/Hello-World/pull/1347", <br>"diff_url": "https://github.com/octocat/Hello-World/pull/1347.diff", <br>"patch_url": "https://github.com/octocat/Hello-World/pull/1347.patch", <br>…. <br>] |
 testValidRepoResponse | `gitex get repo response` | | 
 testValidUpdatePullResponse | `gitex update pull response` | |
 testInvalidFeatureResponse | `gitex update lorem response` | | 
