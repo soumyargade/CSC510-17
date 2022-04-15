@@ -38,9 +38,9 @@ testInvalidOptionalCommand | `gitex update repo eqweqwewq` | Invalid optional co
 testTooManyActionSpecifiers | `gitex update repo shell eqwewqe` | Invalid number of action specifiers. | Invalid number of action specifiers.
 
 <b> UC2 Tests - Retrieve Shell command or JavaScript code </b> <br>
-The following commands can be used to test UC2.
-The first few tests check the Javascript response. The next set of tests check Shell response. 
-The remaining tests should return error messages. Key points to verify for this use case are that Gitex should recognize that “js” and “javascript” are equivalent. It is also important to verify that Gitex only responds to properly formatted requests. Gitex shouldn’t respond to invalid actions and features even if a “javascript” or “shell” option is included.
+The following commands can be used to test UC2. UC2 involves the case where the user wants an example of a javascript or shell command performing an API call in the Pulls, Repositories, or Issues Github API's.
+The first few tests check the Javascript response. The next set of tests check the Shell response. 
+The remaining tests focus on invalid user commands. Key point to verify for this use case is that the Gitex bot should recognize that “js” and “javascript” are equivalent. It is also important to verify that Gitex only responds to properly formatted requests. Gitex shouldn’t respond to invalid actions and features even if a “javascript” or “shell” option is included in the command.
 
 TestID | Input   | Expected Output  |  Actual Output  
 | ------------- | ------------  |  ------------ | ------------- |
