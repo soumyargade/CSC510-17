@@ -25,15 +25,17 @@ The acceptance tests below provide a helpful guide of user commands you can copy
 <b> UC1 Tests - Retrieve HTTP method and API endpoint </b>
 
 The following commands can be used to test UC1. UC1 involves the case when a user wants the HTTP method and API endpoint returned for a particular action in the Repositories, Pulls, or Issues Github APIs. For example, if a user wants to get the API call for retrieving the list of repositories, they would input ‘gitex get repo/repository’ and the bot will return the associated API call. The following acceptance tests check for both valid and invalid user inputs.
-| Input   | Expected Output  |  Actual Output  | ✅/  🆇
+TestID | Input   | Expected Output  |  Actual Output  
 | ------------- | ------------  |  ------------ | ------------- |
-`gitex get repo` | get /repos/{owner}/{repo} | get /repos/{owner}/{repo} |
-`gitex get repository` | get /repos/{owner}/{repo} | get /repos/{owner}/{repo} |
-`gitex create repo` | post /orgs/{org}/repos | post /orgs/{org}/repos |
-`gitex update repo` | get /orgs/{org}/repos | get /orgs/{org}/repos |
-`gitex list repo` | patch /repos/{owner}/{repo} | patch /repos/{owner}/{repo} |
-`gitex create ewqew` | Invalid feature. Please select one of the following features: Pulls, Repos, Issues | Invalid feature. Please select one of the following features: Pulls, Repos, Issues |
-`gitex throw issue` | Invalid action entered. Please make sure it maps to a CRUD keyword. | Invalid action entered. Please make sure it maps to a CRUD keyword. |
+testValidGetRepoCommandShortened | `gitex get repo` | get /repos/{owner}/{repo} | get /repos/{owner}/{repo} 
+testValidGetRepoCommand | `gitex get repository` | get /repos/{owner}/{repo} | get /repos/{owner}/{repo} 
+testValidCreateRepoCommand| `gitex create repo` | post /orgs/{org}/repos | post /orgs/{org}/repos 
+testValidUpdateRepoCommand| `gitex update repo` | get /orgs/{org}/repos | get /orgs/{org}/repos 
+testValidSynonymRepoCommand | `gitex list repo` | patch /repos/{owner}/{repo} | patch /repos/{owner}/{repo} 
+testInvalidFeatureCommand | `gitex create ewqew` | Invalid feature. Please select one of the following features: Pulls, Repos, Issues | Invalid feature. Please select one of the following features: Pulls, Repos, Issues 
+testInvalidActionCommand | `gitex throw issue` | Invalid action entered. Please make sure it maps to a CRUD keyword. | Invalid action entered. Please make sure it maps to a CRUD keyword. 
+testInvalidOptionalCommand | `gitex update repo eqweqwewq` | Invalid optional command. Please select one of the following optional commands: Javascript, Shell, Response | Invalid optional command. Please select one of the following optional commands: Javascript, Shell, Response
+testTooManyActionSpecifiers | `gitex update repo shell eqwewqe` | Invalid number of action specifiers. | Invalid number of action specifiers.
 
 <b> UC2 Tests - Retrieve Shell command or JavaScript code </b> <br>
 The following commands can be used to test UC2.
