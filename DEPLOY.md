@@ -3,7 +3,7 @@ Start by opening up your Mattermost account and navigating to the channel “Tea
 
 <img width="630" alt="Screen Shot 2022-04-13 at 8 34 29 PM" src="https://media.github.ncsu.edu/user/23443/files/ec9319ed-65bd-4ee0-a99e-2c1e3170cc3a">
 
-From here you can begin communication with the bot. The GitEx bot works by formatting a string with the content you would like an example for. In order to communicate with the bot you type your desired example into the chat. 
+From here, you can begin communication with the bot. The GitEx bot works by listening to user commands and replying with the appropriate response. In order to communicate with the bot, you type your desired command into the cha 
 
 <img width="630" alt="Screen Shot 2022-04-13 at 8 35 10 PM" src="https://media.github.ncsu.edu/user/23443/files/feb0b460-a7e1-4993-9c47-3ede7abb0247">
 
@@ -20,9 +20,11 @@ Example of valid choices:
 
 <h2> <b>Instructions for running use case tests: </b> </h2>
 
-The checklists below provide a helpful guide of code snippets you can copy and paste to test each use case. The “Input” column contains lines of code that can be copied and pasted directly into the chat on Mattermost. The “Expected Output” contains what our Bot should respond with. The “Actual Output” column can be used to note if the Bot returns something that differs from the expected output. The last column can be used to note if the test overall passes or fails.
+The acceptance tests below provide a helpful guide of user commands you can copy and paste to test each use case. The “Input” column contains user commands that can be copied and pasted directly into the Mattermost client. The “Expected Output” contains what the GitEx bot should respond with. The “Actual Output” returns the actual output delivered by the bot. This column should match the Expected Output. The last column can be used to note if the test passes or fails i.e. does the actual output match the expected output, and has purposely been left empty for the TA’s to use while grading.
 
 <b> UC1 Tests - Retrieve HTTP method and API endpoint </b>
+
+The following commands can be used to test UC1. UC1 involves the case when a user wants the HTTP method and API endpoint returned for a particular action in the Repositories, Pulls, or Issues Github APIs. For example, if a user wants to get the API call for retrieving the list of repositories, they would input ‘gitex get repo/repository’ and the bot will return the associated API call. The following acceptance tests check for both valid and invalid user inputs.
 | Input   | Expected Output  |  Actual Output  | ✅/  🆇
 | ------------- | ------------  |  ------------ | ------------- |
 `gitex get repo` | get /repos/{owner}/{repo} | get /repos/{owner}/{repo} |
