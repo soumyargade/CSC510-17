@@ -1,10 +1,13 @@
 ---
 - name: bot setup
-  hosts: localhost
+  hosts: all
   become: yes
+  vars:
+    github_token:
+      GITHUB_TOKEN: "{{ lookup('env', 'GITHUB_TOKEN') }}"
   tasks:
   - name: install nodejs & npm
-    yum:
+    package:
       name: npm
       state: present
   - name: install forever
@@ -14,7 +17,7 @@
       state: present
   - name: clone repo
     git:
-      repo: https://{{ lookup("env", "GITHUB_TOKEN") }}@github.ncsu.edu/csc510-s2022/CSC510-17.git
+      repo: https://"{{ github_token }}"@github.ncsu.edu/csc510-s2022/CSC510-17.git
       dest: /home/srgade/gitex
       clone: yes
       update: yes
@@ -24,13 +27,13 @@
   - name: check list of running apps
     become: true
     become_method: sudo
-    become_user: "{{ lookup('env', 'USER') }}"
+    become_user: srgade
     command: forever list
     register: forever_list
     changed_when: false
   - name: start app
     become: true
     become_method: sudo
-    become_user: "{{ lookup('env', 'USER') }}"
+    become_user: srgade
     command: forever start /home/srgade/gitex/index.js
     when: "forever_list.stdout.find('/home/srgade/gitex/index.js') == -1"

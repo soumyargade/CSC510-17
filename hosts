@@ -1,0 +1,2 @@
+[all]
+local ansible_host=152.7.176.237 ansible_connection=ssh ansible_user=srgade
