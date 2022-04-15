@@ -17,7 +17,7 @@
       state: present
   - name: clone repo
     git:
-      repo: https://"{{ github_token }}"@github.ncsu.edu/csc510-s2022/CSC510-17.git
+      repo: https://{{ github_token.GITHUB_TOKEN }}@github.ncsu.edu/csc510-s2022/CSC510-17.git
       dest: /home/srgade/gitex
       clone: yes
       update: yes
