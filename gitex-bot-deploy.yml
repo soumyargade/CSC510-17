@@ -3,9 +3,26 @@
   hosts: all
   become: yes
   vars:
-    github_token:
+    tokens:
       GITHUB_TOKEN: "{{ lookup('env', 'GITHUB_TOKEN') }}"
+      BOTTOKEN: "{{ lookup('env', 'BOTTOKEN') }}"
+      MERRIAMWEBSTERTOKEN: "{{ lookup('env', 'MERRIAMWEBSTERTOKEN') }}"
+      CSC510APIKEY: "{{ lookup('env', 'CSC510APIKEY') }}"
+      CSC510ISSUESTOKEN: "{{ lookup('env', 'CSC510ISSUESTOKEN') }}"
+      CSC510PULLSTOKEN: "{{ lookup('env', 'CSC510PULLSTOKEN') }}"
+      CSC510REPOSTOKEN: "{{ lookup('env', 'CSC510REPOSTOKEN') }}"
   tasks:
+  - name: setting env variables on remote
+    blockinfile:
+      path: /etc/environment
+      block: |
+        BOTTOKEN="{{ tokens.BOTTOKEN }}"
+        GITHUB_TOKEN="{{ tokens.GITHUB_TOKEN }}"
+        MERRIAMWEBSTERTOKEN="{{ tokens.MERRIAMWEBSTERTOKEN }}"
+        CSC510APIKEY="{{ tokens.CSC510APIKEY }}"
+        CSC510ISSUESTOKEN="{{ tokens.CSC510ISSUESTOKEN }}"
+        CSC510PULLSTOKEN="{{ tokens.CSC510PULLSTOKEN }}"
+        CSC510REPOSTOKEN="{{ tokens.CSC510REPOSTOKEN }}"
   - name: install nodejs & npm
     package:
       name: npm
@@ -17,7 +34,7 @@
       state: present
   - name: clone repo
     git:
-      repo: https://{{ github_token.GITHUB_TOKEN }}@github.ncsu.edu/csc510-s2022/CSC510-17.git
+      repo: https://{{ tokens.GITHUB_TOKEN }}@github.ncsu.edu/csc510-s2022/CSC510-17.git
       dest: /home/srgade/gitex
       clone: yes
       update: yes
