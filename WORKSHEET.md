@@ -46,22 +46,9 @@
 
 # Week 3 - Deploy
 Shorthand scrumban meeting notes *(need to format later)*
-* 4/11
-  * Soumya: Created VCL server reservation.
-  * Next:
-    * Dibya & Soumya: Work on ansible playbook.
-    * Alex & Kim: Work on acceptance test instructions.
-* 4/12
-  * Soumya: Continued working on the Ansible script
-  * Dibya: Created preliminary version of the ansible playbook
-  * Alex: Working on Acceptance test for UC1
-  * Kim: Working on Acceptance test for UC2
-* 4/13
-  * Soumya: Completed working ansible script. Will explore running the script from local machine instead of VCL.
-  * Dibya: Testing ansible script.
-  * Alex: Completed Acceptance test for UC1. Starting work on Acceptance test for UC3.
-  * Kim: Completed on Acceptance test for UC2. Starting work on Acceptance test for UC3.
-* 4/14
-  * Soumya: Was able to get script to run from local machine. Looking into copying tokens from local environment variables to the remote VCL environment variables.
-  * Dibya: Looking into using deploy key to copy repo rather than personal acceptance token.
-  * Alex & Kim: Continued working on Acceptance test for UC3. Anticipate completing it by the next scrum meeting.
+| Date   | Team Project Updates  | 
+| ------------- | ------------  | 
+4/11 | Soumya: Created VCL server reservation. <br> Dibya & Soumya: Work on ansible playbook. <br> Alex & Kim: Work on acceptance test instructions. |
+4/12 | Soumya: Continued working on the Ansible script <br> Dibya: Created preliminary version of the ansible playbook <br> Alex: Working on Acceptance test for UC1 <br> Kim: Working on Acceptance test for UC2
+4/13 | Soumya: Completed working ansible script. Will explore running the script from local machine instead of VCL. <br> Dibya: Testing ansible script. <br> Alex: Completed Acceptance test for UC1. Starting work on Acceptance test for UC3. <br> Kim: Completed on Acceptance test for UC2. Starting work on Acceptance test for UC3. |
+4/14 | Soumya: Was able to get script to run from local machine. Looking into copying tokens from local environment variables to the remote VCL environment variables. <br> Dibya: Looking into using deploy key to copy repo rather than personal acceptance token. <br> Alex & Kim: Continued working on Acceptance test for UC3. Anticipate completing it by the next scrum meeting.
