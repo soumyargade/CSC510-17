@@ -46,6 +46,8 @@
 
 # Week 3 - Deploy
 
+#### Project Tasks
+
 | Deliverable   | Item/Status   |  Issues/Tasks
 | ------------- | ------------  |  ------------
 | Use Case      | |
