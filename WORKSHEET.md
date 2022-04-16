@@ -50,9 +50,9 @@
 
 | Deliverable   | Item/Status   |  Issues/Tasks
 | ------------- | ------------  |  ------------
-| Use Case      | |
-| Scenario      | |  
-| Unit Tests    | | 
+| Use Case      |Using Ansible, fully provision and configure a remote environment for the bot that can stay running until the end of the semester |
+| Scenario      | User wants to call the GitEx bot through Mattermost to get a command related to Github's Pulls, Repos, and/or Issues APIs | [#68](https://github.ncsu.edu/csc510-s2022/CSC510-17/issues/68), [#69](https://github.ncsu.edu/csc510-s2022/CSC510-17/issues/69), [#71](https://github.ncsu.edu/csc510-s2022/CSC510-17/issues/71)
+| Acceptance Tests    | Complete| [#70](https://github.ncsu.edu/csc510-s2022/CSC510-17/issues/70)
 
 #### Scrumban Meeting Notes
 
