@@ -56,3 +56,12 @@ Shorthand scrumban meeting notes *(need to format later)*
   * Dibya: Created preliminary version of the ansible playbook
   * Alex: Working on Acceptance test for UC1
   * Kim: Working on Acceptance test for UC2
+* 4/13
+  * Soumya: Completed working ansible script. Will explore running the script from local machine instead of VCL.
+  * Dibya: Testing ansible script.
+  * Alex: Completed Acceptance test for UC1. Starting work on Acceptance test for UC3.
+  * Kim: Completed on Acceptance test for UC2. Starting work on Acceptance test for UC3.
+* 4/14
+  * Soumya: Was able to get script to run from local machine. Looking into copying tokens from local environment variables to the remote VCL environment variables.
+  * Dibya: Looking into using deploy key to copy repo rather than personal acceptance token.
+  * Alex & Kim: Continued working on Acceptance test for UC3. Anticipate completing it by the next scrum meeting.
