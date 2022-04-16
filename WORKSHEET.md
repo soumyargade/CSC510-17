@@ -45,10 +45,22 @@
 | Unit Tests    | Complete      |[#42](https://github.ncsu.edu/csc510-s2022/CSC510-17/issues/42)
 
 # Week 3 - Deploy
-Shorthand scrumban meeting notes *(need to format later)*
-| Date   | Team Project Updates  | 
-| ------------- | ------------  | 
-4/11 | Soumya: Created VCL server reservation. <br> Dibya & Soumya: Work on ansible playbook. <br> Alex & Kim: Work on acceptance test instructions. |
-4/12 | Soumya: Continued working on the Ansible script <br> Dibya: Created preliminary version of the ansible playbook <br> Alex: Working on Acceptance test for UC1 <br> Kim: Working on Acceptance test for UC2
-4/13 | Soumya: Completed working ansible script. Will explore running the script from local machine instead of VCL. <br> Dibya: Testing ansible script. <br> Alex: Completed Acceptance test for UC1. Starting work on Acceptance test for UC3. <br> Kim: Completed on Acceptance test for UC2. Starting work on Acceptance test for UC3. |
-4/14 | Soumya: Was able to get script to run from local machine. Looking into copying tokens from local environment variables to the remote VCL environment variables. <br> Dibya: Looking into using deploy key to copy repo rather than personal acceptance token. <br> Alex & Kim: Continued working on Acceptance test for UC3. Anticipate completing it by the next scrum meeting.
+
+| Deliverable   | Item/Status   |  Issues/Tasks
+| ------------- | ------------  |  ------------
+| Use Case      | |
+| Scenario      | |  
+| Unit Tests    | | 
+
+#### Scrumban Meeting Notes
+
+| Date   | Progress & Blockers   |  Next Steps
+| ------------- | ------------  |  ------------
+| Saturday, April 9 & Sunday, April 10 |  | 
+| Monday, April 11     | <ul><li>**Kim**:  </li><li>**Dibya**:  </li><li>**Alex**:  </li><li>**Soumya**: Created VCL server reservation.</li></ul> | <ul><li>**Kim & Alex**: Work on acceptance test instructions. </li><li>**Soumya & Dibya**: Work on ansible playbook. </li></ul>
+| Tuesday, April 12      | <ul><li>**Kim**: Working on acceptance test for UC2. </li><li>**Dibya**: Created preliminary version of the ansible playbook. </li><li>**Alex**: Working on acceptance test for UC1. </li><li>**Soumya**: Drafted a few ansible tasks. </li></ul> | <ul><li>**Kim**: Continue working on acceptance test for UC2. </li><li>**Alex**: Continue working on acceptance test for UC3. </li><li>**Soumya & Dibya**: Continue working on the Ansible script. </li></ul>
+| Wednesday, April 13      | <ul><li>**Kim**: Completed on Acceptance test for UC2. </li><li>**Dibya**: Testing ansible script. </li><li>**Alex**: Completed Acceptance test for UC1. </li><li>**Soumya**: Completed working ansible script. </li></ul> | <ul><li>**Dibya**: Continue testing ansible script and tweak as needed. </li><li>**Kim & Alex**: Start working on Acceptance test for UC3. </li><li>**Soumya**: Will explore running the script from local machine instead of VCL. </li></ul>
+| Thursday, April 14      | <ul><li>**Kim & Alex**: Continued working on Acceptance test for UC3. </li><li>**Dibya**: Tested WIP ansible script and confirmed all requirements are satisfied. </li><li>**Soumya**: Was able to get script to run from local machine. </li></ul> | <ul><li>**Kim & Alex**: Continue working on Acceptance test for UC3. Anticipate completing it by the next scrum meeting. </li><li>**Dibya**:  Look into using deploy key to copy repo rather than personal acceptance token.</li><li>**Soumya**: Look into copying tokens from local environment variables to the remote VCL environment variables. </li></ul>
+| Friday, April 15      | | 
+| Saturday, April 16      | | 
+| Sunday, April 17      | | 
