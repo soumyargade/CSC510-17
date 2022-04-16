@@ -37,7 +37,7 @@ testInvalidActionCommand | `gitex throw issue` | Invalid action entered. Please 
 testInvalidOptionalCommand | `gitex update repo eqweqwewq` | Invalid optional command. Please select one of the following optional commands: Javascript, Shell, Response | Invalid optional command. Please select one of the following optional commands: Javascript, Shell, Response
 testTooManyActionSpecifiers | `gitex update repo shell eqwewqe` | Invalid number of action specifiers. | Invalid number of action specifiers.
 
-<b> UC2 Tests - Retrieve Shell command or JavaScript code </b> <br>
+<b> UC2 Tests - Retrieve Shell command or JavaScript code </b> <br> <br>
 The following commands can be used to test UC2. UC2 involves the case where the user wants an example of a javascript or shell command performing an API call in the Pulls, Repositories, or Issues Github API's.
 The first few tests check the Javascript response. The next set of tests check the Shell response. 
 The remaining tests focus on invalid user commands. Key point to verify for this use case is that the Gitex bot should recognize that “js” and “javascript” are equivalent. It is also important to verify that Gitex only responds to properly formatted requests. Gitex shouldn’t respond to invalid actions and features even if a “javascript” or “shell” option is included in the command.
@@ -53,6 +53,7 @@ testInvalidActionOptionalJS | `gitex something something js` <br> or <br> `gitex
 testInvalidActionOptionalShell | `gitex something something shell`| Invalid action entered. Please make sure it maps to a CRUD keyword. | Invalid action entered. Please make sure it maps to a CRUD keyword. |
 
 <b> UC3 Tests - Retrieve Response status and body </b>
+<br>
 <br> The following commands can be used to test UC3. UC3 involves the case where a user wants the response status and body related to GitHub's "Pulls" API, "Repositories" API, or "Issues" API. The following acceptance tests check for both valid and invalid user inputs.
 <br>(Note: The output for the "response" optional command returns a large text output. For the purpose of this chart the output has been truncated to save space. When running the optional command in Mattermost expect a larger output)
 TestID | Input   | Expected Output  |  Actual Output  
