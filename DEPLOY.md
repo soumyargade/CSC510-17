@@ -53,7 +53,7 @@ testInvalidActionOptionalJS | `gitex something something js` <br> or <br> `gitex
 testInvalidActionOptionalShell | `gitex something something shell`| Invalid action entered. Please make sure it maps to a CRUD keyword. | Invalid action entered. Please make sure it maps to a CRUD keyword. |
 
 <b> UC3 Tests - Retrieve Response status and body </b>
-The following commands can be used to test UC3. UC3 involves the case where a user wants the response status and body related to GitHub's "Pulls" API, "Repositories" API, or "Issues" API. The following acceptance tests check for both valid and invalid user inputs.
+<br> The following commands can be used to test UC3. UC3 involves the case where a user wants the response status and body related to GitHub's "Pulls" API, "Repositories" API, or "Issues" API. The following acceptance tests check for both valid and invalid user inputs.
 <br>(Note: The output for the "response" optional command returns a large text output. For the purpose of this chart the output has been truncated to save space. When running the optional command in Mattermost expect a larger output)
 TestID | Input   | Expected Output  |  Actual Output  
 | ------------- | ------------  |  ------------ | ------------- |
