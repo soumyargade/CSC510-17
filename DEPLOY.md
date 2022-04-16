@@ -1,4 +1,22 @@
-<h2><b> General Instructions for running GitEx:</b></h2>
+# Deploy Milestone
+
+## Deployment Script
+### Instructions to Run Deployment Script
+!!! *add instructions* !!!
+
+### Summary
+The [deployment script](gitex-bot-deploy.yml) uses an Ansible playbook to complete the following tasks:
+* **`setting env variables on remote` task:** Token values relevant to the GitEx bot found in the local machine's environment variables are stored in the remote VCL machine's environment variables.
+* **`install nodejs & npm` task:** Ensures that the `npm` package manager is installed.
+* **`install forever` task:** Ensures that `forever` is installed globally.
+* **`clone repo` task:** Clones the GitEx private Github repo using a personal access token found in the local machine's environment variables.
+* **`install node modules` task:** Installs node modules for the GitEx repo.
+* **`check list of running apps` task:** Checks list of running apps for `forever`.
+* **`start app` task:** Starts GitEx bot using `forever`.
+
+## Acceptance Tests
+
+### General Instructions for Running the GitEx Bot:
 Start by opening up your Mattermost account and navigating to the channel “Team-17”. 
 
 <img width="630" alt="Screen Shot 2022-04-13 at 8 34 29 PM" src="https://media.github.ncsu.edu/user/23443/files/ec9319ed-65bd-4ee0-a99e-2c1e3170cc3a">
@@ -18,7 +36,7 @@ Example of valid choices:
 
 (Note: <b>case does not matter</b> for the action, feature, or optional words. For Ex: “Javascript”, “javascript”, “JS”, “js” would all be recognized)
 
-<h2> <b>Instructions for running use case tests: </b> </h2>
+### Instructions for Running Use Case Tests:
 
 The acceptance tests below provide a helpful guide of user commands you can copy and paste to test each use case. The "TestID" column contains a description of what is being tested. The “Input” column contains user commands that can be copied and pasted directly into the Mattermost client. The “Expected Output” contains what the GitEx bot should respond with. The “Actual Output” returns the actual output delivered by the bot. This column should match the Expected Output.
 
