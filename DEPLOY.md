@@ -36,7 +36,7 @@ Start by opening up your Mattermost account and navigating to the channel “Tea
 
 <img width="630" alt="Screen Shot 2022-04-13 at 8 34 29 PM" src="https://media.github.ncsu.edu/user/23443/files/ec9319ed-65bd-4ee0-a99e-2c1e3170cc3a">
 
-From here, you can begin communication with the bot. The GitEx bot works by listening to user commands and replying with the appropriate response. In order to communicate with the bot, you type your desired command into the cha 
+From here, you can begin communication with the bot. The GitEx bot works by listening to user commands and replying with the appropriate response. In order to communicate with the bot, you type your desired command into the chat.
 
 <img width="630" alt="Screen Shot 2022-04-13 at 8 35 10 PM" src="https://media.github.ncsu.edu/user/23443/files/feb0b460-a7e1-4993-9c47-3ede7abb0247">
 
@@ -49,7 +49,7 @@ Example of valid choices:
 
 `gitex [create / get / list / update / edit / delete / retrieve] [pull[s] / repo[s] / issue[s]] [javascript / js / shell / response]`
 
-(Note: <b>case does not matter</b> for the action, feature, or optional words. For Ex: “Javascript”, “javascript”, “JS”, “js” would all be recognized)
+(Note: <b>case does NOT matter</b> for the action, feature, or optional words. For Ex: “Javascript”, “javascript”, “JS”, “js” would all be recognized)
 
 ### Instructions for Running Use Case Tests:
 
