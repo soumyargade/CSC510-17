@@ -1,2 +1,2 @@
 [all]
-local ansible_host=152.7.177.184 ansible_connection=ssh ansible_user=srgade
+local ansible_host=152.7.98.76 ansible_connection=ssh ansible_user=srgade
