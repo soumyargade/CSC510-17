@@ -19,6 +19,11 @@ export CSC510REPOSTOKEN="<provided_value>"
 3. Login to the vm & kill the process that was started (this is necessary because in order for the env variables to be set in the vm the user must login & logout prior to running the app). Thus, we will kill the process & re-run the app with the variables now registered. The list of running processes can be viewed with `forever list` & then killed with `kill <forever id>`.
 4. Re-run script with the variables now set on the remote host: `ansible-playbook -i hosts -k gitex-bot-deploy.yml`.
 
+*Note*: update IP address & user in `hosts` file as necessary **if provisioning a new server** by replacing the `<new_ip_address>` & `<your_username>` values on line 2 of the `hosts` file as seen below:
+```
+local ansible_host=<new_ip_address> ansible_connection=ssh ansible_user=<your_username>
+```
+
 ### Summary
 The [deployment script](gitex-bot-deploy.yml) uses an Ansible playbook to do the following:
 * **`setting env variables on remote`:** tokens necessary for GitEx found in the local machine's env are stored on the remote machine's env as a block within the `etc/environment` file.
