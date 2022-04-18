@@ -14,4 +14,4 @@
 * [BOT](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/BOT.md)
 * [PROCESS](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/PROCESS.md)
 * [DEPLOY](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/main/DEPLOY.md)
-* Report
+* [REPORT](https://github.ncsu.edu/csc510-s2022/CSC510-17/blob/dev/REPORT.md)
