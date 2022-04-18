@@ -35,22 +35,22 @@
   - name: clone repo
     git:
       repo: https://{{ tokens.GITHUB_TOKEN }}@github.ncsu.edu/csc510-s2022/CSC510-17.git
-      dest: /home/srgade/gitex
+      dest: /home/{{ lookup('env', 'USER') }}/gitex
       clone: yes
       update: yes
   - name: install node modules
     npm:
-      path: /home/srgade/gitex
+      path: /home/{{ lookup('env', 'USER') }}/gitex
   - name: check list of running apps
     become: true
     become_method: sudo
-    become_user: srgade
+    become_user: "{{ lookup('env', 'USER') }}"
     command: forever list
     register: forever_list
     changed_when: false
   - name: start app
     become: true
     become_method: sudo
-    become_user: srgade
-    command: forever start /home/srgade/gitex/index.js
-    when: "forever_list.stdout.find('/home/srgade/gitex/index.js') == -1"
+    become_user: "{{ lookup('env', 'USER') }}"
+    command: forever start /home/{{ lookup('env', 'USER') }}/gitex/index.js
+    when: "forever_list.stdout.find('/gitex/index.js') == -1"

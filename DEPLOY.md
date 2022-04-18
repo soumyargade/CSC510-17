@@ -1,27 +1,47 @@
-# Deploy Milestone
+# Deployment
 
-## Deployment Script
-### Instructions to Run Deployment Script
-!!! *add instructions* !!!
+## Deployment
+### Screencast
+Can be viewed [here](https://youtu.be/eRT7tGrxscs).
+
+### Instructions to Run Script
+1. Make sure the following variables have been added to the local environment. Replace `<provided_value>` with the token values provided by the team in the Google Form filled out & sent to the teaching staff as part of this milestone.
+```
+export GITHUB_TOKEN="<provided_value>"
+export BOTTOKEN="<provided_value>"
+export MERRIAMWEBSTERTOKEN="<provided_value>"
+export CSC510APIKEY="<provided_value>"
+export CSC510ISSUESTOKEN="<provided_value>"
+export CSC510PULLSTOKEN="<provided_value>"
+export CSC510REPOSTOKEN="<provided_value>"
+```
+2. Run the script: `ansible-playbook -i hosts -k gitex-bot-deploy.yml`.
+3. Login to the vm & kill the process that was started (this is necessary because in order for the env variables to be set in the vm the user must login & logout prior to running the app). Thus, we will kill the process & re-run the app with the variables now registered. The list of running processes can be viewed with `forever list` & then killed with `kill <forever id>`.
+4. Re-run script with the variables now set on the remote host: `ansible-playbook -i hosts -k gitex-bot-deploy.yml`.
+
+*Note*: update IP address & user in `hosts` file as necessary **if provisioning a new server** by replacing the `<new_ip_address>` & `<your_username>` values on line 2 of the `hosts` file as seen below:
+```
+local ansible_host=<new_ip_address> ansible_connection=ssh ansible_user=<your_username>
+```
 
 ### Summary
-The [deployment script](gitex-bot-deploy.yml) uses an Ansible playbook to complete the following tasks:
-* **`setting env variables on remote` task:** Token values relevant to the GitEx bot found in the local machine's environment variables are stored in the remote VCL machine's environment variables.
-* **`install nodejs & npm` task:** Ensures that the `npm` package manager is installed.
-* **`install forever` task:** Ensures that `forever` is installed globally.
-* **`clone repo` task:** Clones the GitEx private Github repo using a personal access token found in the local machine's environment variables.
-* **`install node modules` task:** Installs node modules for the GitEx repo.
-* **`check list of running apps` task:** Checks list of running apps for `forever`.
-* **`start app` task:** Starts GitEx bot using `forever`.
+The [deployment script](gitex-bot-deploy.yml) uses an Ansible playbook to do the following:
+* **`setting env variables on remote`:** tokens necessary for GitEx found in the local machine's env are stored on the remote machine's env as a block within the `etc/environment` file.
+* **`install nodejs & npm`:** ensures the `npm` package manager is installed.
+* **`install forever`:** ensures `forever` is installed globally in order for the process to stay up & running.
+* **`clone repo`:** clones the team's private GitHub repo using the personal access token found in the local machine's env.
+* **`install node modules`:** installs node modules within the `gitex` repo created on the remote machine.
+* **`check list of running apps`:** checks the list of running apps to verify whether or not the app is running (useful later on).
+* **`start app`:** starts the GitEx bot using `forever` only if the app isn't already currently running (achieving idempotency).
 
-## Acceptance Tests
+## Acceptance Testing
 
 ### General Instructions for Running the GitEx Bot:
 Start by opening up your Mattermost account and navigating to the channel “Team-17”. 
 
 <img width="630" alt="Screen Shot 2022-04-13 at 8 34 29 PM" src="https://media.github.ncsu.edu/user/23443/files/ec9319ed-65bd-4ee0-a99e-2c1e3170cc3a">
 
-From here, you can begin communication with the bot. The GitEx bot works by listening to user commands and replying with the appropriate response. In order to communicate with the bot, you type your desired command into the cha 
+From here, you can begin communication with the bot. The GitEx bot works by listening to user commands and replying with the appropriate response. In order to communicate with the bot, you type your desired command into the chat.
 
 <img width="630" alt="Screen Shot 2022-04-13 at 8 35 10 PM" src="https://media.github.ncsu.edu/user/23443/files/feb0b460-a7e1-4993-9c47-3ede7abb0247">
 
@@ -34,7 +54,7 @@ Example of valid choices:
 
 `gitex [create / get / list / update / edit / delete / retrieve] [pull[s] / repo[s] / issue[s]] [javascript / js / shell / response]`
 
-(Note: <b>case does not matter</b> for the action, feature, or optional words. For Ex: “Javascript”, “javascript”, “JS”, “js” would all be recognized)
+(Note: <b>case does NOT matter</b> for the action, feature, or optional words. For Ex: “Javascript”, “javascript”, “JS”, “js” would all be recognized)
 
 ### Instructions for Running Use Case Tests:
 
