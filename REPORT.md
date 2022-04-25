@@ -1,5 +1,9 @@
 # Report
 
+
+## Presentation Video
+Our final project presentation video can be viewed [here](https://drive.google.com/file/d/1mCcOJWEwzazLeuqTV2gvZ6n9_83k2G9Z/view?usp=sharing).
+
 ## Problem GitEx Solved
   Chat services, like Mattermost or Slack, are used regularly by software engineers to collaborate during the software development lifecycle. Collaboration between software engineers in chat sometimes leads to updates needed in GitHub for a variety of reasons; such as, version control, issue management, documentation, etc. Prior to GitEx, GitHub users could choose to make updates to GitHub via the graphical user interface (GUI), which requires more clicking around than our second option - making the update to GitHub via their REST API, which requires searching through GitHub API documentation to find the necessary information if it's not memorized. While the GitHub API has the opportunity to be much more efficient than the GitHub GUI, it is impeded by the requirement of needing to review GitHub API documentation every time it's used unless the user has had significant practice that allowed them to memorize the needed endpoints and scripts.
 
@@ -40,7 +44,3 @@ When designing GitEx we programmed in such a way that would easily allow for an 
 
 <li>Expanding into other GitHub REST APIs - there were many APIs to choose from and for the scope of this project we limited ourselves to just 3 to ensure we could properly finish on time. Other APIs that we could include within GitEx include but are not limited to:  Commits, Branches, Activity, or Collaborators API.</li>
 <li>Another future endeavor includes continuing to develop natural language processing. We could expand upon our use of the Merriam-Webster dictionary API and work on processing user requests that don’t follow a set format. This would include GitEx pulling the key request information directly from a string and determining what the action, feature, and optional choices are. This would involve investigating some type of machine learning or AI to understand user commands but would allow for a more personalized user experience. This would also reduce the learning curve associated with knowing the proper format of a GitEx command.</li>
- 
-
-## Link to Presentation Video
-
